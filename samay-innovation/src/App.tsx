@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Preloader from './components/ui/Preloader';
-import WhatsAppButton from './components/ui/WhatsAppButton';
+// import WhatsAppButton from './components/ui/WhatsAppButton';
 import BackToTop from './components/ui/BackToTop';
 import PageTransition from './components/ui/PageTransition';
 import Home from './pages/Home';
@@ -43,7 +43,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
-        <WhatsAppButton />
+        {/* <WhatsAppButton /> */}
         <BackToTop />
       </div>
     </Router>
