@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Check, Award, MapPin } from 'lucide-react';
 import Button from '../components/ui/Button';
 import PageHeader from '../components/ui/PageHeader';
-import { SITE_CONFIG, AWARDS, FEATURED_IN } from '../lib/constants';
+import { AWARDS, FEATURED_IN } from '../lib/constants';
 
 export default function About() {
   return (

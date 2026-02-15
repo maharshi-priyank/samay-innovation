@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 
 interface FlaticonIconProps extends HTMLAttributes<HTMLElement> {
   icon: string;

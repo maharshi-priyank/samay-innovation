@@ -39,7 +39,6 @@ export default function ServicesOverview() {
               <div className="mb-6">
                 <ServiceIcon
                   lucideIcon={service.icon.charAt(0).toUpperCase() + service.icon.slice(1).replace(/-./g, x => x[1].toUpperCase())}
-                  flaticonIcon={service.flaticonIcon}
                   size="xl"
                   className="text-text-primary dark:text-dark-text-primary group-hover:text-accent-primary dark:group-hover:text-accent-secondary transition-colors duration-300"
                 />
