@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { blogs } from '../data/blogs';
 import PageHeader from '../components/ui/PageHeader';
+import SEO from '../components/seo/SEO';
 
 const categories = ['all', 'Trends', 'Lifestyle', 'Sustainability', 'Design Tips', 'Space Planning', 'Budget Design'];
 
@@ -16,9 +17,16 @@ export default function Blogs() {
 
   return (
     <div>
+      <SEO
+        title="Interior Design Blog — Trends, Tips & Inspiration | Samay Innovation"
+        description="Explore interior design insights, trends, and inspiration from Samay Innovation's expert team. Articles on luxury residential design, space planning, sustainable interiors, and design tips for homes in Ahmedabad and beyond."
+        keywords="interior design blog India, interior design tips Ahmedabad, luxury home decor ideas, space planning tips, sustainable interior design, interior design trends 2024, home renovation ideas Gujarat"
+        path="/blogs"
+      />
+
       {/* Page Header */}
-      <PageHeader 
-        title="Blogs" 
+      <PageHeader
+        title="Blogs"
         subtitle="INSIGHTS & INSPIRATION"
       />
 

@@ -3,10 +3,20 @@ import { Check, Award, MapPin } from 'lucide-react';
 import Button from '../components/ui/Button';
 import PageHeader from '../components/ui/PageHeader';
 import { AWARDS, FEATURED_IN } from '../lib/constants';
+import SEO from '../components/seo/SEO';
+import { localBusinessSchema } from '../components/seo/schemas';
 
 export default function About() {
   return (
     <div>
+      <SEO
+        title="About Us — Seme Nadvi | Award-Winning Interior Designer Ahmedabad"
+        description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat. Recognised at the House of Commons London (2022) and India Excellence Awards (2019). Featured in Forbes, Vogue & De-Mode."
+        keywords="Seme Nadvi interior designer, about Samay Innovation, interior design firm Ahmedabad, award winning interior designer Gujarat, Forbes Vogue interior designer India, luxury interior designer founder Ahmedabad"
+        path="/about"
+        structuredData={localBusinessSchema}
+      />
+
       {/* Page Header */}
       <PageHeader 
         title="About Us" 

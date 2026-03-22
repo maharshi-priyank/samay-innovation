@@ -5,6 +5,8 @@ import emailjs from '@emailjs/browser';
 import { SITE_CONFIG } from '../lib/constants';
 import Button from '../components/ui/Button';
 import PageHeader from '../components/ui/PageHeader';
+import SEO from '../components/seo/SEO';
+import { localBusinessSchema } from '../components/seo/schemas';
 
 const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || '';
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
@@ -105,9 +107,17 @@ export default function Contact() {
 
   return (
     <div>
+      <SEO
+        title="Contact Samay Innovation — Interior Designer in Ahmedabad, Gujarat"
+        description="Get in touch with Samay Innovation to start your interior design project. Visit our studio at Thaltej, Ahmedabad or call (+91) 989 852 4366. Serving residential and commercial clients across Ahmedabad, Gujarat and the US."
+        keywords="contact interior designer Ahmedabad, interior design studio Thaltej Ahmedabad, book interior designer Gujarat, interior design consultation Ahmedabad, Samay Innovation contact, interior designer SG Highway Ahmedabad"
+        path="/contact"
+        structuredData={localBusinessSchema}
+      />
+
       {/* Page Header */}
-      <PageHeader 
-        title="Contact Us" 
+      <PageHeader
+        title="Contact Us"
         subtitle="GET IN TOUCH"
       />
 

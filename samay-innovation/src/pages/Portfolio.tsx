@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Calendar, Maximize2 } from 'lucide-react';
 import { projects, getProjectsByCategory } from '../data/projects';
 import PageHeader from '../components/ui/PageHeader';
+import SEO from '../components/seo/SEO';
+import { breadcrumbSchema } from '../components/seo/schemas';
 
 const categories = [
   { id: 'all', name: 'All Projects' },
@@ -24,9 +26,20 @@ export default function Portfolio() {
 
   return (
     <div>
+      <SEO
+        title="Interior Design Portfolio — Luxury Projects in Ahmedabad & Gujarat"
+        description="Browse Samay Innovation's portfolio of luxury interior design projects — residential villas, 4BHK apartments, farmhouses, and commercial spaces across Ahmedabad, Khatraj, Anand and Gujarat."
+        keywords="interior design portfolio Ahmedabad, luxury home design projects Gujarat, villa interior design portfolio, 4BHK flat interior Ahmedabad, farmhouse interior design India, residential interior design portfolio"
+        path="/portfolio"
+        structuredData={breadcrumbSchema([
+          { name: 'Home', url: 'https://samayinnovation.in/' },
+          { name: 'Portfolio', url: 'https://samayinnovation.in/portfolio' },
+        ])}
+      />
+
       {/* Page Header */}
-      <PageHeader 
-        title="Portfolio" 
+      <PageHeader
+        title="Portfolio"
         subtitle="OUR WORK"
       />
 

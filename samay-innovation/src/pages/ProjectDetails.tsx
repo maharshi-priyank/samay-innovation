@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, MapPin, Calendar, Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Play, ExternalLink } from 'lucide-react';
 import { getProjectBySlug, projects } from '../data/projects';
 import Button from '../components/ui/Button';
+import SEO from '../components/seo/SEO';
+import { breadcrumbSchema, projectSchema } from '../components/seo/schemas';
 
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
@@ -34,6 +36,22 @@ export default function ProjectDetails() {
 
   return (
     <div>
+      <SEO
+        title={`${project.title} — Interior Design Project | Samay Innovation Ahmedabad`}
+        description={`${project.description.slice(0, 155)}…`}
+        keywords={`${project.tags.join(', ')}, interior design ${project.location}, luxury interior Ahmedabad, Samay Innovation portfolio`}
+        path={`/portfolio/${project.slug}`}
+        image={project.thumbnail}
+        structuredData={[
+          projectSchema(project),
+          breadcrumbSchema([
+            { name: 'Home', url: 'https://samayinnovation.in/' },
+            { name: 'Portfolio', url: 'https://samayinnovation.in/portfolio' },
+            { name: project.title, url: `https://samayinnovation.in/portfolio/${project.slug}` },
+          ]),
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-hidden">
         <motion.img

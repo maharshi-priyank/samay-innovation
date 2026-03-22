@@ -4,6 +4,8 @@ import { services } from '../data/services';
 import ServiceIcon from '../components/ui/ServiceIcon';
 import Button from '../components/ui/Button';
 import PageHeader from '../components/ui/PageHeader';
+import SEO from '../components/seo/SEO';
+import { servicesSchema, breadcrumbSchema } from '../components/seo/schemas';
 
 const process = [
   {
@@ -31,6 +33,19 @@ const process = [
 export default function Services() {
   return (
     <div>
+      <SEO
+        title="Interior Design Services — Residential, Commercial & Turnkey | Ahmedabad"
+        description="Samay Innovation offers full-service interior design in Ahmedabad — residential villas & apartments, commercial offices, turnkey project management, 3D visualisation, furniture design & more. Serving Gujarat and US clients."
+        keywords="interior design services Ahmedabad, residential interior design Gujarat, commercial office interior design Ahmedabad, turnkey interior solutions, 3D interior visualisation Ahmedabad, furniture design Gujarat, interior design consultation Ahmedabad"
+        path="/services"
+        structuredData={[
+          servicesSchema,
+          breadcrumbSchema([
+            { name: 'Home', url: 'https://samayinnovation.in/' },
+            { name: 'Services', url: 'https://samayinnovation.in/services' },
+          ]),
+        ]}
+      />
       <PageHeader title="Our Services" subtitle="WHAT WE OFFER" />
 
       {/* Services Grid */}
