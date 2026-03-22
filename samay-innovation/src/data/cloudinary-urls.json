@@ -1,0 +1,128 @@
+{
+  "arvind-villa-khatraj": {
+    "name": "Arvind Villa No. 6, Khatraj",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166684/samay/arvind-villa-khatraj/nm-08573.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166687/samay/arvind-villa-khatraj/nm-08578.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166691/samay/arvind-villa-khatraj/nm-08582.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166696/samay/arvind-villa-khatraj/nm-08584.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166700/samay/arvind-villa-khatraj/nm-08588.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166707/samay/arvind-villa-khatraj/nm-08607.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166712/samay/arvind-villa-khatraj/nm-08624.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166719/samay/arvind-villa-khatraj/nm-08627.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166724/samay/arvind-villa-khatraj/nm-08631.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166730/samay/arvind-villa-khatraj/nm-08633.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166735/samay/arvind-villa-khatraj/nm-08641.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166740/samay/arvind-villa-khatraj/nm-08653.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166744/samay/arvind-villa-khatraj/nm-08654.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166749/samay/arvind-villa-khatraj/nm-08658.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166754/samay/arvind-villa-khatraj/nm-08659.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166795/samay/arvind-villa-khatraj/nm-08663.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166800/samay/arvind-villa-khatraj/nm-08666.jpg"
+    ]
+  },
+  "farmhouse-rancharda": {
+    "name": "Farmhouse at Rancharda",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166805/samay/farmhouse-rancharda/nm-08673.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166836/samay/farmhouse-rancharda/nm-08676.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166844/samay/farmhouse-rancharda/nm-08679.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166850/samay/farmhouse-rancharda/nm-08681.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166857/samay/farmhouse-rancharda/nm-08700.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166968/samay/farmhouse-rancharda/nm-08744.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166974/samay/farmhouse-rancharda/nm-08753.jpg"
+    ]
+  },
+  "indraprashtha": {
+    "name": "Indraprashtha",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774166998/samay/indraprashtha/01.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167003/samay/indraprashtha/02.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167010/samay/indraprashtha/03.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167015/samay/indraprashtha/04.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167047/samay/indraprashtha/06.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167049/samay/indraprashtha/07.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167053/samay/indraprashtha/08.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167056/samay/indraprashtha/09.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167059/samay/indraprashtha/10.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167063/samay/indraprashtha/11.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167068/samay/indraprashtha/12.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167071/samay/indraprashtha/13.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167077/samay/indraprashtha/14.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167084/samay/indraprashtha/15.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167099/samay/indraprashtha/16.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167114/samay/indraprashtha/17.jpg"
+    ]
+  },
+  "parijaat-eclat-4bhk": {
+    "name": "Parijaat Eclat 4BHK",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167119/samay/parijaat-eclat-4bhk/nm-00007.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167380/samay/parijaat-eclat-4bhk/nm-00065.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167469/samay/parijaat-eclat-4bhk/nm-00071.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167490/samay/parijaat-eclat-4bhk/nm-00081.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167601/samay/parijaat-eclat-4bhk/nm-00133.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167605/samay/parijaat-eclat-4bhk/nm-00138.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167670/samay/parijaat-eclat-4bhk/nm-00145.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167745/samay/parijaat-eclat-4bhk/nm-00184.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167776/samay/parijaat-eclat-4bhk/nm-00192.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167782/samay/parijaat-eclat-4bhk/nm-00199-copy.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167809/samay/parijaat-eclat-4bhk/nm-00199.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167836/samay/parijaat-eclat-4bhk/nm-00209.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774167886/samay/parijaat-eclat-4bhk/nm-00225.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168044/samay/parijaat-eclat-4bhk/nm-00283.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168051/samay/parijaat-eclat-4bhk/nm-00287.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168056/samay/parijaat-eclat-4bhk/nm-00294.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168064/samay/parijaat-eclat-4bhk/nm-00300.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168074/samay/parijaat-eclat-4bhk/nm-00324.jpg"
+    ]
+  },
+  "venice-bungalows": {
+    "name": "Venice Bungalows",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168098/samay/venice-bungalows/01.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168103/samay/venice-bungalows/02.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168107/samay/venice-bungalows/03.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168111/samay/venice-bungalows/04.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168114/samay/venice-bungalows/05.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168117/samay/venice-bungalows/06.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168121/samay/venice-bungalows/07.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168126/samay/venice-bungalows/08.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168131/samay/venice-bungalows/09.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168135/samay/venice-bungalows/10.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168141/samay/venice-bungalows/11.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168145/samay/venice-bungalows/12.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168149/samay/venice-bungalows/13.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168163/samay/venice-bungalows/14.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168167/samay/venice-bungalows/15.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168170/samay/venice-bungalows/16.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168174/samay/venice-bungalows/17.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168179/samay/venice-bungalows/18.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168183/samay/venice-bungalows/19.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168187/samay/venice-bungalows/20.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168196/samay/venice-bungalows/21.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168198/samay/venice-bungalows/22.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168201/samay/venice-bungalows/23.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168204/samay/venice-bungalows/24.jpg"
+    ]
+  },
+  "ashutosh-kumar-3bhk": {
+    "name": "Ashutosh Kumar 3BHK",
+    "type": "residential",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168218/samay/ashutosh-kumar-3bhk/image00013.jpg"
+    ]
+  },
+  "event-office": {
+    "name": "Event Office",
+    "type": "commercial",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168222/samay/event-office/nm-00076.jpg"
+    ]
+  }
+}

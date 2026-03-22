@@ -102,8 +102,8 @@ export default function About() {
             >
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
-                  alt="Modern architecture"
+                  src="https://res.cloudinary.com/diojzujpv/image/upload/v1774168098/samay/venice-bungalows/01.jpg"
+                  alt="Samay Innovation — Interior Design"
                   className="w-full h-[500px] object-cover"
                 />
                 
@@ -160,8 +160,8 @@ export default function About() {
                 {/* Main Image */}
                 <div className="aspect-[3/4] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary">
                   <img
-                    src="/assets/images/founder/founder.jpg"
-                    alt="Founder - Samay Innovation"
+                    src="https://samayinnovation.com/wp-content/uploads/2022/06/Seme-Nadvi.jpg"
+                    alt="Seme Nadvi - Principal Interior Designer, Samay Innovation"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback to placeholder
@@ -190,23 +190,23 @@ export default function About() {
               {/* Name & Title */}
               <div className="mb-8">
                 <h4 className="text-3xl md:text-4xl font-light text-text-primary dark:text-dark-text-primary mb-2">
-                  [Founder Name]
+                  Seme Nadvi
                 </h4>
                 <p className="text-lg text-text-tertiary dark:text-dark-text-tertiary">
-                  Founder & Principal Designer
+                  Principal Interior Designer
                 </p>
               </div>
 
               {/* Bio */}
               <div className="space-y-4 mb-8">
                 <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  With over [X] years of experience in interior design, [Founder Name] has transformed countless spaces into stunning, functional environments. Their passion for sustainable design and attention to detail has earned recognition from Forbes, Vogue, and De-Mode.
+                  With over 10 years of experience in interior design, Seme Nadvi has transformed countless spaces into stunning, functional environments. Her passion for thoughtful design and meticulous attention to detail has earned recognition from Forbes, Vogue, and De-Mode.
                 </p>
                 <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  [Founder Name] believes that great design should be accessible to everyone. This philosophy drives Samay Innovation's commitment to creating beautiful spaces that reflect each client's unique personality and lifestyle, regardless of budget.
+                  Seme believes that great design should be deeply personal — a true reflection of the people who live and work within a space. This philosophy drives Samay Innovation's commitment to creating interiors that speak to each client's unique personality and lifestyle.
                 </p>
                 <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  Under their leadership, Samay Innovation has become one of Ahmedabad's most trusted interior design firms, known for innovative solutions and exceptional client service.
+                  Under her leadership, Samay Innovation has become one of Ahmedabad's most trusted interior design firms, known for bold ideas, impeccable craftsmanship, and exceptional client relationships.
                 </p>
               </div>
 
@@ -217,13 +217,13 @@ export default function About() {
                 </h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">[X]+</p>
+                    <p className="text-2xl font-light text-accent-primary mb-1">200+</p>
                     <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
                       Projects Completed
                     </p>
                   </div>
                   <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">[X]+</p>
+                    <p className="text-2xl font-light text-accent-primary mb-1">10+</p>
                     <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
                       Years Experience
                     </p>
@@ -235,7 +235,7 @@ export default function About() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">[X]+</p>
+                    <p className="text-2xl font-light text-accent-primary mb-1">150+</p>
                     <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
                       Happy Clients
                     </p>
@@ -243,26 +243,6 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Education/Certifications (Optional) */}
-              <div className="border-t border-border-light dark:border-border-dark pt-8 mt-8">
-                <h5 className="text-sm font-light tracking-wider uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-                  Education & Certifications
-                </h5>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-                    <span className="w-1 h-1 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>[Degree/Certification Name] - [Institution]</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-                    <span className="w-1 h-1 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>[Degree/Certification Name] - [Institution]</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-                    <span className="w-1 h-1 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
-                    <span>[Degree/Certification Name] - [Institution]</span>
-                  </li>
-                </ul>
-              </div>
             </motion.div>
           </div>
         </div>

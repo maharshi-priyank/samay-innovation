@@ -6,11 +6,17 @@ interface HeroProps {
   height?: 'full' | 'screen' | 'auto';
 }
 
-// Default images - you can replace these with local paths
 const defaultImages = [
-  '/assets/images/hero/hero-1.jpeg',
-  '/assets/images/hero/hero-2.jpeg',
-  '/assets/images/hero/hero-3.jpeg',
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166968/samay/farmhouse-rancharda/nm-08744.jpg', // Farmhouse — dramatic bar lounge
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167601/samay/parijaat-eclat-4bhk/nm-00133.jpg', // Parijaat Eclat — living room with gold partition
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166684/samay/arvind-villa-khatraj/nm-08573.jpg', // Arvind Villa — serene white bedroom
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167469/samay/parijaat-eclat-4bhk/nm-00071.jpg', // Parijaat Eclat — elegant dining room
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166740/samay/arvind-villa-khatraj/nm-08653.jpg', // Arvind Villa — clean living room
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167886/samay/parijaat-eclat-4bhk/nm-00225.jpg', // Parijaat Eclat — white corridor with artwork
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166707/samay/arvind-villa-khatraj/nm-08607.jpg', // Arvind Villa — clean white kitchen
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167776/samay/parijaat-eclat-4bhk/nm-00192.jpg', // Parijaat Eclat — bedroom
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166850/samay/farmhouse-rancharda/nm-08681.jpg', // Farmhouse — office with exposed brick & LED ceiling
+  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166795/samay/arvind-villa-khatraj/nm-08663.jpg', // Arvind Villa — outdoor terrace seating
 ];
 
 export default function Hero({
@@ -18,6 +24,7 @@ export default function Hero({
   height = 'screen',
 }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const optimizedImages = images;
 
   const heightClass = {
     full: 'h-screen',
@@ -28,11 +35,25 @@ export default function Hero({
   // Auto-advance slides
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
-
+      setCurrentIndex((prev) => (prev + 1) % optimizedImages.length);
+    }, 5000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [optimizedImages.length]);
+
+  // Preload next image before it's needed
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % optimizedImages.length;
+    const img = new Image();
+    img.src = optimizedImages[nextIndex];
+  }, [currentIndex, optimizedImages]);
+
+  // Preload first 2 images immediately on mount
+  useEffect(() => {
+    optimizedImages.slice(0, 2).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <section className={`relative ${heightClass} overflow-hidden bg-black`}>
@@ -48,14 +69,14 @@ export default function Hero({
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${images[currentIndex]})` }}
+            style={{ backgroundImage: `url(${optimizedImages[currentIndex]})` }}
           />
         </motion.div>
       </AnimatePresence>
 
       {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        {images.map((_, index) => (
+        {optimizedImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
