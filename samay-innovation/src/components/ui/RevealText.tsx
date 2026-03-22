@@ -1,22 +1,20 @@
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+
+type Tag = 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
 
 interface RevealTextProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
+  as?: Tag;
 }
 
-/**
- * Wraps text in an overflow-hidden mask.
- * The child slides up from below into view on scroll — the typesetter's curtain reveal.
- */
 export default function RevealText({
   children,
   className = '',
   delay = 0,
-  as: Tag = 'div',
+  as: Tag = 'p',
 }: RevealTextProps) {
   return (
     <div className="overflow-hidden">
