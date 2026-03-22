@@ -17,6 +17,8 @@ import Blogs from './pages/Blogs';
 import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
 import Services from './pages/Services';
+import ClientReview from './pages/ClientReview';
+import AdminReviews from './pages/AdminReviews';
 import './index.css';
 
 function ScrollToTop() {
@@ -69,7 +71,13 @@ function Layout() {
 export default function App() {
   return (
     <Router>
-      <Layout />
+      <Routes>
+        {/* Standalone pages — no Header / Footer / Cursor */}
+        <Route path="/samay-admin" element={<AdminReviews />} />
+        <Route path="/client-review" element={<ClientReview />} />
+        {/* All public pages */}
+        <Route path="/*" element={<Layout />} />
+      </Routes>
     </Router>
   );
 }

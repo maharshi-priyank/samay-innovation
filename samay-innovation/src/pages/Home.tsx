@@ -3,6 +3,7 @@ import ServicesHighlight from '../components/sections/ServicesHighlight';
 import HorizontalPortfolio from '../components/sections/HorizontalPortfolio';
 import Testimonials from '../components/sections/Testimonials';
 import Stats from '../components/sections/Stats';
+import InstagramSection from '../components/sections/InstagramSection';
 import ContactCTA from '../components/sections/ContactCTA';
 import SEO from '../components/seo/SEO';
 import { localBusinessSchema, websiteSchema } from '../components/seo/schemas';
@@ -26,7 +27,9 @@ export default function Home() {
       <Testimonials />
       
       <Stats />
-      
+
+      <InstagramSection />
+
       <ContactCTA />
     </div>
   );

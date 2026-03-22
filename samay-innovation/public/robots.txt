@@ -9,5 +9,9 @@ Disallow: /src/
 Disallow: /.env
 Disallow: /node_modules/
 
+# Hidden routes — not for public indexing
+Disallow: /client-review
+Disallow: /samay-admin
+
 # Sitemap
 Sitemap: https://samayinnovation.in/sitemap.xml

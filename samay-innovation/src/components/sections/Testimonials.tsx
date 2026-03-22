@@ -1,52 +1,78 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { supabase, type Review } from '../../lib/supabase';
 
-const testimonials = [
+// Hardcoded fallback — shown if Supabase has no approved reviews yet
+const FALLBACK = [
   {
-    id: 1,
+    id: 'f1',
     name: 'Sadhna Shah',
     role: 'Customer',
-    content: 'I am glad that I have come across you and have your recommendation from one of my friends. What I want for my house is what you actually give in return. A big thank you for letting my dream come true. Kudos to Samay Innovation!',
+    review: 'I am glad that I have come across you and have your recommendation from one of my friends. What I want for my house is what you actually give in return. A big thank you for letting my dream come true. Kudos to Samay Innovation!',
     project: 'Residential Interior',
     rating: 5,
   },
   {
-    id: 2,
+    id: 'f2',
     name: 'Ashwin Shukla',
     role: 'Customer',
-    content: 'We breathe relaxed in our home because we have perfect interior designing, perfect color combination, and everything is just perfect as we dreamt. I don\'t have words to express my gratitude to Samay Innovation, just thank you is not enough for your efforts!',
+    review: "We breathe relaxed in our home because we have perfect interior designing, perfect color combination, and everything is just perfect as we dreamt. I don't have words to express my gratitude to Samay Innovation, just thank you is not enough for your efforts!",
     project: 'Home Interior',
     rating: 5,
   },
   {
-    id: 3,
+    id: 'f3',
     name: 'Amit Shah',
     role: 'Customer',
-    content: 'Technically what we want is almost impossible within the space we have, but Seme Nadvi makes it happen for us! My employees and I are very happy to have such an amazing, comfortable, and relaxing working space. All because of Samay Innovations and Seme Nadvi, Thank you so much!',
+    review: 'Technically what we want is almost impossible within the space we have, but Seme Nadvi makes it happen for us! My employees and I are very happy to have such an amazing, comfortable, and relaxing working space. All because of Samay Innovations and Seme Nadvi, Thank you so much!',
     project: 'Office Interior',
     rating: 5,
   },
   {
-    id: 4,
+    id: 'f4',
     name: 'Amit Agrawal',
     role: 'Customer',
-    content: 'Samay Innovations has performed and delivered for us in an efficient and professional fashion. The design talent is exceptional and has given us unique designs and interior design as we want. Keep going guys, you are amazing.',
+    review: 'Samay Innovations has performed and delivered for us in an efficient and professional fashion. The design talent is exceptional and has given us unique designs and interior design as we want. Keep going guys, you are amazing.',
     project: 'Interior Design',
     rating: 5,
   },
 ];
 
+type DisplayReview = {
+  id: string;
+  name: string;
+  role: string | null;
+  review: string;
+  project: string | null;
+  rating: number;
+};
+
+function toDisplay(r: Review): DisplayReview {
+  return { id: r.id, name: r.name, role: r.role, review: r.review, project: r.project, rating: r.rating };
+}
+
 export default function Testimonials() {
+  const [list, setList] = useState<DisplayReview[]>(FALLBACK);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  useEffect(() => {
+    supabase
+      .from('reviews')
+      .select('*')
+      .eq('approved', true)
+      .order('created_at', { ascending: false })
+      .then(({ data }) => {
+        if (data && data.length > 0) {
+          setList((data as Review[]).map(toDisplay));
+          setCurrentIndex(0);
+        }
+      });
+  }, []);
 
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  const next = () => setCurrentIndex((p) => (p + 1) % list.length);
+  const prev = () => setCurrentIndex((p) => (p - 1 + list.length) % list.length);
+  const t = list[currentIndex];
 
   return (
     <section className="py-32 bg-bg-dark-section dark:bg-dark-bg-tertiary overflow-hidden">
@@ -73,7 +99,7 @@ export default function Testimonials() {
         <div className="max-w-5xl">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentIndex}
+              key={t.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -81,65 +107,50 @@ export default function Testimonials() {
             >
               {/* Quote */}
               <p className="text-2xl md:text-4xl font-light text-white leading-relaxed mb-16">
-                "{testimonials[currentIndex].content}"
+                "{t.review}"
               </p>
 
               {/* Client Info & Navigation Row */}
               <div className="flex items-end justify-between border-t border-white/10 pt-8">
-                {/* Client Details */}
                 <div>
-                  <p className="text-lg font-light text-white mb-1">
-                    {testimonials[currentIndex].name}
-                  </p>
-                  <p className="text-sm text-white/50 mb-3">
-                    {testimonials[currentIndex].role}
-                  </p>
-                  
-                  {/* Rating & Project Badge Row */}
+                  <p className="text-lg font-light text-white mb-1">{t.name}</p>
+                  <p className="text-sm text-white/50 mb-3">{t.role}</p>
+
                   <div className="flex items-center gap-4">
-                    {/* Star Rating */}
+                    {/* Stars */}
                     <div className="flex items-center gap-1">
                       {[...Array(5)].map((_, i) => (
                         <svg
                           key={i}
-                          className={`w-4 h-4 ${
-                            i < testimonials[currentIndex].rating
-                              ? 'text-accent-primary'
-                              : 'text-white/20'
-                          }`}
+                          className={`w-4 h-4 ${i < t.rating ? 'text-accent-primary' : 'text-white/20'}`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
-                      <span className="text-xs text-white/50 ml-2">
-                        {testimonials[currentIndex].rating}.0
-                      </span>
+                      <span className="text-xs text-white/50 ml-2">{t.rating}.0</span>
                     </div>
 
-                    {/* Divider */}
                     <div className="w-px h-4 bg-white/20" />
 
-                    {/* Project Badge */}
-                    <div className="inline-block border border-white/20 px-4 py-1.5">
-                      <p className="text-xs font-light tracking-wider uppercase text-white/70">
-                        {testimonials[currentIndex].project}
-                      </p>
-                    </div>
+                    {t.project && (
+                      <div className="inline-block border border-white/20 px-4 py-1.5">
+                        <p className="text-xs font-light tracking-wider uppercase text-white/70">
+                          {t.project}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* Navigation Controls */}
+                {/* Navigation */}
                 <div className="flex items-center gap-6">
-                  {/* Counter */}
                   <div className="text-sm font-light text-white/50">
                     <span className="text-white">{String(currentIndex + 1).padStart(2, '0')}</span>
                     {' / '}
-                    {String(testimonials.length).padStart(2, '0')}
+                    {String(list.length).padStart(2, '0')}
                   </div>
-
-                  {/* Buttons */}
                   <div className="flex gap-3">
                     <button
                       onClick={prev}
