@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Calendar, Maximize2 } from 'lucide-react';
 import { projects, getProjectsByCategory } from '../data/projects';
 import PageHeader from '../components/ui/PageHeader';
+import TiltCard from '../components/ui/TiltCard';
 import SEO from '../components/seo/SEO';
 import { breadcrumbSchema } from '../components/seo/schemas';
 
@@ -132,11 +133,12 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
-      className="group relative h-[500px] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary"
     >
-      <Link to={`/portfolio/${project.slug}`} className="block h-full">
+    <TiltCard maxTilt={4} className="group relative h-[500px] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary"
+      onMouseEnter={onHover}
+      onHoverEnd={onLeave}
+    >
+      <Link to={`/portfolio/${project.slug}`} className="block h-full" data-cursor-image="">
         {/* Image Carousel */}
         <div className="relative h-full overflow-hidden">
           <AnimatePresence mode="wait">
@@ -223,6 +225,7 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
           </div>
         </div>
       </Link>
+    </TiltCard>
     </motion.div>
   );
 }

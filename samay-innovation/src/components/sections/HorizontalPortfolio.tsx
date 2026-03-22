@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, MapPin, Ruler, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { projects } from '../../data/projects';
 import Button from '../ui/Button';
+import TiltCard from '../ui/TiltCard';
 
 export default function HorizontalPortfolio() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +52,12 @@ export default function HorizontalPortfolio() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative flex-shrink-0 w-[85vw] md:w-[500px] lg:w-[600px] h-[400px] md:h-[500px] overflow-hidden cursor-pointer"
+              className="flex-shrink-0 w-[85vw] md:w-[500px] lg:w-[600px]"
+            >
+            <Link to={`/portfolio/${project.slug}`} data-cursor-image="">
+            <TiltCard
+              maxTilt={5}
+              className="group relative w-full h-[400px] md:h-[500px] overflow-hidden"
             >
               {/* Project Image */}
               <div className="absolute inset-0">
@@ -101,6 +108,8 @@ export default function HorizontalPortfolio() {
                   )}
                 </div>
               </div>
+            </TiltCard>
+            </Link>
             </motion.div>
           ))}
         </div>

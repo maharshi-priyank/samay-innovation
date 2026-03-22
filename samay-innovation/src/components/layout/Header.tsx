@@ -61,7 +61,7 @@ export default function Header() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-xs font-light tracking-widest uppercase transition-colors duration-500 ${
+                    className={`relative text-xs font-light tracking-widest uppercase transition-colors duration-500 group ${
                       isScrolled
                         ? isActive
                           ? 'text-text-primary dark:text-dark-text-primary'
@@ -72,6 +72,12 @@ export default function Header() {
                     }`}
                   >
                     {item.name}
+                    {/* Animated underline — grows from center */}
+                    <span
+                      className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-px bg-current transition-all duration-300 ease-out ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    />
                   </Link>
                 );
               })}

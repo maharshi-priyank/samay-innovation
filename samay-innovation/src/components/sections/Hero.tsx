@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 
 interface HeroProps {
   images?: string[];
@@ -25,6 +25,14 @@ export default function Hero({
 }: HeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const optimizedImages = images;
+  const containerRef = useRef<HTMLElement>(null);
+
+  // Parallax: background moves at 40% of scroll speed
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
 
   const heightClass = {
     full: 'h-screen',
@@ -40,14 +48,14 @@ export default function Hero({
     return () => clearInterval(interval);
   }, [optimizedImages.length]);
 
-  // Preload next image before it's needed
+  // Preload next image
   useEffect(() => {
     const nextIndex = (currentIndex + 1) % optimizedImages.length;
     const img = new Image();
     img.src = optimizedImages[nextIndex];
   }, [currentIndex, optimizedImages]);
 
-  // Preload first 2 images immediately on mount
+  // Preload first 2 on mount
   useEffect(() => {
     optimizedImages.slice(0, 2).forEach((src) => {
       const img = new Image();
@@ -56,20 +64,26 @@ export default function Hero({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className={`relative ${heightClass} overflow-hidden bg-black`}>
-      {/* Image Slider */}
+    <section ref={containerRef} className={`relative ${heightClass} overflow-hidden bg-black`}>
+      {/* Image Slider with parallax wrapper */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
+          initial={{ opacity: 0, scale: 1.08 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
           className="absolute inset-0"
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${optimizedImages[currentIndex]})` }}
+          {/* Extra height (-15% top, 130% total) gives room for the parallax Y travel */}
+          <motion.div
+            className="absolute left-0 right-0 bg-cover bg-center"
+            style={{
+              top: '-15%',
+              height: '130%',
+              backgroundImage: `url(${optimizedImages[currentIndex]})`,
+              y: bgY,
+            }}
           />
         </motion.div>
       </AnimatePresence>

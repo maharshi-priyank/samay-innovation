@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import MagneticButton from './MagneticButton';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -7,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   className?: string;
+  magnetic?: boolean;
 }
 
 /**
@@ -24,6 +26,7 @@ export default function Button({
   size = 'md',
   href,
   className = '',
+  magnetic = false,
   ...props
 }: ButtonProps) {
   const baseStyles = 'inline-flex items-center justify-center font-light tracking-widest uppercase transition-all duration-300 rounded-full';
@@ -42,30 +45,21 @@ export default function Button({
 
   const buttonClasses = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
+  let el: ReactNode;
+
   if (href) {
     if (href.startsWith('http')) {
-      return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonClasses}
-        >
+      el = (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={buttonClasses}>
           {children}
         </a>
       );
+    } else {
+      el = <Link to={href} className={buttonClasses}>{children}</Link>;
     }
-
-    return (
-      <Link to={href} className={buttonClasses}>
-        {children}
-      </Link>
-    );
+  } else {
+    el = <button className={buttonClasses} {...props}>{children}</button>;
   }
 
-  return (
-    <button className={buttonClasses} {...props}>
-      {children}
-    </button>
-  );
+  return magnetic ? <MagneticButton>{el}</MagneticButton> : <>{el}</>;
 }
