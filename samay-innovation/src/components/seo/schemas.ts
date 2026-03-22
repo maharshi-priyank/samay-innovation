@@ -17,7 +17,7 @@ export const localBusinessSchema = {
     'Award-winning luxury interior design firm in Ahmedabad, Gujarat, India. Specialising in residential villas, 4BHK apartments, farmhouses, and commercial spaces. Featured in Forbes, Vogue, and De-Mode.',
   url: SITE_URL,
   logo: `${SITE_URL}/logo/logo.png`,
-  image: `${SITE_URL}/assets/images/og-image.jpg`,
+  image: 'https://res.cloudinary.com/diojzujpv/image/upload/w_1200,h_630,c_fill,g_auto/samay/arvind-villa-khatraj/nm-08573.jpg',
   telephone: '+919898524366',
   email: 'info@samayinnovation.in',
   priceRange: '₹₹₹₹',
