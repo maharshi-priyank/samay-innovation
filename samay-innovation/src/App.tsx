@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Preloader from './components/ui/Preloader';
-// import WhatsAppButton from './components/ui/WhatsAppButton';
+import WhatsAppButton from './components/ui/WhatsAppButton';
 import BackToTop from './components/ui/BackToTop';
 import PageTransition from './components/ui/PageTransition';
 import Home from './pages/Home';
@@ -13,6 +13,7 @@ import ProjectDetails from './pages/ProjectDetails';
 import Blogs from './pages/Blogs';
 import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
+import Services from './pages/Services';
 import './index.css';
 
 function AnimatedRoutes() {
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
         <Route path="/portfolio/:slug" element={<PageTransition><ProjectDetails /></PageTransition>} />
         <Route path="/blogs" element={<PageTransition><Blogs /></PageTransition>} />
         <Route path="/blogs/:slug" element={<PageTransition><BlogDetails /></PageTransition>} />
+        <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
       </Routes>
     </AnimatePresence>
@@ -43,7 +45,7 @@ function App() {
           <AnimatedRoutes />
         </main>
         <Footer />
-        {/* <WhatsAppButton /> */}
+        <WhatsAppButton />
         <BackToTop />
       </div>
     </Router>

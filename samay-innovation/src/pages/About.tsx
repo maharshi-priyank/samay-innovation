@@ -160,7 +160,7 @@ export default function About() {
                 {/* Main Image */}
                 <div className="aspect-[3/4] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary">
                   <img
-                    src="https://samayinnovation.com/wp-content/uploads/2022/06/Seme-Nadvi.jpg"
+                    src="/assets/images/founder/founder-photo.png"
                     alt="Seme Nadvi - Principal Interior Designer, Samay Innovation"
                     className="w-full h-full object-cover"
                     onError={(e) => {

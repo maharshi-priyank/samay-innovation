@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Instagram, Linkedin, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle, Instagram, Linkedin, Facebook } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { SITE_CONFIG } from '../lib/constants';
 import Button from '../components/ui/Button';
 import PageHeader from '../components/ui/PageHeader';
+
+const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || '';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || '';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -18,6 +23,7 @@ export default function Contact() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -29,25 +35,29 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        projectType: '',
-        budget: '',
-        message: '',
-      });
-    }, 3000);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:    formData.name,
+          from_email:   formData.email,
+          phone:        formData.phone || 'Not provided',
+          project_type: formData.projectType,
+          budget:       formData.budget || 'Not specified',
+          message:      formData.message,
+          to_name:      'Seme Nadvi',
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+      setIsSubmitted(true);
+    } catch {
+      setError('Something went wrong. Please try calling us directly or email us at ' + SITE_CONFIG.email);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -349,6 +359,18 @@ export default function Contact() {
                         Tell us about your project *
                       </label>
                     </div>
+
+                    {/* Error Message */}
+                    {error && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+                      >
+                        <AlertCircle size={18} className="text-red-500 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm text-red-700 dark:text-red-400">{error}</p>
+                      </motion.div>
+                    )}
 
                     {/* Submit Button */}
                     <button

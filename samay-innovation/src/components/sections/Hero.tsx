@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface HeroProps {
   images?: string[];
@@ -75,7 +75,7 @@ export default function Hero({
       </AnimatePresence>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-[3]">
         {optimizedImages.map((_, index) => (
           <button
             key={index}
