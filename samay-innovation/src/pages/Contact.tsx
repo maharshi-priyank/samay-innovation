@@ -44,17 +44,23 @@ export default function Contact() {
         {
           from_name:    formData.name,
           from_email:   formData.email,
+          reply_to:     formData.email,
           phone:        formData.phone || 'Not provided',
           project_type: formData.projectType,
           budget:       formData.budget || 'Not specified',
           message:      formData.message,
           to_name:      'Seme Nadvi',
+          to_email:     'info@samayinnovation.in',
         },
-        EMAILJS_PUBLIC_KEY,
+        { publicKey: EMAILJS_PUBLIC_KEY },
       );
       setIsSubmitted(true);
-    } catch {
-      setError('Something went wrong. Please try calling us directly or email us at ' + SITE_CONFIG.email);
+    } catch (err: unknown) {
+      console.error('EmailJS error:', err);
+      const message = err && typeof err === 'object' && 'text' in err
+        ? String((err as { text: unknown }).text)
+        : 'Something went wrong. Please try calling us directly or email us at ' + SITE_CONFIG.email;
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }

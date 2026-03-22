@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, MapPin, Calendar, Maximize2, X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Play, ExternalLink } from 'lucide-react';
 import { getProjectBySlug, projects } from '../data/projects';
 import Button from '../components/ui/Button';
 
@@ -209,6 +209,11 @@ export default function ProjectDetails() {
         </div>
       </section>
 
+      {/* Video Tour */}
+      {project.videoUrl && (
+        <VideoSection videoUrl={project.videoUrl} projectTitle={project.title} />
+      )}
+
       {/* Image Gallery */}
       <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
         <div className="container-custom">
@@ -361,7 +366,175 @@ export default function ProjectDetails() {
   );
 }
 
-// Lightbox Component
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+function extractYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
+// ─── Video Section ───────────────────────────────────────────────────────────
+
+interface VideoSectionProps {
+  videoUrl: string;
+  projectTitle: string;
+}
+
+function VideoSection({ videoUrl, projectTitle }: VideoSectionProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoId = extractYouTubeId(videoUrl);
+
+  if (!videoId) return null;
+
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&color=white`;
+
+  return (
+    <section className="py-24 bg-[#0e0e0e]">
+      <div className="container-custom">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-12"
+        >
+          <p className="text-[10px] font-light tracking-[0.4em] uppercase text-[#C9A97A] mb-4 flex items-center gap-3">
+            <span className="inline-block w-6 h-px bg-[#C9A97A]" />
+            Video Tour
+          </p>
+          <h2 className="text-3xl md:text-4xl font-light text-white">
+            Experience the Space
+          </h2>
+        </motion.div>
+
+        {/* Video Frame */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="relative"
+        >
+          {/* Corner accents */}
+          <div className="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-[#C9A97A]/60 z-10 pointer-events-none" />
+          <div className="absolute -top-3 -right-3 w-10 h-10 border-t-2 border-r-2 border-[#C9A97A]/60 z-10 pointer-events-none" />
+          <div className="absolute -bottom-3 -left-3 w-10 h-10 border-b-2 border-l-2 border-[#C9A97A]/60 z-10 pointer-events-none" />
+          <div className="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-[#C9A97A]/60 z-10 pointer-events-none" />
+
+          {/* 16:9 container */}
+          <div className="relative aspect-video bg-black overflow-hidden">
+            <AnimatePresence mode="wait">
+              {!isPlaying ? (
+                <motion.div
+                  key="thumbnail"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 cursor-pointer group"
+                  onClick={() => setIsPlaying(true)}
+                >
+                  {/* Thumbnail */}
+                  <img
+                    src={thumbnailUrl}
+                    alt={`${projectTitle} video tour`}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  {/* Gradient overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500" />
+
+                  {/* Pulsing rings + play button */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    {/* Outer ring 1 */}
+                    <motion.div
+                      animate={{ scale: [1, 1.35, 1], opacity: [0.25, 0, 0.25] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="absolute w-40 h-40 rounded-full border border-[#C9A97A]/50"
+                    />
+                    {/* Outer ring 2 */}
+                    <motion.div
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.15, 0, 0.15] }}
+                      transition={{ duration: 2.5, delay: 0.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="absolute w-40 h-40 rounded-full border border-[#C9A97A]/30"
+                    />
+
+                    {/* Play circle */}
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                      className="relative w-[72px] h-[72px] rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:bg-[#C9A97A]/30 group-hover:border-[#C9A97A] transition-colors duration-300"
+                    >
+                      <Play size={26} className="text-white ml-1" fill="currentColor" />
+                    </motion.div>
+                  </div>
+
+                  {/* Bottom info strip */}
+                  <div className="absolute bottom-0 left-0 right-0 px-8 py-7">
+                    <p className="text-[10px] font-light tracking-[0.35em] uppercase text-[#C9A97A] mb-1">
+                      Client Walkthrough
+                    </p>
+                    <p className="text-white text-xl font-light leading-snug">
+                      {projectTitle}
+                    </p>
+                  </div>
+
+                  {/* Top-right "PLAY" label */}
+                  <div className="absolute top-6 right-8 flex items-center gap-2">
+                    <span className="text-[10px] font-light tracking-[0.3em] uppercase text-white/50">
+                      Watch Tour
+                    </span>
+                    <div className="w-4 h-px bg-white/30" />
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.iframe
+                  key="video"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  src={embedUrl}
+                  title={`${projectTitle} — Video Tour`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+
+        {/* Watch on YouTube link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-6 flex items-center justify-between"
+        >
+          <p className="text-sm font-light text-white/40">
+            Full project walkthrough by the client
+          </p>
+          <a
+            href={videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs font-light tracking-[0.2em] uppercase text-[#C9A97A] hover:text-white transition-colors duration-300"
+          >
+            Watch on YouTube
+            <ExternalLink size={13} />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Lightbox Component ───────────────────────────────────────────────────────
+
 interface LightboxProps {
   images: string[];
   currentIndex: number;

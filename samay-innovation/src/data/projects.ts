@@ -15,6 +15,7 @@ export interface Project {
   challenges?: string;
   solutions?: string;
   tags: string[];
+  videoUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -52,6 +53,7 @@ export const projects: Project[] = [
     challenges: 'Achieving a sense of luxury without visual clutter, while designing distinct spaces for family members with different needs — including a playful yet refined children\'s room.',
     solutions: 'A strict neutral palette with warm cove lighting creates cohesion across all rooms. Custom furniture pieces and curated accents serve as focal points without overwhelming the space.',
     tags: ['Minimalist', 'Villa', 'Luxury', 'Residential', 'White Interiors'],
+    videoUrl: 'https://youtu.be/xMyVu1XXDu0?si=OBrFpNyGFFda83T5',
   },
   {
     id: '2',
@@ -128,6 +130,7 @@ export const projects: Project[] = [
     challenges: 'Designing a home that serves both adults and a child with equal thoughtfulness — balancing warm sophistication in the main spaces with fun and creativity in the kids\' room.',
     solutions: 'Warm wood tones and textured wallpapers unify the adult spaces, while the children\'s room gets its own bold colour story — blue, neon, and custom joinery — that feels exciting without clashing with the rest of the home.',
     tags: ['Warm Contemporary', 'Apartment', 'Personalized', 'Kids Room', 'Wooden Interiors'],
+    videoUrl: 'https://youtu.be/O_jZIjFDDDY?si=7ErtG32urYiAKLDm'
   },
   {
     id: '4',
@@ -164,6 +167,7 @@ export const projects: Project[] = [
     challenges: 'Creating a consistent sense of luxury across a large 4BHK footprint while keeping the design feeling intimate and personal rather than hotel-like.',
     solutions: 'A warm, rose-gold and ivory palette runs through all spaces, while custom millwork and personal touches like the bespoke entrance nameplate make the apartment feel distinctly tailored to its owners.',
     tags: ['Luxury', 'Rose Gold', '4BHK', 'Marble', 'Sophisticated'],
+    videoUrl: 'https://youtu.be/zqCSHp4NWu4?si=7pWuXYGLCKVTEaHS'
   },
   {
     id: '5',
@@ -189,6 +193,7 @@ export const projects: Project[] = [
     challenges: 'Designing an entertainment space grand enough to impress guests while remaining warm and inviting — avoiding the sterile feel of a commercial bar setup.',
     solutions: 'Natural materials — wood, marble, velvet — bring warmth to a dramatic scheme. The arched niches and warm lighting create an intimate atmosphere despite the large scale of the space.',
     tags: ['Farmhouse', 'Entertainment', 'Bar Lounge', 'Dramatic', 'Luxury'],
+    videoUrl: 'https://youtu.be/KUWhU-RQJCk?si=PBO1bXfzlN3_ITj9'
   },
   {
     id: '6',
