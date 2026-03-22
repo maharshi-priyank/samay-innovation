@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion';
-import { Instagram, ExternalLink, MapPin, Award, Sparkles, Package } from 'lucide-react';
+import { Instagram, ExternalLink, MapPin, Award, Sparkles, Newspaper } from 'lucide-react';
 import { instagramPosts } from '../../data/instagramPosts';
 
 const INSTAGRAM_URL = 'https://www.instagram.com/samayinnovation/';
 
 const profileBullets = [
-  { icon: Award,    text: 'Award-winning Interior Design Firm' },
-  { icon: MapPin,   text: 'Ahmedabad, Gujarat — Serving India & US' },
-  { icon: Sparkles, text: 'Luxury Residential & Commercial Interiors' },
-  { icon: Package,  text: 'Turnkey Interior Solutions' },
+  { icon: Award,     text: 'Award @ House of Commons, UK' },
+  { icon: Newspaper, text: 'Featured in Forbes, Vogue, Zee News & more' },
+  { icon: MapPin,    text: 'India + USA — Commercial & Residential' },
+  { icon: Sparkles,  text: 'Interior Design Studio since inception' },
 ];
 
 const profileStats = [
-  { value: '15+', label: 'Posts' },
-  { value: '500+', label: 'Followers' },
-  { value: '200+', label: 'Projects' },
+  { value: '749',   label: 'Posts' },
+  { value: '31.4K', label: 'Followers' },
+  { value: '57',    label: 'Following' },
 ];
 
 const containerVariants = {
@@ -24,7 +24,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, scale: 0.96 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 export default function InstagramSection() {
@@ -98,7 +98,7 @@ export default function InstagramSection() {
                 </a>
               </div>
               <p className="text-white/50 text-sm mb-5">
-                Samay Innovation — Interior Design &amp; Décor
+                Samay Innovation Interior Design Studio
               </p>
 
               {/* Stats */}
