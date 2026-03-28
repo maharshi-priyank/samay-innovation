@@ -1,31 +1,23 @@
 {
-  "event-office": {
-    "name": "Event Office",
-    "type": "commercial",
+  "ravello-italy": {
+    "name": "Ravello, Italy",
+    "type": "hospitality",
     "images": [
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691540/samay/event-office/nm-00003.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691542/samay/event-office/nm-00023.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691544/samay/event-office/nm-00025.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691545/samay/event-office/nm-00027.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691547/samay/event-office/nm-00046.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691549/samay/event-office/nm-00055.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691551/samay/event-office/nm-00062.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691553/samay/event-office/nm-00064.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691556/samay/event-office/nm-00069.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691559/samay/event-office/nm-00072.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774168222/samay/event-office/nm-00076.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691565/samay/event-office/nm-00078.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691568/samay/event-office/nm-00081.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691570/samay/event-office/nm-00086.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691573/samay/event-office/nm-00095.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691575/samay/event-office/nm-00101.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691576/samay/event-office/nm-00121.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691578/samay/event-office/nm-00138.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691581/samay/event-office/nm-00147.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691583/samay/event-office/nm-00160.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691584/samay/event-office/nm-00175.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691586/samay/event-office/nm-00187.jpg",
-      "https://res.cloudinary.com/diojzujpv/image/upload/v1774691589/samay/event-office/nm-00201.jpg"
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692405/samay/ravello-italy/img-20241128-wa0265-1-.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692407/samay/ravello-italy/img-20241128-wa0266-1-.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692408/samay/ravello-italy/img-20241128-wa0267-1-.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692409/samay/ravello-italy/img-20241128-wa0268-1-.jpg"
+    ]
+  },
+  "usa-restaurant-la": {
+    "name": "USA Restaurant in LA",
+    "type": "hospitality",
+    "images": [
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692412/samay/usa-restaurant-la/20250206-234537.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692414/samay/usa-restaurant-la/img-20250206-wa0330.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692415/samay/usa-restaurant-la/img-20250206-wa0331.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692416/samay/usa-restaurant-la/img-20250206-wa0332.jpg",
+      "https://res.cloudinary.com/diojzujpv/image/upload/v1774692418/samay/usa-restaurant-la/img-20250206-wa0333.jpg"
     ]
   }
 }

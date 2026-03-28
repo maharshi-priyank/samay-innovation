@@ -3,6 +3,9 @@ export interface Project {
   title: string;
   slug: string;
   category: 'residential' | 'commercial' | 'hospitality' | 'retail';
+  region?: 'india' | 'international';
+  country?: string;
+  flag?: string;
   location: string;
   year: number;
   size: string;
@@ -250,6 +253,57 @@ export const projects: Project[] = [
     description: 'A focused, high-performance office workspace designed for efficiency. A custom multi-monitor trading workstation setup in a clean, minimal environment — purpose-built for long hours of precision work.',
     tags: ['Commercial', 'Office', 'Workspace', 'Minimal'],
     videoUrl: 'https://youtu.be/xMyVu1XXDu0?si=OBrFpNyGFFda83T5',
+  },
+  {
+    id: '8',
+    title: 'Ravello Villa, Italy',
+    slug: 'ravello-italy',
+    category: 'hospitality',
+    region: 'international',
+    country: 'Italy',
+    flag: '🇮🇹',
+    location: 'Ravello, Amalfi Coast, Italy',
+    year: 2024,
+    size: '2,800 sq ft',
+    status: 'completed',
+    featured: false,
+    thumbnail: 'https://res.cloudinary.com/diojzujpv/image/upload/v1774692405/samay/ravello-italy/img-20241128-wa0265-1-.jpg',
+    images: [
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692405/samay/ravello-italy/img-20241128-wa0265-1-.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692407/samay/ravello-italy/img-20241128-wa0266-1-.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692408/samay/ravello-italy/img-20241128-wa0267-1-.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692409/samay/ravello-italy/img-20241128-wa0268-1-.jpg',
+    ],
+    description: 'A luxury villa interior on the iconic Amalfi Coast, blending Italian heritage with contemporary Indian craftsmanship. Set against the dramatic cliffs of Ravello, this project fused rich textures, bespoke furniture, and a warm material palette to create a home that honours its breathtaking Mediterranean setting.',
+    challenges: 'Designing for an international context while maintaining Samay Innovation\'s signature aesthetic — balancing Italian architectural heritage with contemporary luxury.',
+    solutions: 'Warm stone textures, handcrafted furniture, and a palette drawn from the Amalfi landscape were used to create spaces that feel both global and deeply personal.',
+    tags: ['International', 'Villa', 'Italy', 'Luxury', 'Mediterranean', 'Hospitality'],
+  },
+  {
+    id: '9',
+    title: 'Restaurant Interior, Los Angeles',
+    slug: 'usa-restaurant-la',
+    category: 'hospitality',
+    region: 'international',
+    country: 'USA',
+    flag: '🇺🇸',
+    location: 'Los Angeles, California, USA',
+    year: 2025,
+    size: '3,200 sq ft',
+    status: 'completed',
+    featured: false,
+    thumbnail: 'https://res.cloudinary.com/diojzujpv/image/upload/v1774692412/samay/usa-restaurant-la/20250206-234537.jpg',
+    images: [
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692412/samay/usa-restaurant-la/20250206-234537.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692414/samay/usa-restaurant-la/img-20250206-wa0330.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692415/samay/usa-restaurant-la/img-20250206-wa0331.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692416/samay/usa-restaurant-la/img-20250206-wa0332.jpg',
+      'https://res.cloudinary.com/diojzujpv/image/upload/v1774692418/samay/usa-restaurant-la/img-20250206-wa0333.jpg',
+    ],
+    description: 'A full restaurant interior design project in the heart of Los Angeles — where the energy of LA dining culture meets the sophistication of Indian design sensibility. Dramatic lighting, custom joinery, and a layered material story create a space that is bold, immersive, and entirely memorable.',
+    challenges: 'Meeting the high expectations of LA\'s competitive dining scene while incorporating the client\'s vision for a warm, character-rich space that stands apart from typical restaurant aesthetics.',
+    solutions: 'A theatrical approach to lighting, custom booth seating, and richly textured wall treatments bring depth and drama. Each zone of the restaurant offers a distinct atmosphere within a cohesive design language.',
+    tags: ['International', 'Restaurant', 'USA', 'Los Angeles', 'Commercial', 'Hospitality'],
   },
 ];
 
