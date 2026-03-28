@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Calendar, Maximize2, Globe } from 'lucide-react';
 import { projects, getProjectsByCategory } from '../data/projects';
 import PageHeader from '../components/ui/PageHeader';
-import TiltCard from '../components/ui/TiltCard';
 import SEO from '../components/seo/SEO';
 import { breadcrumbSchema } from '../components/seo/schemas';
 
@@ -166,118 +165,106 @@ interface ProjectCardProps {
 function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Auto-scroll images on hover
   useEffect(() => {
-    if (!isHovered) {
-      setCurrentImageIndex(0);
-      return;
-    }
-
+    if (!isHovered) { setCurrentImageIndex(0); return; }
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
-    }, 1500);
-
+    }, 1800);
     return () => clearInterval(interval);
   }, [isHovered, project.images.length]);
 
+  const num = String(index + 1).padStart(2, '0');
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
     >
-    <TiltCard maxTilt={4} className="group relative h-[500px] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary"
-      onMouseEnter={onHover}
-      onHoverEnd={onLeave}
-    >
-      <Link to={`/portfolio/${project.slug}`} className="block h-full" data-cursor-image="">
-        {/* Image Carousel */}
-        <div className="relative h-full overflow-hidden">
+      <Link
+        to={`/portfolio/${project.slug}`}
+        className="group block relative overflow-hidden"
+        onMouseEnter={onHover}
+        onMouseLeave={onLeave}
+        data-cursor-image=""
+      >
+        {/* Image container */}
+        <div className="relative h-[480px] overflow-hidden bg-neutral-900">
           <AnimatePresence mode="wait">
             <motion.img
               key={currentImageIndex}
               src={project.images[currentImageIndex]}
               alt={project.title}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: isHovered ? 1.05 : 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, scale: isHovered ? 1.06 : 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
               className="w-full h-full object-cover"
             />
           </AnimatePresence>
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+          {/* Permanent soft vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
 
-          {/* Image Counter */}
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="absolute top-6 right-6 flex gap-1"
-            >
-              {project.images.map((_: any, idx: number) => (
-                <div
-                  key={idx}
-                  className={`h-1 transition-all duration-300 ${
-                    idx === currentImageIndex ? 'w-8 bg-white' : 'w-1 bg-white/50'
-                  }`}
-                />
-              ))}
-            </motion.div>
-          )}
+          {/* Gold bottom reveal line */}
+          <motion.div
+            className="absolute bottom-0 left-0 h-[2px] bg-accent-primary"
+            initial={{ width: '0%' }}
+            animate={{ width: isHovered ? '100%' : '0%' }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          />
 
-          {/* Category Badge */}
-          <div className="absolute top-6 left-6">
-            <span className="px-4 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-light tracking-wider uppercase">
+          {/* Top row */}
+          <div className="absolute top-6 left-6 right-6 flex items-start justify-between">
+            <span className="text-[10px] font-light tracking-[0.4em] text-white/50">{num}</span>
+            <span className="px-3 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/15 text-white/70 text-[10px] font-light tracking-[0.25em] uppercase">
               {project.category}
             </span>
           </div>
 
-          {/* Content */}
-          <div className="absolute inset-0 p-8 flex flex-col justify-end">
-            {/* Arrow Icon - appears on hover */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
-              transition={{ duration: 0.3 }}
-              className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center"
-            >
-              <ArrowRight size={20} className="text-white" />
-            </motion.div>
+          {/* Image dots on hover */}
+          <motion.div
+            className="absolute top-6 left-1/2 -translate-x-1/2 flex gap-1.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {project.images.map((_: any, idx: number) => (
+              <div key={idx} className={`h-[3px] rounded-full transition-all duration-300 ${idx === currentImageIndex ? 'w-5 bg-accent-primary' : 'w-1.5 bg-white/30'}`} />
+            ))}
+          </motion.div>
 
-            {/* Title */}
-            <h3 className="text-3xl font-light text-white mb-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+          {/* Bottom content */}
+          <div className="absolute bottom-0 left-0 right-0 p-7">
+            <h3 className="text-2xl md:text-3xl font-light text-white leading-snug group-hover:-translate-y-1 transition-transform duration-500">
               {project.title}
             </h3>
 
-            {/* Meta Info - appears on hover */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: isHovered ? 1 : 0,
-                y: isHovered ? 0 : 20,
-              }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-wrap gap-4 text-white/80 text-xs font-light tracking-wider uppercase"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 12 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="flex items-center gap-5 mt-3 text-white/55 text-[11px] font-light tracking-[0.15em] uppercase"
             >
-              <div className="flex items-center gap-2">
-                <MapPin size={14} />
-                <span>{project.location}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Calendar size={14} />
-                <span>{project.year}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Maximize2 size={14} />
-                <span>{project.size}</span>
-              </div>
+              <span className="flex items-center gap-1.5"><MapPin size={10} />{project.location}</span>
+              <span className="w-px h-3 bg-white/20" />
+              <span className="flex items-center gap-1.5"><Calendar size={10} />{project.year}</span>
+              <span className="w-px h-3 bg-white/20" />
+              <span className="flex items-center gap-1.5"><Maximize2 size={10} />{project.size}</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -8 }}
+              transition={{ duration: 0.35, delay: 0.1 }}
+              className="flex items-center gap-2 mt-4 text-accent-primary text-[10px] tracking-[0.3em] uppercase font-light"
+            >
+              <span>View Project</span>
+              <ArrowRight size={11} />
             </motion.div>
           </div>
         </div>
       </Link>
-    </TiltCard>
     </motion.div>
   );
 }
