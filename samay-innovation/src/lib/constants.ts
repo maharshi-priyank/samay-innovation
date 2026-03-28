@@ -6,9 +6,9 @@ export const SITE_CONFIG = {
   url: 'https://samayinnovation.in',
   email: 'info@samayinnovation.in',
   phone: '(+91) 989 852 4366',
-  address: 'No 104/A, 1st Floor Shilp The Address, Shilaj Circle, Thaltej, Ahmedabad, Gujarat 380059',
+  address: '403 Before, Lane of ICICI Bank, PV Enclave, Sindhu Bhavan Marg, opp. Satyam House, Bodakdev, Ahmedabad, Gujarat 380059',
   hours: 'All Day 10:00 – 07:00',
-  mapUrl: 'https://goo.gl/maps/itfgxUPvy9dh7Lpq7',
+  mapUrl: 'https://maps.app.goo.gl/122bESsVDzQCwumV8',
   social: {
     instagram: 'https://instagram.com/samayinnovation',
     linkedin: 'https://linkedin.com/company/samayinnovation',

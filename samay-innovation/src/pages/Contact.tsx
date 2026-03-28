@@ -73,10 +73,10 @@ export default function Contact() {
       icon: MapPin,
       title: 'Visit Us',
       details: [
-        'No 104/A, 1st Floor',
-        'Shilp The Address, Shilaj Circle',
-        'Thaltej, Ahmedabad',
-        'Gujarat 380059',
+        '403 Before, Lane of ICICI Bank',
+        'PV Enclave, Sindhu Bhavan Marg',
+        'opp. Satyam House, Bodakdev',
+        'Ahmedabad, Gujarat 380059',
       ],
       link: SITE_CONFIG.mapUrl,
     },
@@ -109,8 +109,8 @@ export default function Contact() {
     <div>
       <SEO
         title="Contact Samay Innovation — Interior Designer in Ahmedabad, Gujarat"
-        description="Get in touch with Samay Innovation to start your interior design project. Visit our studio at Thaltej, Ahmedabad or call (+91) 989 852 4366. Serving residential and commercial clients across Ahmedabad, Gujarat and the US."
-        keywords="contact interior designer Ahmedabad, interior design studio Thaltej Ahmedabad, book interior designer Gujarat, interior design consultation Ahmedabad, Samay Innovation contact, interior designer SG Highway Ahmedabad"
+        description="Get in touch with Samay Innovation to start your interior design project. Visit our studio at Bodakdev, Ahmedabad or call (+91) 989 852 4366. Serving residential and commercial clients across Ahmedabad, Gujarat and the US."
+        keywords="contact interior designer Ahmedabad, interior design studio Bodakdev Ahmedabad, book interior designer Gujarat, interior design consultation Ahmedabad, Samay Innovation contact, interior designer Sindhu Bhavan Marg Ahmedabad"
         path="/contact"
         structuredData={localBusinessSchema}
       />
@@ -430,6 +430,101 @@ export default function Contact() {
               </motion.div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="bg-[#0e0e0e] py-20 overflow-hidden">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+              <div>
+                <span className="text-xs font-light tracking-[0.35em] uppercase text-accent-primary">
+                  Find Us
+                </span>
+                <h2 className="text-3xl md:text-4xl font-light text-white mt-2">
+                  Visit Our Studio
+                </h2>
+              </div>
+              <a
+                href={SITE_CONFIG.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs tracking-[0.2em] uppercase font-light text-accent-primary hover:text-white transition-colors duration-200"
+              >
+                <MapPin size={13} />
+                Get Directions
+              </a>
+            </div>
+
+            {/* Map + Address card */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 rounded-2xl overflow-hidden border border-white/10">
+
+              {/* Map iframe */}
+              <div className="lg:col-span-2 h-[320px] md:h-[420px] relative">
+                <iframe
+                  title="Samay Innovation Location"
+                  src="https://maps.google.com/maps?q=PV+Enclave+Sindhu+Bhavan+Marg+Bodakdev+Ahmedabad+Gujarat+380059&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: 'grayscale(20%) contrast(1.05)' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                {/* Gold top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent-primary" />
+              </div>
+
+              {/* Address sidebar */}
+              <div className="bg-[#1a1a1a] p-8 md:p-10 flex flex-col justify-between">
+                <div>
+                  <div className="w-10 h-10 rounded-full border border-accent-primary/40 flex items-center justify-center mb-6">
+                    <MapPin size={16} className="text-accent-primary" />
+                  </div>
+                  <h3 className="text-lg font-light text-white mb-4 tracking-wide">
+                    Samay Innovation
+                  </h3>
+                  <div className="space-y-1 mb-8">
+                    <p className="text-white/60 text-sm font-light">No 104/A, 1st Floor</p>
+                    <p className="text-white/60 text-sm font-light">403 Before, Lane of ICICI Bank</p>
+                    <p className="text-white/60 text-sm font-light">PV Enclave, Sindhu Bhavan Marg</p>
+                    <p className="text-white/60 text-sm font-light">opp. Satyam House, Bodakdev</p>
+                    <p className="text-white/60 text-sm font-light">Ahmedabad, Gujarat 380059</p>
+                  </div>
+                  <div className="w-8 h-px bg-accent-primary/40 mb-8" />
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <Clock size={13} className="text-accent-primary flex-shrink-0" />
+                      <span className="text-white/50 text-xs font-light tracking-wide">Mon – Sat, 10:00 AM – 7:00 PM</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Phone size={13} className="text-accent-primary flex-shrink-0" />
+                      <a href={`tel:${SITE_CONFIG.phone}`} className="text-white/50 text-xs font-light tracking-wide hover:text-accent-primary transition-colors">
+                        {SITE_CONFIG.phone}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href={SITE_CONFIG.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-10 inline-flex items-center justify-center gap-2 border border-accent-primary text-accent-primary px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-light hover:bg-accent-primary hover:text-white transition-all duration-300"
+                >
+                  <MapPin size={12} />
+                  Open in Maps
+                </a>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

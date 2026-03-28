@@ -78,9 +78,9 @@ export default function Footer() {
                 <div className="flex items-start gap-3 md:justify-end">
                   <MapPin size={18} className="text-white/60 mt-0.5 flex-shrink-0" />
                   <div className="text-sm text-white/80 md:text-right">
-                    <p>No 104/A, 1st Floor Shilp The Address</p>
-                    <p>Shilaj Circle, Thaltej, Ahmedabad</p>
-                    <p>Gujarat 380059</p>
+                    <p>403 Before, Lane of ICICI Bank</p>
+                    <p>PV Enclave, Sindhu Bhavan Marg</p>
+                    <p>Bodakdev, Ahmedabad 380059</p>
                   </div>
                 </div>
                 

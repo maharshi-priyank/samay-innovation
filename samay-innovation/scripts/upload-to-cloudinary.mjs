@@ -16,12 +16,12 @@ cloudinary.config({
 });
 
 const PROJECT_FOLDERS = {
-  'ARVIND VILLA NO 6 KHATRAJ':   { slug: 'arvind-villa-khatraj',  name: 'Arvind Villa No. 6, Khatraj', type: 'residential' },
-  'FARMHOUSE PICS AT RANCHARDA': { slug: 'farmhouse-rancharda',   name: 'Farmhouse at Rancharda',      type: 'residential' },
-  'Indraprashtha':               { slug: 'indraprashtha',         name: 'Indraprashtha',               type: 'residential' },
-  'PARIJAAT ECLAT 4BHK PHOTOS':  { slug: 'parijaat-eclat-4bhk',  name: 'Parijaat Eclat 4BHK',         type: 'residential' },
-  'Venice Bunglows Watermarked': { slug: 'venice-bungalows',      name: 'Venice Bungalows',            type: 'residential' },
-  'Ashutosh Kumar 3BHK':         { slug: 'ashutosh-kumar-3bhk',   name: 'Ashutosh Kumar 3BHK',         type: 'residential' },
+  // 'ARVIND VILLA NO 6 KHATRAJ':   { slug: 'arvind-villa-khatraj',  name: 'Arvind Villa No. 6, Khatraj', type: 'residential' },
+  // 'FARMHOUSE PICS AT RANCHARDA': { slug: 'farmhouse-rancharda',   name: 'Farmhouse at Rancharda',      type: 'residential' },
+  // 'Indraprashtha':               { slug: 'indraprashtha',         name: 'Indraprashtha',               type: 'residential' },
+  // 'PARIJAAT ECLAT 4BHK PHOTOS':  { slug: 'parijaat-eclat-4bhk',  name: 'Parijaat Eclat 4BHK',         type: 'residential' },
+  // 'Venice Bunglows Watermarked': { slug: 'venice-bungalows',      name: 'Venice Bungalows',            type: 'residential' },
+  // 'Ashutosh Kumar 3BHK':         { slug: 'ashutosh-kumar-3bhk',   name: 'Ashutosh Kumar 3BHK',         type: 'residential' },
   'EVENT OFFICE':                { slug: 'event-office',          name: 'Event Office',                type: 'commercial'  },
 };
 

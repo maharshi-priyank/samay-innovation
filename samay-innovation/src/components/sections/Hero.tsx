@@ -7,16 +7,12 @@ interface HeroProps {
 }
 
 const defaultImages = [
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166968/samay/farmhouse-rancharda/nm-08744.jpg', // Farmhouse — dramatic bar lounge
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167601/samay/parijaat-eclat-4bhk/nm-00133.jpg', // Parijaat Eclat — living room with gold partition
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166684/samay/arvind-villa-khatraj/nm-08573.jpg', // Arvind Villa — serene white bedroom
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167469/samay/parijaat-eclat-4bhk/nm-00071.jpg', // Parijaat Eclat — elegant dining room
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166740/samay/arvind-villa-khatraj/nm-08653.jpg', // Arvind Villa — clean living room
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167886/samay/parijaat-eclat-4bhk/nm-00225.jpg', // Parijaat Eclat — white corridor with artwork
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166707/samay/arvind-villa-khatraj/nm-08607.jpg', // Arvind Villa — clean white kitchen
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774167776/samay/parijaat-eclat-4bhk/nm-00192.jpg', // Parijaat Eclat — bedroom
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166850/samay/farmhouse-rancharda/nm-08681.jpg', // Farmhouse — office with exposed brick & LED ceiling
-  'https://res.cloudinary.com/diojzujpv/image/upload/v1774166795/samay/arvind-villa-khatraj/nm-08663.jpg', // Arvind Villa — outdoor terrace seating
+  '/assets/hero/hero-living-room.png',
+  '/assets/hero/hero-bar-area.png',
+  '/assets/hero/hero-restaurant.png',
+  '/assets/hero/hero-us-restaurant.jpg',
+  '/assets/hero/hero-us.png',
+  '/assets/hero/hero-3a.png',
 ];
 
 export default function Hero({

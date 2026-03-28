@@ -25,7 +25,7 @@ export const localBusinessSchema = {
   paymentAccepted: 'Cash, Credit Card, Bank Transfer',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'No 104/A, 1st Floor, Shilp The Address, Shilaj Circle',
+    streetAddress: '403 Before, Lane of ICICI Bank, PV Enclave, Sindhu Bhavan Marg, opp. Satyam House, Bodakdev',
     addressLocality: 'Ahmedabad',
     addressRegion: 'Gujarat',
     postalCode: '380059',
@@ -33,8 +33,8 @@ export const localBusinessSchema = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 23.0534,
-    longitude: 72.5061,
+    latitude: 23.0419,
+    longitude: 72.5097,
   },
   openingHoursSpecification: [
     {
@@ -52,7 +52,7 @@ export const localBusinessSchema = {
     { '@type': 'Country', name: 'India' },
     { '@type': 'Country', name: 'United States' },
   ],
-  hasMap: 'https://goo.gl/maps/itfgxUPvy9dh7Lpq7',
+  hasMap: 'https://maps.app.goo.gl/122bESsVDzQCwumV8',
   sameAs: [
     'https://instagram.com/samayinnovation',
     'https://linkedin.com/company/samayinnovation',
