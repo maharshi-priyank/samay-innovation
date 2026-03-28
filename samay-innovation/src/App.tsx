@@ -7,7 +7,6 @@ import Preloader from './components/ui/Preloader';
 import WhatsAppButton from './components/ui/WhatsAppButton';
 import BackToTop from './components/ui/BackToTop';
 import PageTransition from './components/ui/PageTransition';
-import CustomCursor from './components/ui/CustomCursor';
 import ScrollProgress from './components/ui/ScrollProgress';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -52,10 +51,9 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
-      <CustomCursor />
       <ScrollProgress />
       <Preloader />
-      <div className="min-h-screen flex flex-col" style={{ cursor: 'none' }}>
+      <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">
           <AnimatedRoutes />

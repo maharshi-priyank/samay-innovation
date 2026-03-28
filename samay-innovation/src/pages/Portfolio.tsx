@@ -45,14 +45,14 @@ export default function Portfolio() {
       <PageHeader title="Portfolio" subtitle="OUR WORK" />
 
       {/* Filter Section */}
-      <section className="py-12 bg-white dark:bg-dark-bg-primary border-b border-border-light dark:border-border-dark sticky top-20 z-40 backdrop-blur-md bg-white/95 dark:bg-dark-bg-primary/95">
-        <div className="container-custom">
-          <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-hide">
+      <section className="py-4 md:py-6 bg-white dark:bg-dark-bg-primary border-b border-border-light dark:border-border-dark sticky top-20 z-40 backdrop-blur-md bg-white/95 dark:bg-dark-bg-primary/95">
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex items-center gap-2 px-4 md:px-8 md:justify-center min-w-max md:min-w-0">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2 text-xs font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap ${
+                className={`px-4 md:px-6 py-2 text-[10px] md:text-xs font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                   activeCategory === category.id
                     ? 'bg-text-primary dark:bg-dark-text-primary text-white dark:text-dark-bg-primary'
                     : 'border border-text-primary dark:border-dark-text-primary text-text-primary dark:text-dark-text-primary hover:bg-text-primary hover:text-white dark:hover:bg-dark-text-primary dark:hover:text-dark-bg-primary'
@@ -66,7 +66,7 @@ export default function Portfolio() {
       </section>
 
       {/* India Projects Grid */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
+      <section className="py-6 md:py-16 bg-[#0d0d0d] md:bg-bg-secondary dark:bg-dark-bg-secondary">
         <div className="container-custom">
           <AnimatePresence mode="wait">
             <motion.div
@@ -75,7 +75,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8"
             >
               {filteredProjects.map((project, index) => (
                 <ProjectCard
@@ -177,19 +177,63 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
     >
       <Link
         to={`/portfolio/${project.slug}`}
-        className="group block relative overflow-hidden"
+        className="group block"
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
         data-cursor-image=""
       >
-        {/* Image container */}
-        <div className="relative h-[480px] overflow-hidden bg-neutral-900">
+        {/* ── MOBILE CARD ── */}
+        <div className="md:hidden relative overflow-hidden bg-[#111111]">
+          {/* Full bleed image */}
+          <div className="relative h-[260px] overflow-hidden">
+            <img
+              src={project.images[0]}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+            {/* Dark gradient — heavier at bottom */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-black/20 to-transparent" />
+
+            {/* Index top-left */}
+            <span className="absolute top-4 left-4 text-[9px] font-light tracking-[0.45em] text-white/40">{num}</span>
+
+            {/* Category top-right */}
+            <span className="absolute top-4 right-4 px-2.5 py-1 bg-black/50 backdrop-blur-sm border border-white/10 text-white/60 text-[9px] tracking-[0.2em] uppercase">
+              {project.category}
+            </span>
+          </div>
+
+          {/* Info — sits flush against gradient bottom */}
+          <div className="px-5 pt-3 pb-5 flex items-end justify-between gap-4">
+            <div className="min-w-0">
+              <h3 className="text-[17px] font-light text-white leading-snug tracking-wide">
+                {project.title}
+              </h3>
+              <div className="flex items-center gap-2 mt-1.5">
+                <MapPin size={9} className="text-accent-primary flex-shrink-0" />
+                <span className="text-[10px] text-white/40 font-light tracking-wide truncate">{project.location}</span>
+                <span className="text-white/20 text-[10px]">·</span>
+                <span className="text-[10px] text-white/40 font-light">{project.year}</span>
+              </div>
+            </div>
+            {/* Gold arrow */}
+            <div className="flex-shrink-0 w-9 h-9 border border-accent-primary/60 flex items-center justify-center">
+              <ArrowRight size={14} className="text-accent-primary" />
+            </div>
+          </div>
+
+          {/* Gold bottom line */}
+          <div className="h-[1px] bg-gradient-to-r from-accent-primary/60 via-accent-primary/20 to-transparent" />
+        </div>
+
+        {/* ── DESKTOP CARD (hover overlay) ── */}
+        <div className="hidden md:block relative h-[480px] overflow-hidden bg-neutral-900">
           <AnimatePresence mode="wait">
             <motion.img
               key={currentImageIndex}
@@ -203,10 +247,9 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
             />
           </AnimatePresence>
 
-          {/* Permanent soft vignette */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
 
-          {/* Gold bottom reveal line */}
+          {/* Gold bottom line */}
           <motion.div
             className="absolute bottom-0 left-0 h-[2px] bg-accent-primary"
             initial={{ width: '0%' }}
@@ -239,7 +282,6 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
             <h3 className="text-2xl md:text-3xl font-light text-white leading-snug group-hover:-translate-y-1 transition-transform duration-500">
               {project.title}
             </h3>
-
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 12 }}
@@ -252,7 +294,6 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: ProjectCar
               <span className="w-px h-3 bg-white/20" />
               <span className="flex items-center gap-1.5"><Maximize2 size={10} />{project.size}</span>
             </motion.div>
-
             <motion.div
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -8 }}

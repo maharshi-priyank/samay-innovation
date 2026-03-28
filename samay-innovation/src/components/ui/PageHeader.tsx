@@ -10,7 +10,7 @@ export default function PageHeader({ title, subtitle, backgroundImage }: PageHea
   const letters = title.split('');
 
   return (
-    <section className="relative h-[55vh] min-h-[440px] flex items-end overflow-hidden bg-[#111111]">
+    <section className="relative h-[38vh] min-h-[260px] md:h-[44vh] md:min-h-[320px] flex items-center overflow-hidden bg-[#111111]">
       {/* Background Image */}
       {backgroundImage && (
         <motion.div
@@ -65,7 +65,7 @@ export default function PageHeader({ title, subtitle, backgroundImage }: PageHea
       />
 
       {/* Content — centered */}
-      <div className="relative z-10 w-full container-custom pb-14 flex flex-col items-center text-center">
+      <div className="relative z-10 w-full container-custom py-8 flex flex-col items-center text-center">
         {/* Subtitle / label */}
         {subtitle && (
           <motion.p
@@ -83,7 +83,7 @@ export default function PageHeader({ title, subtitle, backgroundImage }: PageHea
         {/* Title — staggered letter reveal */}
         <div className="overflow-hidden">
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-tight uppercase leading-none flex flex-wrap justify-center"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-light text-white tracking-tight uppercase leading-none flex flex-wrap justify-center"
             initial="hidden"
             animate="visible"
             variants={{
@@ -112,7 +112,7 @@ export default function PageHeader({ title, subtitle, backgroundImage }: PageHea
           initial={{ width: 0 }}
           animate={{ width: '64px' }}
           transition={{ duration: 0.8, delay: 0.9, ease: 'easeOut' }}
-          className="h-[2px] bg-[#C9A97A] mt-8 mx-auto"
+          className="h-[2px] bg-[#C9A97A] mt-5 mx-auto"
         />
       </div>
     </section>
