@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
-import Button from '../ui/Button';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import { SITE_CONFIG } from '../../lib/constants';
 
 export default function ContactCTA() {
   return (
-    <section className="relative py-32 bg-bg-dark-section dark:bg-dark-bg-secondary overflow-hidden">
-      {/* Subtle background grid texture */}
+    <section className="py-32 md:py-40 bg-[#0b1012] relative overflow-hidden">
+      {/* Subtle grid */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage:
             'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
@@ -15,72 +16,61 @@ export default function ContactCTA() {
         }}
       />
 
-      {/* Gold corner accent — top left */}
-      <div className="absolute top-12 left-12 hidden md:block">
-        <div className="w-12 h-px bg-accent-primary" />
-        <div className="w-px h-12 bg-accent-primary" />
-      </div>
-
-      {/* Gold corner accent — bottom right */}
-      <div className="absolute bottom-12 right-12 hidden md:block">
-        <div className="w-12 h-px bg-accent-primary ml-auto" />
-        <div className="w-px h-12 bg-accent-primary ml-auto" />
-      </div>
-
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-
-          {/* Section label */}
+        <div className="max-w-4xl">
+          {/* Overline */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-4 mb-8"
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-8"
           >
-            <div className="h-px w-12 bg-accent-primary" />
-            <span className="text-xs font-light tracking-[0.3em] uppercase text-accent-primary">
-              GET IN TOUCH
+            <div className="w-6 h-px bg-accent-primary" />
+            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-accent-primary">
+              Get In Touch
             </span>
-            <div className="h-px w-12 bg-accent-primary" />
           </motion.div>
 
-          {/* Heading — plain motion, no RevealText (overflow-hidden blocks viewport detection) */}
+          {/* Heading */}
           <motion.h2
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl md:text-6xl font-light text-white mb-6 leading-tight"
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-10"
+            style={{ fontFamily: 'Georgia, serif' }}
           >
-            Let's Create Something<br className="hidden md:block" /> Beautiful Together
+            Let's create something<br className="hidden md:block" /> beautiful together.
           </motion.h2>
-
-          {/* Sub-text */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed"
-          >
-            Ready to transform your space? Get in touch to discuss your project — we would love to hear your vision.
-          </motion.p>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row gap-4 sm:items-center"
           >
-            <Button variant="primary" size="lg" href="/contact" magnetic className="!bg-accent-primary !border-accent-primary hover:!bg-accent-hover text-white">
-              START A PROJECT
-            </Button>
-            <Button variant="outline" size="lg" href={`mailto:${SITE_CONFIG.email}`} magnetic className="!border-white !text-white hover:!bg-white hover:!text-black">
-              EMAIL US
-            </Button>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 group"
+            >
+              <span className="text-[11px] font-mono tracking-[0.35em] uppercase text-white group-hover:text-accent-primary transition-colors duration-300">
+                Start a Project
+              </span>
+              <div className="w-8 h-px bg-white/40 group-hover:w-14 group-hover:bg-accent-primary transition-all duration-500" />
+              <ArrowRight size={12} className="text-white/40 group-hover:text-accent-primary transition-colors duration-300" />
+            </Link>
+
+            <span className="text-white/15 hidden sm:block">·</span>
+
+            <a
+              href={`mailto:${SITE_CONFIG.email}`}
+              className="text-[11px] font-mono tracking-[0.35em] uppercase text-white/40 hover:text-white/70 transition-colors duration-300"
+            >
+              {SITE_CONFIG.email}
+            </a>
           </motion.div>
         </div>
       </div>

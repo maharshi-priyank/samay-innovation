@@ -1,18 +1,18 @@
 import { motion } from 'framer-motion';
 import { STATS } from '../../lib/constants';
 
-export default function Stats() {
-  const stats = [
-    { label: 'Projects Completed', value: STATS.projectsCompleted },
-    { label: 'Happy Clients', value: STATS.happyClients },
-    { label: 'Years Experience', value: STATS.yearsExperience },
-    { label: 'Awards Won', value: STATS.awards },
-  ];
+const stats = [
+  { label: 'Projects Completed', value: STATS.projectsCompleted },
+  { label: 'Happy Clients', value: STATS.happyClients },
+  { label: 'Years Experience', value: STATS.yearsExperience },
+  { label: 'Awards Won', value: STATS.awards },
+];
 
+export default function Stats() {
   return (
-    <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
+    <section className="py-24 md:py-32 bg-[#f3f0ec]">
       <div className="container-custom">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-0 divide-x divide-[#ddd8d0]">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -20,12 +20,15 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center"
+              className="px-6 md:px-12 py-8 md:py-0 text-center first:pl-0 last:pr-0"
             >
-              <div className="text-5xl md:text-6xl font-light text-text-primary dark:text-dark-text-primary mb-3">
+              <div
+                className="text-5xl md:text-7xl font-light text-[#0b1012] mb-3 leading-none"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
                 {stat.value}
               </div>
-              <div className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary">
+              <div className="text-[10px] font-mono tracking-[0.35em] uppercase text-[#0b1012]/40">
                 {stat.label}
               </div>
             </motion.div>

@@ -27,6 +27,12 @@ html {
   --color-border-medium: #CCCCCC;
   --color-border-dark: #333333;
 
+  /* Fluid Glass Design System */
+  --color-cream: #f3f0ec;
+  --color-cream-secondary: #ede9e3;
+  --color-cream-border: #ddd8d0;
+  --color-near-black: #0b1012;
+
   /* Dark Mode Colors */
   --color-dark-bg-primary: #0A0A0A;
   --color-dark-bg-secondary: #1A1A1A;

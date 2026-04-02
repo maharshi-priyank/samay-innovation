@@ -1,14 +1,48 @@
 import { motion } from 'framer-motion';
-import { Check, Award, MapPin } from 'lucide-react';
-import Button from '../components/ui/Button';
-import PageHeader from '../components/ui/PageHeader';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Award, Check } from 'lucide-react';
 import { AWARDS, FEATURED_IN } from '../lib/constants';
 import SEO from '../components/seo/SEO';
 import { localBusinessSchema } from '../components/seo/schemas';
 
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.7 },
+};
+
+const FEATURES = [
+  'Sustainable Design',
+  'Custom Furniture',
+  'Award-Winning',
+  'International Projects',
+];
+
+const PHILOSOPHY = [
+  {
+    number: '01',
+    title: 'Purposeful Space',
+    description:
+      'Every room is considered as a living system — proportion, light, and material work together to support the way people inhabit a space.',
+  },
+  {
+    number: '02',
+    title: 'Honest Materials',
+    description:
+      'We source sustainably and let materials speak for themselves. Wood, stone, and textile retain their texture rather than being masked by ornament.',
+  },
+  {
+    number: '03',
+    title: 'Client at Centre',
+    description:
+      "Design emerges from listening. We immerse ourselves in a client's life before a single line is drawn, ensuring the result feels unmistakably theirs.",
+  },
+];
+
 export default function About() {
   return (
-    <div>
+    <div style={{ backgroundColor: '#f3f0ec' }}>
       <SEO
         title="About Us — Seme Nadvi | Award-Winning Interior Designer Ahmedabad"
         description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat. Recognised at the House of Commons London (2022) and India Excellence Awards (2019). Featured in Forbes, Vogue & De-Mode."
@@ -17,463 +51,252 @@ export default function About() {
         structuredData={localBusinessSchema}
       />
 
-      {/* Page Header */}
-      <PageHeader 
-        title="About Us" 
-        subtitle="OUR STORY"
-      />
+      {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
+      <section
+        className="pt-40 pb-24 px-6 md:px-16"
+        style={{ backgroundColor: '#0b1012' }}
+      >
+        <motion.div {...fadeUp}>
+          <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-white/50 mb-6">
+            Our Story
+          </p>
+          <h1
+            className="text-[clamp(4rem,12vw,10rem)] font-light leading-none text-white"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            About
+          </h1>
+        </motion.div>
+      </section>
 
-      {/* Featured In Section */}
-      <section className="py-12 bg-white dark:bg-dark-bg-primary border-b border-border-light dark:border-border-dark">
-        <div className="container-custom">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            <p className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary">
-              FEATURED IN
+      {/* ── 2. FEATURED IN ───────────────────────────────────────────────── */}
+      <section
+        className="py-10 px-6 md:px-16 border-b"
+        style={{ backgroundColor: '#f3f0ec', borderColor: '#ddd8d0' }}
+      >
+        <motion.div
+          {...fadeUp}
+          className="flex flex-wrap items-center gap-6 md:gap-14"
+        >
+          <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 shrink-0">
+            Featured In
+          </p>
+          {FEATURED_IN.map((pub, i) => (
+            <span key={pub} className="flex items-center gap-6 md:gap-14">
+              <span
+                className="text-3xl md:text-4xl font-light text-[#0b1012]/80"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
+                {pub}
+              </span>
+              {i < FEATURED_IN.length - 1 && (
+                <span className="text-[#ddd8d0] text-2xl select-none">·</span>
+              )}
+            </span>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* ── 3. FOUNDER ───────────────────────────────────────────────────── */}
+      <section
+        className="py-24 px-6 md:px-16"
+        style={{ backgroundColor: '#f3f0ec' }}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Left — text */}
+          <motion.div {...fadeUp}>
+            <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">
+              The Studio
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-              {FEATURED_IN.map((publication) => (
-                <span
-                  key={publication}
-                  className="text-xl md:text-2xl font-light text-text-primary dark:text-dark-text-primary"
-                >
-                  {publication}
-                </span>
+            <h2
+              className="text-4xl md:text-5xl font-light text-[#0b1012] leading-tight mb-10"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              Simple, Minimalistic
+              <br />& Elegant Design
+            </h2>
+            <p className="text-base text-[#0b1012]/70 leading-relaxed mb-5">
+              Samay Innovation is an Ahmedabad-based interior decorative firm whose work has been
+              featured in Forbes, Vogue, and De-Mode. We offer residential, office, and commercial
+              design solutions rooted in a simple, minimalistic aesthetic — spaces that endure
+              because they are grounded in proportion, material, and light.
+            </p>
+            <p className="text-base text-[#0b1012]/70 leading-relaxed mb-10">
+              Our team is energetic, cooperative, and diverse — united by a commitment to
+              sustainable design. We treat every project as a long-term relationship, remaining
+              responsive to the client's vision from first sketch to final installation.
+            </p>
+
+            <ul className="space-y-4 mb-12">
+              {FEATURES.map((feat) => (
+                <li key={feat} className="flex items-center gap-3 text-[#0b1012]/80">
+                  <Check size={15} className="shrink-0 text-[#0b1012]/40" />
+                  <span className="text-sm">{feat}</span>
+                </li>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
+            </ul>
 
-      {/* Our Story Section */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom">
-          {/* Section Header */}
-          <div className="flex items-center gap-8 mb-16">
-            <div className="w-12 h-12 rounded-full border-2 border-text-primary dark:border-dark-text-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-sm font-bold">A</span>
-            </div>
-            <div className="h-px bg-border-light dark:bg-border-dark flex-1" />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-sm text-[#0b1012] hover:gap-3 transition-all duration-200"
             >
-              <h2 className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-                ABOUT.
-              </h2>
-              <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary mb-8">
-                Simple, Minimalistic<br />& Elegant Design
-              </h3>
-              <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed mb-6">
-                Samay Innovation's work has been featured in Forbes, Vogue, De-Mode, and more for our simple and minimalistic approach. Based in Ahmedabad, we are a premier interior decorative firm offering residential, office, and commercial designing solutions.
-              </p>
-              <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed mb-8">
-                Our staff is energetic, cooperative, diverse, and committed to enhancing the importance of sustainable design and development as a basic tenant of our practice.
-              </p>
+              Explore our services <ArrowRight size={14} />
+            </Link>
+          </motion.div>
 
-              {/* Features List */}
-              <ul className="space-y-4 mb-10">
-                {[
-                  'Sustainable & durable raw materials',
-                  'Budget-friendly design solutions',
-                  'Responsive to client vision',
-                ].map((feature, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="flex items-center gap-3 text-text-secondary dark:text-dark-text-secondary"
-                  >
-                    <Check size={20} className="text-accent-primary flex-shrink-0" />
-                    <span>{feature}</span>
-                  </motion.li>
-                ))}
-              </ul>
-
-              <Button variant="outline" size="lg" href="/services">
-                OUR SERVICES
-              </Button>
-            </motion.div>
-
-            {/* Right Column - Image with Stats */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative">
-                <img
-                  src="https://res.cloudinary.com/diojzujpv/image/upload/v1774168098/samay/venice-bungalows/01.jpg"
-                  alt="Samay Innovation — Interior Design"
-                  className="w-full h-[500px] object-cover"
-                />
-                
-                {/* Location Badge */}
-                <div className="absolute bottom-8 left-8 bg-white dark:bg-dark-bg-primary p-8 shadow-strong max-w-[200px]">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={20} className="text-accent-primary flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-2">
-                        Based in
-                      </p>
-                      <p className="text-lg font-light text-text-primary dark:text-dark-text-primary">
-                        Ahmedabad
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Founder Section */}
-      <section className="py-24 bg-white dark:bg-dark-bg-primary">
-        <div className="container-custom">
-          {/* Section Header */}
-          <div className="flex items-center gap-8 mb-16">
-            <div className="w-12 h-12 rounded-full border-2 border-text-primary dark:border-dark-text-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-sm font-bold">F</span>
-            </div>
-            <div className="h-px bg-border-light dark:bg-border-dark flex-1" />
-          </div>
-
-          <div className="mb-12">
-            <h2 className="text-xs font-light tracking-[0.3em] uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-              FOUNDER.
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary">
-              Meet The Visionary
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
-            {/* Founder Image - Left Side */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="lg:col-span-2"
-            >
-              <div className="relative">
-                {/* Main Image */}
-                <div className="aspect-[3/4] overflow-hidden bg-bg-tertiary dark:bg-dark-bg-tertiary">
-                  <img
-                    src="/assets/images/founder/founder-photo.png"
-                    alt="Seme Nadvi - Principal Interior Designer, Samay Innovation"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback to placeholder
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop';
-                    }}
-                  />
-                </div>
-
-                {/* Decorative Quote */}
-                <div className="absolute -bottom-8 -right-8 bg-accent-primary p-8 max-w-[200px]">
-                  <p className="text-sm font-light text-white leading-relaxed">
-                    "Design is not just what it looks like, it's how it makes you feel."
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Founder Details - Right Side */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-3"
-            >
-              {/* Name & Title */}
-              <div className="mb-8">
-                <h4 className="text-3xl md:text-4xl font-light text-text-primary dark:text-dark-text-primary mb-2">
-                  Seme Nadvi
-                </h4>
-                <p className="text-lg text-text-tertiary dark:text-dark-text-tertiary">
-                  Principal Interior Designer
-                </p>
-              </div>
-
-              {/* Bio */}
-              <div className="space-y-4 mb-8">
-                <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  With over 10 years of experience in interior design, Seme Nadvi has transformed countless spaces into stunning, functional environments. Her passion for thoughtful design and meticulous attention to detail has earned recognition from Forbes, Vogue, and De-Mode.
-                </p>
-                <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  Seme believes that great design should be deeply personal — a true reflection of the people who live and work within a space. This philosophy drives Samay Innovation's commitment to creating interiors that speak to each client's unique personality and lifestyle.
-                </p>
-                <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  Under her leadership, Samay Innovation has become one of Ahmedabad's most trusted interior design firms, known for bold ideas, impeccable craftsmanship, and exceptional client relationships.
-                </p>
-              </div>
-
-              {/* Achievements */}
-              <div className="border-t border-border-light dark:border-border-dark pt-8">
-                <h5 className="text-sm font-light tracking-wider uppercase text-text-tertiary dark:text-dark-text-tertiary mb-6">
-                  Key Achievements
-                </h5>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">200+</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      Projects Completed
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">10+</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      Years Experience
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">2</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      International Awards
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-2xl font-light text-accent-primary mb-1">150+</p>
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary">
-                      Happy Clients
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Approach Section */}
-      <section className="py-24 bg-white dark:bg-dark-bg-primary">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-                OUR APPROACH
-              </h2>
-              <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary mb-8">
-                Design Philosophy
-              </h3>
-              <p className="text-lg text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                Responsive to our clients' vision, we are committed to design that expresses the interrelationships between architecture and place, space and form, color and materials, economy and integrity.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'Planning',
-                  description: 'Comprehensive space planning and layout design',
-                },
-                {
-                  title: 'Decorative Ideas',
-                  description: 'Creative and innovative interior concepts',
-                },
-                {
-                  title: 'Sustainable Materials',
-                  description: 'Eco-friendly and durable raw materials',
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="w-16 h-16 mx-auto mb-6 border-2 border-text-primary dark:border-dark-text-primary rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-light">{index + 1}</span>
-                  </div>
-                  <h4 className="text-xl font-light mb-3 text-text-primary dark:text-dark-text-primary">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Awards Section */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom">
-          {/* Section Header */}
-          <div className="flex items-center gap-8 mb-16">
-            <div className="w-12 h-12 rounded-full border-2 border-text-primary dark:border-dark-text-primary flex items-center justify-center flex-shrink-0">
-              <Award size={20} />
-            </div>
-            <div className="h-px bg-border-light dark:bg-border-dark flex-1" />
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-              RECOGNITION.
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary">
-              Awards & Achievements
-            </h3>
-          </div>
-
-          {/* Awards Grid */}
-          <div className="space-y-16">
-            {AWARDS.map((award, index) => (
-              <motion.div
-                key={award.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:grid-flow-dense' : ''
-                }`}
-              >
-                {/* Image */}
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative aspect-[4/3] bg-bg-tertiary dark:bg-dark-bg-tertiary overflow-hidden">
-                    <img
-                      src={award.image}
-                      alt={award.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback to placeholder if image doesn't exist
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800&h=600&fit=crop';
-                      }}
-                    />
-                    {/* Year Badge */}
-                    <div className="absolute top-8 right-8 bg-white dark:bg-dark-bg-primary px-6 py-3">
-                      <p className="text-2xl font-light text-accent-primary">
-                        {award.year}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className={index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}>
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 border-2 border-accent-primary rounded-full flex items-center justify-center flex-shrink-0">
-                      <Award size={20} className="text-accent-primary" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-2">
-                        {award.location}
-                      </p>
-                      <h4 className="text-2xl md:text-3xl font-light text-text-primary dark:text-dark-text-primary">
-                        {award.title}
-                      </h4>
-                    </div>
-                  </div>
-                  <p className="text-base text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                    {award.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Values Section */}
-      <section className="py-24 bg-white dark:bg-dark-bg-primary">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-xs font-light tracking-widest uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-              OUR TEAM
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary">
-              What Drives Us
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                title: 'Energetic',
-                description: 'Passionate team bringing fresh ideas and enthusiasm to every project.',
-              },
-              {
-                title: 'Cooperative',
-                description: 'Collaborative approach ensuring seamless execution and client satisfaction.',
-              },
-              {
-                title: 'Sustainable',
-                description: 'Committed to eco-friendly practices and green design solutions.',
-              },
-            ].map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-6 border-2 border-text-primary dark:border-dark-text-primary rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-light">{index + 1}</span>
-                </div>
-                <h4 className="text-xl font-light mb-4 text-text-primary dark:text-dark-text-primary">
-                  {value.title}
-                </h4>
-                <p className="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom text-center">
+          {/* Right — founder photo placeholder */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
+            transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <h2 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary mb-8">
-              Ready to Transform Your Space?
-            </h2>
-            <p className="text-lg text-text-secondary dark:text-dark-text-secondary mb-10">
-              Let's collaborate to bring your vision to life with our award-winning design team.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary" size="lg" href="/contact">
-                GET IN TOUCH
-              </Button>
-              <Button variant="outline" size="lg" href="/portfolio">
-                VIEW PORTFOLIO
-              </Button>
+            <div
+              className="aspect-[3/4] flex items-center justify-center"
+              style={{ backgroundColor: '#ede9e3' }}
+            >
+              <div className="text-center">
+                <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/30 mb-2">
+                  Founder Photo
+                </p>
+                <p
+                  className="text-lg font-light text-[#0b1012]/40"
+                  style={{ fontFamily: 'Georgia, serif' }}
+                >
+                  Seme Nadvi
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
+      </section>
+
+      {/* ── 4. PHILOSOPHY ────────────────────────────────────────────────── */}
+      <section
+        className="py-24 px-6 md:px-16"
+        style={{ backgroundColor: '#0b1012' }}
+      >
+        <motion.div {...fadeUp} className="text-center mb-20">
+          <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-white/30 mb-10">
+            Our Philosophy
+          </p>
+          <blockquote
+            className="text-3xl md:text-5xl font-light italic text-white leading-snug max-w-3xl mx-auto"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            "We design spaces that shape how people feel."
+          </blockquote>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 border-t border-white/10 pt-16">
+          {PHILOSOPHY.map((item, i) => (
+            <motion.div
+              key={item.number}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.12 }}
+            >
+              <p className="font-mono tracking-[0.4em] text-[10px] text-white/25 mb-5">
+                {item.number}
+              </p>
+              <h3
+                className="text-xl font-light text-white mb-4"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
+                {item.title}
+              </h3>
+              <p className="text-sm text-white/55 leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 5. AWARDS ────────────────────────────────────────────────────── */}
+      <section
+        className="py-24 px-6 md:px-16"
+        style={{ backgroundColor: '#f3f0ec' }}
+      >
+        <motion.div {...fadeUp} className="mb-16">
+          <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">
+            Recognition
+          </p>
+          <h2
+            className="text-4xl md:text-5xl font-light text-[#0b1012]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            Awards & Achievements
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          {AWARDS.map((award, i) => (
+            <motion.div
+              key={award.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: i * 0.12 }}
+              className={`pt-10 pb-12 border-t border-[#ddd8d0] ${
+                i === 0 ? 'md:pr-12' : 'md:pl-12 md:border-l'
+              }`}
+            >
+              {/* Year */}
+              <p
+                className="text-6xl md:text-7xl font-light mb-6 leading-none"
+                style={{ fontFamily: 'Georgia, serif', color: '#b8975a' }}
+              >
+                {award.year}
+              </p>
+
+              {/* Location label */}
+              <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-3 flex items-center gap-2">
+                <Award size={10} className="shrink-0" />
+                {award.location}
+              </p>
+
+              {/* Title */}
+              <h3
+                className="text-xl md:text-2xl font-light text-[#0b1012] leading-snug mb-5"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
+                {award.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm text-[#0b1012]/60 leading-relaxed">
+                {award.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          {...fadeUp}
+          className="mt-20 pt-12 border-t border-[#ddd8d0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+        >
+          <p
+            className="text-2xl md:text-3xl font-light text-[#0b1012]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            Ready to transform your space?
+          </p>
+          <div className="flex items-center gap-10">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-sm text-[#0b1012] hover:gap-3 transition-all duration-200"
+            >
+              Get in touch <ArrowRight size={14} />
+            </Link>
+            <Link
+              to="/portfolio"
+              className="inline-flex items-center gap-2 text-sm text-[#0b1012]/50 hover:text-[#0b1012] hover:gap-3 transition-all duration-200"
+            >
+              View portfolio <ArrowRight size={14} />
+            </Link>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

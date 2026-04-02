@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Header from './components/layout/Header';
+import BottomNav from './components/layout/BottomNav';
 import Footer from './components/layout/Footer';
 import Preloader from './components/ui/Preloader';
-import WhatsAppButton from './components/ui/WhatsAppButton';
+// import WhatsAppButton from './components/ui/WhatsAppButton';
 import BackToTop from './components/ui/BackToTop';
 import PageTransition from './components/ui/PageTransition';
 import ScrollProgress from './components/ui/ScrollProgress';
@@ -54,12 +54,11 @@ function Layout() {
       <ScrollProgress />
       <Preloader />
       <div className="min-h-screen flex flex-col">
-        <Header />
         <main className="flex-1">
           <AnimatedRoutes />
         </main>
         <Footer />
-        <WhatsAppButton />
+        <BottomNav />
         <BackToTop />
       </div>
     </>
