@@ -43,7 +43,7 @@ export default function About() {
       <SEO
         title="About Us — Seme Nadvi | Award-Winning Interior Designer Ahmedabad"
         description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat. Recognised at the House of Commons London (2022) and India Excellence Awards (2019). Featured in Forbes, Vogue & De-Mode."
-        keywords="Seme Nadvi interior designer, about Samay Innovation, interior design firm Ahmedabad, award winning interior designer Gujarat, Forbes Vogue interior designer India, luxury interior designer founder Ahmedabad"
+        keywords="best interior designer India, best Indian interior designer, award winning interior designer India, Seme Nadvi interior designer, top interior designer India, most promising interior designer Asia, luxury interior design firm India, Forbes interior designer India, Vogue interior designer India, interior design firm Ahmedabad, award winning interior designer Gujarat, international interior designer India"
         path="/about"
         structuredData={localBusinessSchema}
       />

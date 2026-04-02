@@ -37,7 +37,7 @@ export default function Services() {
       <SEO
         title="Interior Design Services — Residential, Commercial & Turnkey | Ahmedabad"
         description="Samay Innovation offers full-service interior design in Ahmedabad — residential villas & apartments, commercial offices, turnkey project management, 3D visualisation, furniture design & more."
-        keywords="interior design services Ahmedabad, residential interior design Gujarat, commercial office interior design Ahmedabad, turnkey interior solutions"
+        keywords="best interior design services India, luxury interior design services India, residential interior design India, commercial interior design India, turnkey interior solutions India, hotel interior design India, restaurant interior design India, office interior design India, 3D visualisation interior design India, furniture design India, space planning India, interior design company India, best interior designers India, top interior design studio India, interior design services Ahmedabad, residential interior design Gujarat"
         path="/services"
         structuredData={[
           servicesSchema,

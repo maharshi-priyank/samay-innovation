@@ -34,7 +34,7 @@ export default function Portfolio() {
       <SEO
         title="Interior Design Portfolio — Luxury Projects in Ahmedabad, Gujarat & USA"
         description="Browse Samay Innovation's portfolio of luxury interior design projects."
-        keywords="interior design portfolio Ahmedabad, luxury home design projects Gujarat"
+        keywords="best interior design portfolio India, luxury interior design projects India, top interior design firm India, best residential interior designer India, best commercial interior designer India, luxury home design India, villa interior design India, hotel interior design India, restaurant interior design India, apartment interior design India, interior design projects Ahmedabad, luxury interior design Gujarat, international interior design projects India"
         path="/portfolio"
         structuredData={breadcrumbSchema([
           { name: 'Home', url: 'https://samayinnovation.in/' },

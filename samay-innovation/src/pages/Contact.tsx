@@ -142,7 +142,7 @@ export default function Contact() {
       <SEO
         title="Contact Samay Innovation — Interior Designer in Ahmedabad, Gujarat"
         description="Get in touch with Samay Innovation to start your interior design project. Visit our studio at Bodakdev, Ahmedabad or call (+91) 989 852 4366. Serving residential and commercial clients across Ahmedabad, Gujarat and the US."
-        keywords="contact interior designer Ahmedabad, interior design studio Bodakdev Ahmedabad, book interior designer Gujarat, interior design consultation Ahmedabad, Samay Innovation contact, interior designer Sindhu Bhavan Marg Ahmedabad"
+        keywords="contact best interior designer India, hire interior designer India, book interior designer India, interior design consultation India, top interior design firm India, best interior design studio India, interior designer contact India, luxury interior design India, interior design firm Ahmedabad, book interior designer Ahmedabad, interior design consultation Gujarat, Samay Innovation contact"
         path="/contact"
         structuredData={localBusinessSchema}
       />

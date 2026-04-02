@@ -19,7 +19,7 @@ export default function Blogs() {
       <SEO
         title="Interior Design Blog — Trends, Tips & Inspiration | Samay Innovation"
         description="Explore interior design insights, trends, and inspiration from Samay Innovation's expert team. Articles on luxury residential design, space planning, sustainable interiors, and design tips for homes in Ahmedabad and beyond."
-        keywords="interior design blog India, interior design tips Ahmedabad, luxury home decor ideas, space planning tips, sustainable interior design, interior design trends 2024, home renovation ideas Gujarat"
+        keywords="interior design blog India, best interior design ideas India, luxury home decor India, interior design trends India, modern interior design India, sustainable interior design India, space planning tips India, home renovation ideas India, residential interior design tips India, commercial interior design India, interior design inspiration India, luxury living ideas India, interior design tips Ahmedabad"
         path="/blogs"
       />
 

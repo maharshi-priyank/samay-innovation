@@ -14,7 +14,7 @@ export default function Home() {
       <SEO
         title="Samay Innovation — Luxury Interior Designer in Ahmedabad | Award-Winning Firm"
         description="Samay Innovation is an award-winning luxury interior design firm in Ahmedabad, Gujarat. Residential villas, 4BHK flats, farmhouses & commercial interiors. Featured in Forbes, Vogue & De-Mode. Serving Ahmedabad, Gujarat & US clients."
-        keywords="interior designer Ahmedabad, luxury interior design Ahmedabad, residential interior designer Gujarat, villa interior design Ahmedabad, 4BHK interior designer Ahmedabad, turnkey interior solutions Gujarat, best interior designer Ahmedabad, interior design firm Gujarat, Seme Nadvi designer, award winning interior designer India, interior designer near me Ahmedabad"
+        keywords="best interior designer India, best Indian interior designer, award winning interior designer India, top interior design firm India, luxury interior designer India, best interior design studio India, premium interior designers India, Indian interior design firm, international interior design firm India, creative interior designers India, luxury home interior design India, modern interior designer India, best residential interior designer India, best commercial interior designer India, hospitality interior design India, interior designer Ahmedabad, luxury interior design Ahmedabad, residential interior designer Gujarat, villa interior design Ahmedabad, turnkey interior solutions Gujarat, Seme Nadvi designer"
         path="/"
         structuredData={[localBusinessSchema, websiteSchema]}
       />
