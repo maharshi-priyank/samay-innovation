@@ -78,18 +78,6 @@ export default function Header() {
                   </Link>
                 );
               })}
-
-              {/* Contact CTA */}
-              <Link
-                to="/contact"
-                className={`text-[11px] font-mono tracking-[0.25em] uppercase transition-colors duration-300 ${
-                  isScrolled
-                    ? 'text-accent-primary hover:text-[#0b1012]'
-                    : 'text-accent-primary hover:text-white'
-                }`}
-              >
-                Contact ↗
-              </Link>
             </nav>
 
             {/* Mobile burger */}
@@ -146,7 +134,7 @@ export default function Header() {
             }}
           >
             <div className="flex flex-col justify-center h-full px-8 pb-12 pt-24">
-              {[...NAVIGATION, { name: 'Contact', href: '/contact' }].map(({ name, href }, i) => {
+              {NAVIGATION.map(({ name, href }, i) => {
                 const active = isActive(href);
                 return (
                   <motion.div
