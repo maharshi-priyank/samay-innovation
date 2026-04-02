@@ -1,9 +1,8 @@
-import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Check } from 'lucide-react';
 import { services } from '../data/services';
-import ServiceIcon from '../components/ui/ServiceIcon';
-import Button from '../components/ui/Button';
-import PageHeader from '../components/ui/PageHeader';
 import SEO from '../components/seo/SEO';
 import { servicesSchema, breadcrumbSchema } from '../components/seo/schemas';
 
@@ -31,12 +30,14 @@ const process = [
 ];
 
 export default function Services() {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
   return (
-    <div>
+    <div className="bg-[#f3f0ec]">
       <SEO
         title="Interior Design Services — Residential, Commercial & Turnkey | Ahmedabad"
-        description="Samay Innovation offers full-service interior design in Ahmedabad — residential villas & apartments, commercial offices, turnkey project management, 3D visualisation, furniture design & more. Serving Gujarat and US clients."
-        keywords="interior design services Ahmedabad, residential interior design Gujarat, commercial office interior design Ahmedabad, turnkey interior solutions, 3D interior visualisation Ahmedabad, furniture design Gujarat, interior design consultation Ahmedabad"
+        description="Samay Innovation offers full-service interior design in Ahmedabad — residential villas & apartments, commercial offices, turnkey project management, 3D visualisation, furniture design & more."
+        keywords="interior design services Ahmedabad, residential interior design Gujarat, commercial office interior design Ahmedabad, turnkey interior solutions"
         path="/services"
         structuredData={[
           servicesSchema,
@@ -46,132 +47,186 @@ export default function Services() {
           ]),
         ]}
       />
-      <PageHeader title="Our Services" subtitle="WHAT WE OFFER" />
 
-      {/* Services Grid */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom">
-          <div className="flex items-center gap-8 mb-16">
-            <div className="w-12 h-12 rounded-full border-2 border-text-primary dark:border-dark-text-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-sm font-bold">S</span>
-            </div>
-            <div className="h-px bg-border-light dark:bg-border-dark flex-1" />
-          </div>
+      {/* ── Header ── */}
+      <section className="pt-32 pb-12 px-6 md:px-16 border-b border-[#ddd8d0]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-3">
+            What We Offer
+          </span>
+          <h1
+            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            Services
+          </h1>
+        </motion.div>
+      </section>
 
-          <div className="mb-16">
-            <h2 className="text-xs font-light tracking-[0.3em] uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-              SERVICES.
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary max-w-2xl">
-              Everything Your Space Needs, Under One Roof
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white dark:bg-dark-bg-primary p-8 group hover:shadow-strong transition-all duration-300"
-              >
-                <div className="mb-6">
-                  <ServiceIcon lucideIcon={service.icon} size="lg" className="text-accent-primary" />
+      {/* ── Services list ── */}
+      <section className="py-8 px-6 md:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.07 }}
+              onMouseEnter={() => setHoveredId(service.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className={`group py-8 md:py-10 border-b border-[#ddd8d0] cursor-default transition-colors duration-300 ${
+                index % 2 === 0 ? 'md:pr-12 md:border-r md:border-r-[#ddd8d0]' : 'md:pl-12'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-6 mb-4">
+                <div>
+                  <span className="text-[10px] font-mono text-[#0b1012]/25 block mb-2">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3
+                    className={`text-2xl md:text-3xl font-light leading-tight transition-colors duration-300 ${
+                      hoveredId === service.id ? 'text-accent-primary' : 'text-[#0b1012]'
+                    }`}
+                    style={{ fontFamily: 'Georgia, serif' }}
+                  >
+                    {service.name}
+                  </h3>
                 </div>
+                <ArrowRight
+                  size={16}
+                  className={`flex-shrink-0 mt-8 transition-all duration-300 ${
+                    hoveredId === service.id ? 'text-accent-primary translate-x-1' : 'text-[#0b1012]/20'
+                  }`}
+                />
+              </div>
 
-                <h4 className="text-xl font-light text-text-primary dark:text-dark-text-primary mb-3">
-                  {service.name}
-                </h4>
-                <p className="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed mb-6">
-                  {service.description}
-                </p>
+              <p className="text-sm text-[#0b1012]/55 font-light leading-relaxed mb-6 max-w-sm">
+                {service.description}
+              </p>
 
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-text-secondary dark:text-dark-text-secondary">
-                      <Check size={14} className="text-accent-primary flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
+              <AnimatePresence>
+                {hoveredId === service.id && (
+                  <motion.ul
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                    className="overflow-hidden space-y-2"
+                  >
+                    {service.features.map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.05, duration: 0.25 }}
+                        className="flex items-center gap-3 text-[11px] font-mono tracking-widest uppercase text-[#0b1012]/40"
+                      >
+                        <Check size={10} className="text-accent-primary flex-shrink-0" />
+                        {feature}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-24 bg-white dark:bg-dark-bg-primary">
-        <div className="container-custom">
-          <div className="flex items-center gap-8 mb-16">
-            <div className="w-12 h-12 rounded-full border-2 border-text-primary dark:border-dark-text-primary flex items-center justify-center flex-shrink-0">
-              <span className="text-sm font-bold">P</span>
-            </div>
-            <div className="h-px bg-border-light dark:bg-border-dark flex-1" />
-          </div>
-
-          <div className="mb-16">
-            <h2 className="text-xs font-light tracking-[0.3em] uppercase text-text-tertiary dark:text-dark-text-tertiary mb-4">
-              PROCESS.
-            </h2>
-            <h3 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary">
+      {/* ── Process ── */}
+      <section className="py-24 md:py-32 bg-[#0b1012]">
+        <div className="px-6 md:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-16 border-b border-white/8 pb-8"
+          >
+            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 text-white/30 block mb-3">
               How We Work
-            </h3>
-          </div>
+            </span>
+            <h2
+              className="text-4xl md:text-5xl font-light text-white"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              Our Process
+            </h2>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
             {process.map((item, index) => (
               <motion.div
                 key={item.step}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className="relative"
+                transition={{ duration: 0.6, delay: index * 0.12 }}
+                className={`py-10 ${
+                  index < process.length - 1
+                    ? 'lg:border-r border-white/8 lg:pr-10 lg:mr-0'
+                    : ''
+                } ${index > 0 ? 'lg:pl-10' : ''} border-b lg:border-b-0 border-white/8`}
               >
-                <p className="text-6xl font-light text-border-light dark:text-border-dark mb-6 leading-none">
+                <p
+                  className="text-6xl md:text-7xl font-light text-accent-primary/20 mb-6 leading-none"
+                  style={{ fontFamily: 'Georgia, serif' }}
+                >
                   {item.step}
                 </p>
-                <h4 className="text-xl font-light text-text-primary dark:text-dark-text-primary mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-sm text-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  {item.description}
-                </p>
-                {index < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-8 h-px bg-border-light dark:bg-border-dark -translate-x-4" />
-                )}
+                <h4 className="text-xl font-light text-white mb-3">{item.title}</h4>
+                <p className="text-sm text-white/40 font-light leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom text-center">
+      {/* ── CTA ── */}
+      <section className="py-24 md:py-32 bg-[#f3f0ec] border-t border-[#ddd8d0]">
+        <div className="px-6 md:px-16">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto"
+            transition={{ duration: 0.7 }}
+            className="max-w-2xl"
           >
-            <h2 className="text-4xl md:text-5xl font-light text-text-primary dark:text-dark-text-primary mb-6">
-              Ready to Get Started?
+            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/35 block mb-4">
+              Get Started
+            </span>
+            <h2
+              className="text-4xl md:text-5xl font-light text-[#0b1012] mb-10 leading-tight"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              Ready to transform your space?
             </h2>
-            <p className="text-lg text-text-secondary dark:text-dark-text-secondary mb-10">
-              Tell us about your project and we'll get back to you within 24 hours.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary" size="lg" href="/contact">
-                GET IN TOUCH
-              </Button>
-              <Button variant="outline" size="lg" href="/portfolio">
-                VIEW OUR WORK
-              </Button>
+
+            <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-3 group"
+              >
+                <span className="text-[11px] font-mono tracking-[0.35em] uppercase text-[#0b1012] group-hover:text-accent-primary transition-colors duration-300">
+                  Start a Project
+                </span>
+                <div className="w-8 h-px bg-[#0b1012]/40 group-hover:w-14 group-hover:bg-accent-primary transition-all duration-500" />
+                <ArrowRight size={12} className="text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300" />
+              </Link>
+
+              <span className="text-[#0b1012]/15 hidden sm:block">·</span>
+
+              <Link
+                to="/portfolio"
+                className="text-[11px] font-mono tracking-[0.35em] uppercase text-[#0b1012]/40 hover:text-[#0b1012]/70 transition-colors duration-300"
+              >
+                View Our Work
+              </Link>
             </div>
           </motion.div>
         </div>
