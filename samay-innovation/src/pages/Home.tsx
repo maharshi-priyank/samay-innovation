@@ -18,7 +18,7 @@ export default function Home() {
         path="/"
         structuredData={[localBusinessSchema, websiteSchema]}
       />
-      <Hero height="full" />
+      <Hero />
       
       <ServicesHighlight />
       
