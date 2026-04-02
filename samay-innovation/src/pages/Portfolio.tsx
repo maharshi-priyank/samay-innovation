@@ -97,7 +97,6 @@ function HorizontalScroll({ projects }: { projects: typeof indiaProjects }) {
               project={project}
               index={index}
               total={n}
-              scrollYProgress={scrollYProgress}
             />
           ))}
         </motion.div>
@@ -118,32 +117,17 @@ interface PanelProps {
   project: (typeof indiaProjects)[0];
   index: number;
   total: number;
-  scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
 }
 
-function HorizontalPanel({ project, index, total, scrollYProgress }: PanelProps) {
-  // Each panel is "active" in the range [index/n, (index+1)/n]
-  const n = total;
-  const start = index / n;
-  const end = (index + 1) / n;
-
-  const opacity = useTransform(
-    scrollYProgress,
-    [start - 0.05, start + 0.1, end - 0.1, end + 0.05],
-    [0.4, 1, 1, 0.4]
-  );
-
+function HorizontalPanel({ project, index, total }: PanelProps) {
   const num = String(index + 1).padStart(2, '0');
 
   return (
     <div className="relative w-screen h-screen flex-shrink-0 overflow-hidden">
       {/* Background image */}
-      <motion.div
+      <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${project.images[0]})`,
-          opacity,
-        }}
+        style={{ backgroundImage: `url(${project.images[0]})` }}
       />
 
       {/* Gradient overlays */}
@@ -164,10 +148,7 @@ function HorizontalPanel({ project, index, total, scrollYProgress }: PanelProps)
 
       {/* Bottom content */}
       <div className="absolute bottom-14 left-12 right-12">
-        <motion.div
-          initial={false}
-          style={{ opacity }}
-        >
+        <div>
           <p className="text-[10px] tracking-[0.35em] uppercase text-accent-primary font-light mb-3">
             {project.category}
           </p>
@@ -197,7 +178,7 @@ function HorizontalPanel({ project, index, total, scrollYProgress }: PanelProps)
             <div className="w-8 h-px bg-white/40 group-hover:w-14 group-hover:bg-accent-primary transition-all duration-500" />
             <ArrowRight size={12} className="text-white/40 group-hover:text-accent-primary transition-colors duration-300" />
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* Right edge scroll hint (first panel only) */}
