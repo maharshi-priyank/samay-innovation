@@ -18,8 +18,20 @@ export interface InstagramPost {
   image: string;
   /** Short caption shown on hover */
   caption: string;
-  /** Direct link to the Instagram post. Use profile URL if you don't have the post URL. */
+  /** Direct link to the Instagram post or reel. Use profile URL if you don't have the post URL. */
   postUrl: string;
+  /**
+   * Optional: set to 'reel' to show a play button and enable inline playback.
+   * Requires embedPath.
+   */
+  type?: 'post' | 'reel';
+  /**
+   * The embed path used to build https://www.instagram.com/{embedPath}/embed/
+   * Examples:
+   *   reel/DUTFFeCksfH  → from https://www.instagram.com/reel/DUTFFeCksfH/
+   *   p/DV1CcfziOin     → from https://www.instagram.com/p/DV1CcfziOin/
+   */
+  embedPath?: string;
 }
 
 const PROFILE_URL = 'https://www.instagram.com/samayinnovation/';
@@ -30,6 +42,8 @@ export const instagramPosts: InstagramPost[] = [
     image: 'https://res.cloudinary.com/diojzujpv/image/upload/w_600,h_600,c_fill,g_auto/samay/arvind-villa-khatraj/nm-08573.jpg',
     caption: 'Arvind Villa, Khatraj — Where luxury meets restraint.',
     postUrl: 'https://www.instagram.com/samayinnovation/reel/DUTFFeCksfH/',
+    type: 'reel',
+    embedPath: 'reel/DUTFFeCksfH',
   },
   {
     id: 2,
@@ -78,5 +92,14 @@ export const instagramPosts: InstagramPost[] = [
     image: 'https://res.cloudinary.com/diojzujpv/image/upload/w_600,h_600,c_fill,g_auto/samay/event-office/nm-00076.jpg',
     caption: 'Event Office — Commercial interiors with character.',
     postUrl: PROFILE_URL,
+  },
+  {
+    id: 10,
+    // TODO: replace with actual thumbnail uploaded to Cloudinary
+    image: 'https://res.cloudinary.com/diojzujpv/image/upload/w_600,h_600,c_fill,g_auto/samay/arvind-villa-khatraj/nm-08573.jpg',
+    caption: 'Latest reel — swipe to see the transformation.',
+    postUrl: 'https://www.instagram.com/p/DV1CcfziOin/',
+    type: 'reel',
+    embedPath: 'p/DV1CcfziOin',
   },
 ];
