@@ -151,21 +151,15 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <div
-              className="aspect-[3/4] flex items-center justify-center"
-              style={{ backgroundColor: '#ede9e3' }}
-            >
-              <div className="text-center">
-                <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/30 mb-2">
-                  Founder Photo
-                </p>
-                <p
-                  className="text-lg font-light text-[#0b1012]/40"
-                  style={{ fontFamily: 'Georgia, serif' }}
-                >
-                  Seme Nadvi
-                </p>
-              </div>
+            <div className="aspect-[3/4] overflow-hidden">
+              <img
+                src="/assets/images/founder/founder-photo.png"
+                alt="Seme Nadvi — Founder, Samay Innovation"
+                className="w-full h-full object-cover object-center"
+                onError={(e) => {
+                  e.currentTarget.src = '/assets/images/founder/founder-photo.png';
+                }}
+              />
             </div>
           </motion.div>
         </div>
@@ -241,6 +235,17 @@ export default function About() {
                 i === 0 ? 'md:pr-12' : 'md:pl-12 md:border-l'
               }`}
             >
+              {/* Award photo */}
+              {award.image && (
+                <div className="aspect-[4/3] overflow-hidden mb-8">
+                  <img
+                    src={award.image}
+                    alt={award.title}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+              )}
+
               {/* Year */}
               <p
                 className="text-6xl md:text-7xl font-light mb-6 leading-none"
