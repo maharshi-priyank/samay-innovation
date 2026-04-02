@@ -24,7 +24,8 @@ export default function Blogs() {
       />
 
       {/* ── Header ── */}
-      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
+      <section className="pt-32 pb-16 border-b border-[#ddd8d0] text-center">
+        <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,11 +44,12 @@ export default function Blogs() {
             Design thinking, material stories, and spatial ideas from our studio.
           </p>
         </motion.div>
+        </div>
       </section>
 
       {/* ── Filter bar ── */}
       <section className="sticky top-0 z-40 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#ddd8d0]">
-        <div className="px-6 md:px-16 py-4 flex items-center gap-8 overflow-x-auto scrollbar-hide">
+        <div className="container-custom py-4 flex items-center gap-8 overflow-x-auto scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -72,7 +74,8 @@ export default function Blogs() {
       </section>
 
       {/* ── Blog grid ── */}
-      <section className="py-16 px-6 md:px-16">
+      <section className="py-16">
+        <div className="container-custom">
         {filteredBlogs.length === 0 ? (
           <div className="py-32 text-center">
             <p className="text-sm font-light text-[#0b1012]/40">No articles in this category.</p>
@@ -146,6 +149,7 @@ export default function Blogs() {
             ))}
           </div>
         )}
+        </div>
       </section>
     </div>
   );

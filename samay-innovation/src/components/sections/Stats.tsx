@@ -20,7 +20,7 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="px-6 md:px-12 py-8 md:py-0 text-center first:pl-0 last:pr-0"
+              className="px-6 md:px-10 py-8 md:py-0 text-center first:pl-0 last:pr-0"
             >
               <div
                 className="text-5xl md:text-7xl font-light text-[#0b1012] mb-3 leading-none"

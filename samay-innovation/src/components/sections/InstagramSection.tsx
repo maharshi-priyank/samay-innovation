@@ -26,7 +26,7 @@ export default function InstagramSection() {
 
   return (
     <section className="py-24 md:py-32 bg-[#fafaf8]">
-      <div className="px-6 md:px-16">
+      <div className="container-custom">
 
         {/* ── Section label ── */}
         <motion.div

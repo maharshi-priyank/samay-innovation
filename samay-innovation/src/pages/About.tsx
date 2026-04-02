@@ -61,7 +61,7 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/85 via-black/30 to-black/20" />
 
         {/* Bottom-left text */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-16 pb-14 z-10">
+        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-20 pb-14 z-10">
           <motion.p
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -104,7 +104,8 @@ export default function About() {
       </section>
 
       {/* ── 2. FEATURED IN ── */}
-      <section className="py-8 px-6 md:px-16 border-b border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-8 border-b border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
+        <div className="container-custom">
         <motion.div {...fadeUp} className="flex flex-wrap items-center gap-6 md:gap-14">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 shrink-0">Featured In</p>
           {FEATURED_IN.map((pub, i) => (
@@ -116,10 +117,12 @@ export default function About() {
             </span>
           ))}
         </motion.div>
+        </div>
       </section>
 
       {/* ── 3. SELECTED WORK ── */}
-      <section className="py-20 px-6 md:px-16" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-20" style={{ backgroundColor: '#fafaf8' }}>
+        <div className="container-custom">
         <motion.div
           {...fadeUp}
           className="flex items-end justify-between mb-10 pb-8 border-b border-[#ddd8d0]"
@@ -196,10 +199,12 @@ export default function About() {
             <ArrowRight size={11} className="text-[#0b1012]/25 group-hover:text-accent-primary transition-colors duration-300" />
           </Link>
         </div>
+        </div>
       </section>
 
       {/* ── 4. FOUNDER ── */}
-      <section className="py-24 px-6 md:px-16 border-t border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-24 border-t border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
+        <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left */}
           <motion.div {...fadeUp}>
@@ -247,10 +252,12 @@ export default function About() {
             </div>
           </motion.div>
         </div>
+        </div>
       </section>
 
       {/* ── 5. PHILOSOPHY ── */}
-      <section className="py-24 px-6 md:px-16" style={{ backgroundColor: '#0b1012' }}>
+      <section className="py-24" style={{ backgroundColor: '#0b1012' }}>
+        <div className="container-custom">
         <motion.div {...fadeUp} className="text-center mb-20">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-white/30 mb-10">Our Philosophy</p>
           <blockquote
@@ -278,10 +285,12 @@ export default function About() {
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* ── 6. AWARDS ── */}
-      <section className="py-24 px-6 md:px-16" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-24" style={{ backgroundColor: '#fafaf8' }}>
+        <div className="container-custom">
         <motion.div {...fadeUp} className="mb-16">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">Recognition</p>
           <h2 className="text-4xl md:text-5xl font-light text-[#0b1012]" style={{ fontFamily: 'Georgia, serif' }}>
@@ -335,6 +344,7 @@ export default function About() {
             </Link>
           </div>
         </motion.div>
+        </div>
       </section>
     </div>
   );

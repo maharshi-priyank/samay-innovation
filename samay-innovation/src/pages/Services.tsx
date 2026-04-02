@@ -49,7 +49,8 @@ export default function Services() {
       />
 
       {/* ── Header ── */}
-      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
+      <section className="pt-32 pb-16 border-b border-[#ddd8d0] text-center">
+        <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -68,10 +69,12 @@ export default function Services() {
             From concept to completion — every detail handled with precision and care.
           </p>
         </motion.div>
+        </div>
       </section>
 
       {/* ── Services list ── */}
-      <section className="py-8 px-6 md:px-16">
+      <section className="py-8">
+        <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
           {services.map((service, index) => (
             <motion.div
@@ -139,11 +142,12 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* ── Process ── */}
       <section className="py-24 md:py-32 bg-[#0b1012]">
-        <div className="px-6 md:px-16">
+        <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +199,7 @@ export default function Services() {
 
       {/* ── CTA ── */}
       <section className="py-24 md:py-32 bg-[#fafaf8] border-t border-[#ddd8d0]">
-        <div className="px-6 md:px-16 text-center">
+        <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

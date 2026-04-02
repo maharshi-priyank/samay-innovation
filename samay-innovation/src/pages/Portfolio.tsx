@@ -43,7 +43,8 @@ export default function Portfolio() {
       />
 
       {/* ── Page Header ── */}
-      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
+      <section className="pt-32 pb-16 border-b border-[#ddd8d0] text-center">
+        <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,6 +63,7 @@ export default function Portfolio() {
             200+ spaces crafted across India and beyond — residential, commercial, and hospitality.
           </p>
         </motion.div>
+        </div>
       </section>
 
       {/* ── Filter bar ── */}
@@ -93,7 +95,8 @@ export default function Portfolio() {
       </section>
 
       {/* ── India projects ── */}
-      <section className="py-16 px-6 md:px-16">
+      <section className="py-16">
+        <div className="container-custom">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -113,6 +116,7 @@ export default function Portfolio() {
             )}
           </motion.div>
         </AnimatePresence>
+        </div>
       </section>
 
       {/* ── International ── */}
@@ -218,7 +222,7 @@ function ProjectCard({ project, index, isHovered, onHover, onLeave }: CardProps)
 function InternationalSection() {
   return (
     <section className="py-24 md:py-32 bg-[#0b1012]">
-      <div className="px-6 md:px-16">
+      <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
