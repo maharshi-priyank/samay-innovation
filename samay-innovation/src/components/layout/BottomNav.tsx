@@ -63,8 +63,7 @@ export default function BottomNav() {
             <img
               src="/logo/logo.svg"
               alt="Samay Innovation"
-              className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200"
-              style={{ filter: 'brightness(0) invert(1)' }}
+              className="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
             />
           </Link>
 
@@ -159,8 +158,7 @@ export default function BottomNav() {
             <img
               src="/logo/logo.svg"
               alt="Samay Innovation"
-              className="h-5 w-auto opacity-60 hover:opacity-90 transition-opacity duration-200"
-              style={{ filter: 'brightness(0) invert(1)' }}
+              className="h-7 w-auto opacity-80 hover:opacity-100 transition-opacity duration-200"
             />
           </Link>
 
