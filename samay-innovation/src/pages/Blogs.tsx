@@ -15,7 +15,7 @@ export default function Blogs() {
     : blogs.filter(blog => blog.category === activeCategory);
 
   return (
-    <div className="bg-[#f3f0ec]">
+    <div className="bg-[#fafaf8]">
       <SEO
         title="Interior Design Blog — Trends, Tips & Inspiration | Samay Innovation"
         description="Explore interior design insights, trends, and inspiration from Samay Innovation's expert team. Articles on luxury residential design, space planning, sustainable interiors, and design tips for homes in Ahmedabad and beyond."
@@ -43,7 +43,7 @@ export default function Blogs() {
       </section>
 
       {/* ── Filter bar ── */}
-      <section className="sticky top-0 z-40 bg-[#f3f0ec]/95 backdrop-blur-md border-b border-[#ddd8d0]">
+      <section className="sticky top-0 z-40 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#ddd8d0]">
         <div className="px-6 md:px-16 py-4 flex items-center gap-8 overflow-x-auto scrollbar-hide">
           {categories.map((cat) => (
             <button
@@ -97,7 +97,7 @@ export default function Blogs() {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500" />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-[#f3f0ec]/90 backdrop-blur-sm font-mono text-[9px] tracking-[0.35em] uppercase text-[#0b1012]/70">
+                      <span className="px-3 py-1 bg-[#fafaf8]/90 backdrop-blur-sm font-mono text-[9px] tracking-[0.35em] uppercase text-[#0b1012]/70">
                         {blog.category}
                       </span>
                     </div>

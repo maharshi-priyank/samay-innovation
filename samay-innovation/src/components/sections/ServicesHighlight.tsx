@@ -27,7 +27,7 @@ const services = [
 
 export default function ServicesHighlight() {
   return (
-    <section className="py-24 md:py-32 bg-[#f3f0ec]">
+    <section className="py-24 md:py-32 bg-[#fafaf8]">
       <div className="container-custom">
         {/* Header */}
         <motion.div

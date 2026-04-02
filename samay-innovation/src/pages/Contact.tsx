@@ -138,7 +138,7 @@ export default function Contact() {
 
   // ── render ───────────────────────────────────────────────────────────────────
   return (
-    <div className="bg-[#f3f0ec] min-h-screen">
+    <div className="bg-[#fafaf8] min-h-screen">
       <SEO
         title="Contact Samay Innovation — Interior Designer in Ahmedabad, Gujarat"
         description="Get in touch with Samay Innovation to start your interior design project. Visit our studio at Bodakdev, Ahmedabad or call (+91) 989 852 4366. Serving residential and commercial clients across Ahmedabad, Gujarat and the US."
@@ -148,7 +148,7 @@ export default function Contact() {
       />
 
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
-      <header className="bg-[#f3f0ec] pt-32 pb-12 border-b border-[#ddd8d0]">
+      <header className="bg-[#fafaf8] pt-32 pb-12 border-b border-[#ddd8d0]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -169,7 +169,7 @@ export default function Contact() {
       </header>
 
       {/* ── Main two-column section ──────────────────────────────────────────── */}
-      <section className="bg-[#f3f0ec] py-24">
+      <section className="bg-[#fafaf8] py-24">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 lg:gap-24">
 
@@ -625,7 +625,7 @@ export default function Contact() {
       </section>
 
       {/* ── Bottom CTA ───────────────────────────────────────────────────────── */}
-      <section className="bg-[#f3f0ec] py-24 border-t border-[#ddd8d0]">
+      <section className="bg-[#fafaf8] py-24 border-t border-[#ddd8d0]">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

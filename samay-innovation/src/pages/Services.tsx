@@ -33,7 +33,7 @@ export default function Services() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
-    <div className="bg-[#f3f0ec]">
+    <div className="bg-[#fafaf8]">
       <SEO
         title="Interior Design Services — Residential, Commercial & Turnkey | Ahmedabad"
         description="Samay Innovation offers full-service interior design in Ahmedabad — residential villas & apartments, commercial offices, turnkey project management, 3D visualisation, furniture design & more."
@@ -188,7 +188,7 @@ export default function Services() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-24 md:py-32 bg-[#f3f0ec] border-t border-[#ddd8d0]">
+      <section className="py-24 md:py-32 bg-[#fafaf8] border-t border-[#ddd8d0]">
         <div className="px-6 md:px-16">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

@@ -51,7 +51,7 @@ export default function Testimonials() {
   const t = list[idx];
 
   return (
-    <section className="relative py-24 md:py-36 bg-[#f3f0ec] overflow-hidden">
+    <section className="relative py-24 md:py-36 bg-[#fafaf8] overflow-hidden">
 
       {/* Large decorative quote mark */}
       <div

@@ -42,7 +42,7 @@ const PHILOSOPHY = [
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: '#f3f0ec' }}>
+    <div style={{ backgroundColor: '#fafaf8' }}>
       <SEO
         title="About Us — Seme Nadvi | Award-Winning Interior Designer Ahmedabad"
         description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat. Recognised at the House of Commons London (2022) and India Excellence Awards (2019). Featured in Forbes, Vogue & De-Mode."
@@ -72,7 +72,7 @@ export default function About() {
       {/* ── 2. FEATURED IN ───────────────────────────────────────────────── */}
       <section
         className="py-10 px-6 md:px-16 border-b"
-        style={{ backgroundColor: '#f3f0ec', borderColor: '#ddd8d0' }}
+        style={{ backgroundColor: '#fafaf8', borderColor: '#ddd8d0' }}
       >
         <motion.div
           {...fadeUp}
@@ -100,7 +100,7 @@ export default function About() {
       {/* ── 3. FOUNDER ───────────────────────────────────────────────────── */}
       <section
         className="py-24 px-6 md:px-16"
-        style={{ backgroundColor: '#f3f0ec' }}
+        style={{ backgroundColor: '#fafaf8' }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left — text */}
@@ -153,7 +153,7 @@ export default function About() {
           >
             <div className="aspect-[3/4] overflow-hidden">
               <img
-                src="/assets/images/founder/seme-nadvi.jpg"
+                src="/assets/images/founder/founder-photo.png"
                 alt="Seme Nadvi — Founder, Samay Innovation"
                 className="w-full h-full object-cover object-center"
                 onError={(e) => {
@@ -209,7 +209,7 @@ export default function About() {
       {/* ── 5. AWARDS ────────────────────────────────────────────────────── */}
       <section
         className="py-24 px-6 md:px-16"
-        style={{ backgroundColor: '#f3f0ec' }}
+        style={{ backgroundColor: '#fafaf8' }}
       >
         <motion.div {...fadeUp} className="mb-16">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">

@@ -17,7 +17,7 @@ export default function ProjectDetails() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#f3f0ec] flex items-center justify-center">
+      <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-light text-[#0b1012] mb-4">Project Not Found</h1>
           <Link to="/portfolio" className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#0b1012]/50 hover:text-accent-primary transition-colors">
@@ -32,7 +32,7 @@ export default function ProjectDetails() {
   const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <div className="bg-[#f3f0ec]">
+    <div className="bg-[#fafaf8]">
       <SEO
         title={`${project.title} — Interior Design Project | Samay Innovation Ahmedabad`}
         description={`${project.description.slice(0, 155)}…`}
@@ -98,7 +98,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* ── Info strip ── */}
-      <section className="bg-[#f3f0ec] border-b border-[#ddd8d0]">
+      <section className="bg-[#fafaf8] border-b border-[#ddd8d0]">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#ddd8d0]">
           {[
             { label: 'Category', value: project.category },
@@ -115,7 +115,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* ── Description ── */}
-      <section className="py-16 md:py-24 px-6 md:px-14 lg:px-24 bg-[#f3f0ec]">
+      <section className="py-16 md:py-24 px-6 md:px-14 lg:px-24 bg-[#fafaf8]">
         <div className="max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -164,7 +164,7 @@ export default function ProjectDetails() {
       )}
 
       {/* ── Gallery ── */}
-      <section className="py-10 md:py-16 bg-[#f3f0ec]">
+      <section className="py-10 md:py-16 bg-[#fafaf8]">
         <div className="px-6 md:px-14">
           <div className="flex items-center justify-between mb-8 border-b border-[#ddd8d0] pb-6">
             <div>

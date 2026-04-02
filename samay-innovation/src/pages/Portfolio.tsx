@@ -30,7 +30,7 @@ export default function Portfolio() {
   }, [activeCategory]);
 
   return (
-    <div className="bg-[#f3f0ec]">
+    <div className="bg-[#fafaf8]">
       <SEO
         title="Interior Design Portfolio — Luxury Projects in Ahmedabad, Gujarat & USA"
         description="Browse Samay Innovation's portfolio of luxury interior design projects."
@@ -62,7 +62,7 @@ export default function Portfolio() {
       </section>
 
       {/* ── Filter bar ── */}
-      <section className="sticky top-0 z-40 bg-[#f3f0ec]/95 backdrop-blur-sm border-b border-[#ddd8d0]">
+      <section className="sticky top-0 z-40 bg-[#fafaf8]/95 backdrop-blur-sm border-b border-[#ddd8d0]">
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex items-center gap-0 px-6 md:px-16 min-w-max md:min-w-0">
             {categories.map((cat) => (
@@ -90,7 +90,7 @@ export default function Portfolio() {
       </section>
 
       {/* ── India projects ── */}
-      <section className="py-4 px-6 md:px-16">
+      <section className="py-10 px-6 md:px-16">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -106,18 +106,7 @@ export default function Portfolio() {
                 </p>
               </div>
             ) : (
-              <div>
-                {filteredProjects.map((project, index) => (
-                  <ProjectRow
-                    key={project.id}
-                    project={project}
-                    index={index}
-                    isHovered={hoveredId === project.id}
-                    onHover={() => setHoveredId(project.id)}
-                    onLeave={() => setHoveredId(null)}
-                  />
-                ))}
-              </div>
+              <ProjectGrid projects={filteredProjects} hoveredId={hoveredId} setHoveredId={setHoveredId} />
             )}
           </motion.div>
         </AnimatePresence>
@@ -129,87 +118,130 @@ export default function Portfolio() {
   );
 }
 
-/* ── Project Row ── */
-interface RowProps {
+/* ── Project Grid ── */
+interface GridProps {
+  projects: (typeof projects);
+  hoveredId: string | null;
+  setHoveredId: (id: string | null) => void;
+}
+
+function ProjectGrid({ projects: list, hoveredId, setHoveredId }: GridProps) {
+  // Editorial pattern: hero (full-width) → 2-col → 2-col → repeat every 5
+  return (
+    <div className="space-y-3">
+      {Array.from({ length: Math.ceil(list.length / 5) }).map((_, groupIndex) => {
+        const group = list.slice(groupIndex * 5, groupIndex * 5 + 5);
+        const [hero, ...rest] = group;
+        return (
+          <div key={groupIndex} className="space-y-3">
+            {/* Hero card — full width */}
+            {hero && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
+              >
+                <ProjectCard
+                  project={hero}
+                  aspectClass="aspect-[16/7]"
+                  isHovered={hoveredId === hero.id}
+                  onHover={() => setHoveredId(hero.id)}
+                  onLeave={() => setHoveredId(null)}
+                />
+              </motion.div>
+            )}
+            {/* Remaining in 2-col rows */}
+            {rest.length > 0 && (
+              <div className="grid grid-cols-2 gap-3">
+                {rest.map((project, i) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: groupIndex * 0.1 + (i + 1) * 0.07 }}
+                  >
+                    <ProjectCard
+                      project={project}
+                      aspectClass="aspect-[4/3]"
+                      isHovered={hoveredId === project.id}
+                      onHover={() => setHoveredId(project.id)}
+                      onLeave={() => setHoveredId(null)}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ── Project Card ── */
+interface CardProps {
   project: (typeof projects)[0];
-  index: number;
+  aspectClass: string;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;
 }
 
-function ProjectRow({ project, index, isHovered, onHover, onLeave }: RowProps) {
-  const num = String(index + 1).padStart(2, '0');
-
+function ProjectCard({ project, aspectClass, isHovered, onHover, onLeave }: CardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+    <Link
+      to={`/portfolio/${project.slug}`}
+      className="group block relative overflow-hidden"
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
-      <Link
-        to={`/portfolio/${project.slug}`}
-        className="group flex items-center gap-6 md:gap-10 py-5 md:py-6 border-b border-[#ddd8d0] hover:border-[#0b1012]/20 transition-colors duration-300"
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-      >
-        <span className="text-[10px] font-mono text-[#0b1012]/25 flex-shrink-0 w-8">{num}</span>
+      <div className={`relative overflow-hidden ${aspectClass}`}>
+        <img
+          src={project.images[0]}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.05]"
+        />
 
-        {/* Thumbnail — mobile only */}
-        <div className="md:hidden flex-shrink-0 w-16 h-12 overflow-hidden">
-          <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" />
+        {/* Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/80 via-black/10 to-transparent" />
+
+        {/* Gold bottom line on hover */}
+        <div
+          className={`absolute bottom-0 left-0 h-[2px] bg-accent-primary transition-all duration-500 ease-out ${
+            isHovered ? 'w-full' : 'w-0'
+          }`}
+        />
+
+        {/* Category badge */}
+        <div className="absolute top-5 left-5">
+          <span className="font-mono text-[9px] tracking-[0.35em] uppercase text-white/60 bg-black/30 backdrop-blur-sm px-2 py-1">
+            {project.category}
+          </span>
         </div>
 
-        {/* Text */}
-        <div className="flex-1 min-w-0">
+        {/* Text bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
           <h3
-            className={`text-lg md:text-2xl font-light leading-snug transition-colors duration-300 truncate ${isHovered ? 'text-accent-primary' : 'text-[#0b1012]'}`}
+            className={`font-light text-white leading-tight transition-colors duration-300 text-xl md:text-2xl mb-2 ${
+              isHovered ? 'text-accent-primary/90' : ''
+            }`}
             style={{ fontFamily: 'Georgia, serif' }}
           >
             {project.title}
           </h3>
-          <div className="flex items-center gap-3 mt-1 flex-wrap">
-            <span className="text-[10px] font-mono tracking-widest uppercase text-[#0b1012]/35">{project.category}</span>
-            <span className="text-[#0b1012]/20 text-[10px]">·</span>
-            <span className="text-[10px] font-mono text-[#0b1012]/35 flex items-center gap-1">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1 font-mono text-[9px] tracking-widest uppercase text-white/40">
               <MapPin size={8} />{project.location}
             </span>
-            <span className="text-[#0b1012]/20 text-[10px]">·</span>
-            <span className="text-[10px] font-mono text-[#0b1012]/35">{project.year}</span>
+            <span className="text-white/20 text-[9px]">·</span>
+            <span className="font-mono text-[9px] tracking-widest uppercase text-white/40">{project.year}</span>
+            <span className="ml-auto font-mono text-[9px] tracking-[0.3em] uppercase text-white/30 group-hover:text-accent-primary flex items-center gap-1.5 transition-colors duration-300">
+              View <ArrowRight size={10} className={`transition-transform duration-300 ${isHovered ? 'translate-x-0.5' : ''}`} />
+            </span>
           </div>
         </div>
-
-        {/* Desktop: hover image + arrow */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="w-32 h-20 overflow-hidden flex-shrink-0 bg-[#ede9e3]">
-            <AnimatePresence>
-              {isHovered && (
-                <motion.img
-                  key={project.id}
-                  src={project.images[0]}
-                  alt={project.title}
-                  initial={{ opacity: 0, scale: 1.06 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-                  className="w-full h-full object-cover"
-                />
-              )}
-            </AnimatePresence>
-          </div>
-          <ArrowRight
-            size={16}
-            className={`flex-shrink-0 transition-all duration-300 ${isHovered ? 'text-accent-primary translate-x-1' : 'text-[#0b1012]/20'}`}
-          />
-        </div>
-
-        {/* Mobile arrow */}
-        <ArrowRight
-          size={14}
-          className={`md:hidden flex-shrink-0 transition-colors duration-300 ${isHovered ? 'text-accent-primary' : 'text-[#0b1012]/20'}`}
-        />
-      </Link>
-    </motion.div>
+      </div>
+    </Link>
   );
 }
 

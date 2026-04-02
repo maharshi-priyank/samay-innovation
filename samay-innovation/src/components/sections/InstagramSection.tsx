@@ -25,7 +25,7 @@ export default function InstagramSection() {
   }, [activeReel]);
 
   return (
-    <section className="py-24 md:py-32 bg-[#f3f0ec]">
+    <section className="py-24 md:py-32 bg-[#fafaf8]">
       <div className="px-6 md:px-16">
 
         {/* ── Section label ── */}

@@ -14,7 +14,7 @@ export default function BlogDetails() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-[#f3f0ec] flex items-center justify-center">
+      <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-light text-[#0b1012] mb-4">Article Not Found</h1>
           <Link to="/blogs" className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#0b1012]/50 hover:text-accent-primary transition-colors">
@@ -29,7 +29,7 @@ export default function BlogDetails() {
   const relatedBlogs = blogs.filter((_, index) => index !== currentIndex).slice(0, 3);
 
   return (
-    <div className="bg-[#f3f0ec]">
+    <div className="bg-[#fafaf8]">
 
       {/* ── Hero ── */}
       <section className="relative h-[65vh] md:h-[75vh] overflow-hidden bg-[#0b1012]">
@@ -84,7 +84,7 @@ export default function BlogDetails() {
       </section>
 
       {/* ── Article content ── */}
-      <section className="py-20 md:py-28 px-6 md:px-16 bg-[#f3f0ec]">
+      <section className="py-20 md:py-28 px-6 md:px-16 bg-[#fafaf8]">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
