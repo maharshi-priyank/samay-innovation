@@ -92,8 +92,8 @@ export default function Hero() {
       {/* Subtle left vignette */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0b1012]/50 via-transparent to-transparent" />
 
-      {/* ── Top-right: counter + category ── */}
-      <div className="absolute top-8 right-6 md:right-10 z-10 text-right">
+      {/* ── Top-right: counter + category — sits below h-20 navbar ── */}
+      <div className="absolute top-24 md:top-28 right-6 md:right-10 z-10 text-right">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
