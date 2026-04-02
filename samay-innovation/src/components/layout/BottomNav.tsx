@@ -1,166 +1,166 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Grid2x2, Wrench, Info, BookOpen, Mail, X, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import { X } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { href: '/',          label: 'Home',      Icon: Home       },
-  { href: '/portfolio', label: 'Portfolio', Icon: Grid2x2    },
-  { href: '/services',  label: 'Services',  Icon: Wrench     },
-  { href: '/about',     label: 'About',     Icon: Info       },
-  { href: '/blogs',     label: 'Blogs',     Icon: BookOpen   },
-  { href: '/contact',   label: 'Contact',   Icon: Mail       },
+  { href: '/',          label: 'Home'      },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/services',  label: 'Services'  },
+  { href: '/about',     label: 'About'     },
+  { href: '/blogs',     label: 'Blogs'     },
 ];
 
 export default function BottomNav() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  // Magnetic underline — tracks mouse X across the nav bar
+  const mouseX = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const [underlineWidth, setUnderlineWidth] = useState(0);
+  const [showUnderline, setShowUnderline] = useState(false);
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (!navRef.current) return;
+    const rect = navRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+  }
+
+  function handleItemEnter(e: React.MouseEvent<HTMLAnchorElement>) {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setUnderlineWidth(rect.width - 24); // subtract px padding
+    setShowUnderline(true);
+  }
 
   return (
     <>
       {/* ── Desktop nav ── */}
       <nav className="hidden md:flex fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <motion.div
-          className="flex items-center gap-1 px-3 py-2 rounded-full"
+        <div
+          ref={navRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setShowUnderline(false)}
+          className="flex items-center"
           style={{
-            background: 'rgba(10,10,10,0.85)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            boxShadow: '0 0 0 1px rgba(255,255,255,0.07), 0 8px 40px rgba(0,0,0,0.5), 0 0 60px rgba(201,169,122,0.04)',
+            background: 'rgba(8,8,8,0.82)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            borderRadius: '100px',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 12px 48px rgba(0,0,0,0.55)',
+            padding: '6px 6px',
           }}
         >
-          {/* Brand mark */}
+          {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-1.5 px-3 py-2 mr-1 group"
-            aria-label="Home"
+            className="flex items-center px-4 py-2 mr-1"
           >
-            <Sparkles
-              size={13}
-              className="text-accent-primary group-hover:text-white transition-colors duration-300"
-            />
-            <span className="text-[11px] font-light tracking-[0.25em] uppercase text-white/50 group-hover:text-white/80 transition-colors duration-300">
+            <span
+              className="text-[13px] font-light tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors duration-200"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
               SI
             </span>
           </Link>
 
-          {/* Divider */}
-          <div className="w-px h-5 bg-white/10 mr-1" />
+          {/* Thin divider */}
+          <div className="w-px h-4 bg-white/10 mr-1 flex-shrink-0" />
 
-          {/* Nav items */}
-          {NAV_ITEMS.map(({ href, label, Icon }) => {
-            const active = isActive(href);
-            const hovered = hoveredHref === href;
-
-            return (
-              <Link
-                key={href}
-                to={href}
-                onMouseEnter={() => setHoveredHref(href)}
-                onMouseLeave={() => setHoveredHref(null)}
-                className="relative"
-                aria-label={label}
-              >
-                <motion.div
-                  className="relative flex items-center gap-2 px-3 py-2 rounded-full overflow-hidden"
-                  animate={{
-                    paddingLeft: hovered || active ? 12 : 10,
-                    paddingRight: hovered || active ? 12 : 10,
-                  }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          {/* Nav items with floating underline */}
+          <div className="relative flex items-center">
+            {NAV_ITEMS.map(({ href, label }) => {
+              const active = isActive(href);
+              return (
+                <Link
+                  key={href}
+                  to={href}
+                  onMouseEnter={handleItemEnter}
+                  className="relative px-4 py-2 group"
                 >
-                  {/* Active/hover background pill */}
-                  <AnimatePresence>
-                    {(active || hovered) && (
-                      <motion.span
-                        key="bg"
-                        layoutId={active ? 'active-pill' : undefined}
-                        className={`absolute inset-0 rounded-full ${active ? 'bg-accent-primary/15' : 'bg-white/6'}`}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    )}
-                  </AnimatePresence>
-
-                  {/* Icon */}
-                  <motion.div
-                    animate={{
-                      scale: active ? 1.1 : hovered ? 1.05 : 1,
-                    }}
-                    transition={{ duration: 0.2 }}
+                  <span
+                    className={`text-[11px] tracking-[0.22em] uppercase font-light transition-colors duration-200 ${
+                      active ? 'text-white' : 'text-white/45 group-hover:text-white/80'
+                    }`}
                   >
-                    <Icon
-                      size={15}
-                      strokeWidth={active ? 1.8 : 1.5}
-                      className={`relative z-10 transition-colors duration-200 ${
-                        active
-                          ? 'text-accent-primary'
-                          : hovered
-                          ? 'text-white/90'
-                          : 'text-white/40'
-                      }`}
-                    />
-                  </motion.div>
+                    {label}
+                  </span>
 
-                  {/* Label — slides in on hover/active */}
-                  <AnimatePresence>
-                    {(hovered || active) && (
-                      <motion.span
-                        key="label"
-                        initial={{ opacity: 0, width: 0, x: -4 }}
-                        animate={{ opacity: 1, width: 'auto', x: 0 }}
-                        exit={{ opacity: 0, width: 0, x: -4 }}
-                        transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                        className={`relative z-10 text-[10px] font-light tracking-[0.2em] uppercase whitespace-nowrap overflow-hidden ${
-                          active ? 'text-accent-primary' : 'text-white/70'
-                        }`}
-                      >
-                        {label}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-
-                  {/* Active dot */}
-                  {active && !hovered && (
+                  {/* Persistent active underline */}
+                  {active && (
                     <motion.span
-                      layoutId="active-dot"
-                      className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent-primary"
+                      layoutId="active-line"
+                      className="absolute bottom-1 left-4 right-4 h-px bg-accent-primary"
                       transition={{ type: 'spring', stiffness: 500, damping: 40 }}
                     />
                   )}
-                </motion.div>
-              </Link>
-            );
-          })}
-        </motion.div>
+                </Link>
+              );
+            })}
+
+            {/* Magnetic hover underline — follows cursor */}
+            <AnimatePresence>
+              {showUnderline && (
+                <motion.span
+                  initial={{ opacity: 0, scaleX: 0.3 }}
+                  animate={{ opacity: 1, scaleX: 1 }}
+                  exit={{ opacity: 0, scaleX: 0.3 }}
+                  transition={{ duration: 0.18 }}
+                  className="absolute bottom-1 h-px bg-white/25 pointer-events-none"
+                  style={{
+                    width: underlineWidth,
+                    x: springX,
+                    translateX: '-50%',
+                    transformOrigin: 'center',
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Divider */}
+          <div className="w-px h-4 bg-white/10 mx-1 flex-shrink-0" />
+
+          {/* Contact CTA */}
+          <Link
+            to="/contact"
+            className="flex items-center gap-1.5 px-4 py-2 group"
+          >
+            <span className="text-[11px] tracking-[0.22em] uppercase font-light text-accent-primary group-hover:text-accent-secondary transition-colors duration-200">
+              Contact
+            </span>
+            <span className="text-accent-primary/60 text-[10px] group-hover:text-accent-secondary group-hover:translate-x-0.5 transition-all duration-200">
+              ↗
+            </span>
+          </Link>
+        </div>
       </nav>
 
       {/* ── Mobile nav ── */}
       <nav className="md:hidden fixed bottom-5 left-4 right-4 z-50">
         <div
-          className="flex items-center justify-between px-5 py-3 rounded-full"
+          className="flex items-center justify-between px-5 py-3"
           style={{
-            background: 'rgba(10,10,10,0.88)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            boxShadow: '0 0 0 1px rgba(255,255,255,0.07), 0 8px 32px rgba(0,0,0,0.5)',
+            background: 'rgba(8,8,8,0.88)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            borderRadius: '100px',
+            boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.5)',
           }}
         >
-          {/* Active page indicator + logo */}
-          <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-            <Sparkles size={13} className="text-accent-primary" />
-            <span className="text-[11px] font-light tracking-[0.2em] uppercase text-white/60">
-              {NAV_ITEMS.find(({ href }) => isActive(href))?.label ?? 'Samay'}
-            </span>
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="text-[12px] font-light tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            SI
           </Link>
 
-          {/* Hamburger / close */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
             className="w-8 h-8 flex items-center justify-center"
@@ -173,9 +173,9 @@ export default function BottomNav() {
                   initial={{ rotate: -90, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.18 }}
                 >
-                  <X size={16} className="text-white/70" />
+                  <X size={16} className="text-white/60" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -183,11 +183,11 @@ export default function BottomNav() {
                   initial={{ rotate: 90, opacity: 0 }}
                   animate={{ rotate: 0, opacity: 1 }}
                   exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.18 }}
                   className="flex flex-col gap-[5px]"
                 >
                   <span className="w-5 h-px bg-white/60" />
-                  <span className="w-3 h-px bg-white/40" />
+                  <span className="w-3 h-px bg-white/35" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -195,52 +195,50 @@ export default function BottomNav() {
         </div>
       </nav>
 
-      {/* ── Mobile overlay menu ── */}
+      {/* ── Mobile overlay ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.22 }}
             className="md:hidden fixed inset-0 z-40"
             style={{
               backdropFilter: 'blur(32px)',
               WebkitBackdropFilter: 'blur(32px)',
-              backgroundColor: 'rgba(10,10,10,0.9)',
+              backgroundColor: 'rgba(8,8,8,0.92)',
             }}
           >
-            <div className="flex flex-col justify-center h-full px-8 pb-28 pt-16">
-              {NAV_ITEMS.map(({ href, label, Icon }, i) => {
+            <div className="flex flex-col justify-center h-full px-8 pb-28 pt-12">
+              {[...NAV_ITEMS, { href: '/contact', label: 'Contact' }].map(({ href, label }, i) => {
                 const active = isActive(href);
                 return (
                   <motion.div
                     key={href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ delay: i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ delay: i * 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                   >
                     <Link
                       to={href}
                       onClick={() => setMenuOpen(false)}
-                      className={`group flex items-center gap-5 py-5 border-b transition-colors duration-200 ${
-                        active ? 'border-accent-primary/30' : 'border-white/6 hover:border-white/15'
+                      className={`group flex items-center justify-between py-5 border-b transition-colors duration-200 ${
+                        active ? 'border-accent-primary/30' : 'border-white/6'
                       }`}
                     >
-                      <div className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors duration-200 ${active ? 'bg-accent-primary/15' : 'bg-white/5 group-hover:bg-white/10'}`}>
-                        <Icon
-                          size={15}
-                          strokeWidth={1.5}
-                          className={active ? 'text-accent-primary' : 'text-white/40 group-hover:text-white/70'}
-                        />
-                      </div>
                       <span
-                        className={`text-3xl font-light transition-colors duration-200 ${active ? 'text-accent-primary' : 'text-white/70 group-hover:text-white'}`}
+                        className={`text-4xl font-light transition-colors duration-200 ${
+                          active ? 'text-accent-primary' : 'text-white/60 group-hover:text-white'
+                        }`}
                         style={{ fontFamily: 'Georgia, serif' }}
                       >
                         {label}
                       </span>
+                      {active && (
+                        <span className="text-accent-primary text-sm">↗</span>
+                      )}
                     </Link>
                   </motion.div>
                 );
