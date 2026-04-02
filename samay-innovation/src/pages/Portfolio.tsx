@@ -43,33 +43,36 @@ export default function Portfolio() {
       />
 
       {/* ── Page Header ── */}
-      <section className="pt-32 pb-12 px-6 md:px-16 border-b border-[#ddd8d0]">
+      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-3">
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-4">
             Our Work
           </span>
           <h1
-            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none"
+            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none mb-5"
             style={{ fontFamily: 'Georgia, serif' }}
           >
             Portfolio
           </h1>
+          <p className="text-base font-light text-[#0b1012]/45 max-w-md mx-auto leading-relaxed">
+            200+ spaces crafted across India and beyond — residential, commercial, and hospitality.
+          </p>
         </motion.div>
       </section>
 
       {/* ── Filter bar ── */}
-      <section className="sticky top-0 z-40 bg-[#fafaf8]/95 backdrop-blur-sm border-b border-[#ddd8d0]">
+      <section className="sticky top-0 z-40 bg-[#fafaf8]/95 backdrop-blur-md border-b border-[#ddd8d0]">
         <div className="overflow-x-auto scrollbar-hide">
-          <div className="flex items-center gap-0 px-6 md:px-16 min-w-max md:min-w-0">
+          <div className="flex items-center justify-center gap-0 px-6 min-w-max mx-auto">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`relative px-5 py-4 text-[11px] font-mono tracking-[0.3em] uppercase whitespace-nowrap transition-colors duration-200 ${
+                className={`relative px-6 py-4 text-[10px] font-mono tracking-[0.35em] uppercase whitespace-nowrap transition-colors duration-200 ${
                   activeCategory === cat.id
                     ? 'text-[#0b1012]'
                     : 'text-[#0b1012]/35 hover:text-[#0b1012]/70'
@@ -90,18 +93,18 @@ export default function Portfolio() {
       </section>
 
       {/* ── India projects ── */}
-      <section className="py-10 px-6 md:px-16">
+      <section className="py-16 px-6 md:px-16">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.35 }}
           >
             {filteredProjects.length === 0 ? (
               <div className="py-24 text-center">
-                <p className="text-[#0b1012]/30 text-sm font-mono tracking-widest uppercase">
+                <p className="text-[#0b1012]/25 text-[10px] font-mono tracking-[0.4em] uppercase">
                   No projects in this category.
                 </p>
               </div>
@@ -118,7 +121,7 @@ export default function Portfolio() {
   );
 }
 
-/* ── Project Grid ── */
+/* ── Project Grid — 3-col clean cards with text below ── */
 interface GridProps {
   projects: (typeof projects);
   hoveredId: string | null;
@@ -126,120 +129,86 @@ interface GridProps {
 }
 
 function ProjectGrid({ projects: list, hoveredId, setHoveredId }: GridProps) {
-  // Editorial pattern: hero (full-width) → 2-col → 2-col → repeat every 5
   return (
-    <div className="space-y-3">
-      {Array.from({ length: Math.ceil(list.length / 5) }).map((_, groupIndex) => {
-        const group = list.slice(groupIndex * 5, groupIndex * 5 + 5);
-        const [hero, ...rest] = group;
-        return (
-          <div key={groupIndex} className="space-y-3">
-            {/* Hero card — full width */}
-            {hero && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: groupIndex * 0.1 }}
-              >
-                <ProjectCard
-                  project={hero}
-                  aspectClass="aspect-[16/7]"
-                  isHovered={hoveredId === hero.id}
-                  onHover={() => setHoveredId(hero.id)}
-                  onLeave={() => setHoveredId(null)}
-                />
-              </motion.div>
-            )}
-            {/* Remaining in 2-col rows */}
-            {rest.length > 0 && (
-              <div className="grid grid-cols-2 gap-3">
-                {rest.map((project, i) => (
-                  <motion.div
-                    key={project.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: groupIndex * 0.1 + (i + 1) * 0.07 }}
-                  >
-                    <ProjectCard
-                      project={project}
-                      aspectClass="aspect-[4/3]"
-                      isHovered={hoveredId === project.id}
-                      onHover={() => setHoveredId(project.id)}
-                      onLeave={() => setHoveredId(null)}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      })}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
+      {list.map((project, i) => (
+        <motion.div
+          key={project.id}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <ProjectCard
+            project={project}
+            index={i}
+            isHovered={hoveredId === project.id}
+            onHover={() => setHoveredId(project.id)}
+            onLeave={() => setHoveredId(null)}
+          />
+        </motion.div>
+      ))}
     </div>
   );
 }
 
-/* ── Project Card ── */
+/* ── Project Card — image top, text below ── */
 interface CardProps {
   project: (typeof projects)[0];
-  aspectClass: string;
+  index: number;
   isHovered: boolean;
   onHover: () => void;
   onLeave: () => void;
 }
 
-function ProjectCard({ project, aspectClass, isHovered, onHover, onLeave }: CardProps) {
+function ProjectCard({ project, index, isHovered, onHover, onLeave }: CardProps) {
   return (
     <Link
       to={`/portfolio/${project.slug}`}
-      className="group block relative overflow-hidden"
+      className="group block"
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
     >
-      <div className={`relative overflow-hidden ${aspectClass}`}>
+      {/* Image */}
+      <div className="relative overflow-hidden aspect-[4/5] mb-4">
         <img
           src={project.images[0]}
           alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.05]"
+          className="w-full h-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.04]"
         />
+        {/* Subtle dark overlay on hover only */}
+        <div className={`absolute inset-0 bg-[#0b1012]/0 group-hover:bg-[#0b1012]/15 transition-colors duration-500`} />
+        {/* Gold bottom line */}
+        <div className={`absolute bottom-0 left-0 h-[2px] bg-accent-primary transition-all duration-500 ease-out ${isHovered ? 'w-full' : 'w-0'}`} />
+        {/* Index number top-left */}
+        <span className="absolute top-4 left-4 font-mono text-[10px] text-white/50 tracking-widest">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+      </div>
 
-        {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/80 via-black/10 to-transparent" />
-
-        {/* Gold bottom line on hover */}
-        <div
-          className={`absolute bottom-0 left-0 h-[2px] bg-accent-primary transition-all duration-500 ease-out ${
-            isHovered ? 'w-full' : 'w-0'
-          }`}
-        />
-
-        {/* Category badge */}
-        <div className="absolute top-5 left-5">
-          <span className="font-mono text-[9px] tracking-[0.35em] uppercase text-white/60 bg-black/30 backdrop-blur-sm px-2 py-1">
+      {/* Text below image */}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="font-mono text-[9px] tracking-[0.35em] uppercase text-[#0b1012]/35 mb-1.5">
             {project.category}
-          </span>
-        </div>
-
-        {/* Text bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+          </p>
           <h3
-            className={`font-light text-white leading-tight transition-colors duration-300 text-xl md:text-2xl mb-2 ${
-              isHovered ? 'text-accent-primary/90' : ''
-            }`}
+            className={`text-lg font-light leading-snug transition-colors duration-300 ${isHovered ? 'text-accent-primary' : 'text-[#0b1012]'}`}
             style={{ fontFamily: 'Georgia, serif' }}
           >
             {project.title}
           </h3>
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 font-mono text-[9px] tracking-widest uppercase text-white/40">
-              <MapPin size={8} />{project.location}
+          <div className="flex items-center gap-2 mt-1.5">
+            <span className="flex items-center gap-1 font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/30">
+              <MapPin size={7} />{project.location}
             </span>
-            <span className="text-white/20 text-[9px]">·</span>
-            <span className="font-mono text-[9px] tracking-widest uppercase text-white/40">{project.year}</span>
-            <span className="ml-auto font-mono text-[9px] tracking-[0.3em] uppercase text-white/30 group-hover:text-accent-primary flex items-center gap-1.5 transition-colors duration-300">
-              View <ArrowRight size={10} className={`transition-transform duration-300 ${isHovered ? 'translate-x-0.5' : ''}`} />
-            </span>
+            <span className="text-[#0b1012]/20 text-[9px]">·</span>
+            <span className="font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/30">{project.year}</span>
           </div>
         </div>
+        <ArrowRight
+          size={14}
+          className={`flex-shrink-0 mt-6 transition-all duration-300 ${isHovered ? 'text-accent-primary translate-x-0.5' : 'text-[#0b1012]/20'}`}
+        />
       </div>
     </Link>
   );

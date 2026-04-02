@@ -24,21 +24,24 @@ export default function Blogs() {
       />
 
       {/* ── Header ── */}
-      <section className="pt-32 pb-12 px-6 md:px-16 border-b border-[#ddd8d0]">
+      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-3">
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-4">
             Insights & Inspiration
           </span>
           <h1
-            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none"
+            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none mb-5"
             style={{ fontFamily: 'Georgia, serif' }}
           >
             Journal
           </h1>
+          <p className="text-base font-light text-[#0b1012]/45 max-w-sm mx-auto leading-relaxed">
+            Design thinking, material stories, and spatial ideas from our studio.
+          </p>
         </motion.div>
       </section>
 

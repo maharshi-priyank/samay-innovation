@@ -148,22 +148,25 @@ export default function Contact() {
       />
 
       {/* ── Page Header ──────────────────────────────────────────────────────── */}
-      <header className="bg-[#fafaf8] pt-32 pb-12 border-b border-[#ddd8d0]">
+      <header className="bg-[#fafaf8] pt-32 pb-16 border-b border-[#ddd8d0] text-center">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-[#0b1012]/50 mb-5">
+            <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-[#0b1012]/50 mb-4">
               Get in Touch
             </p>
             <h1
-              className="text-[clamp(3rem,8vw,6.5rem)] font-light leading-none text-[#0b1012]"
+              className="text-[clamp(3rem,8vw,6.5rem)] font-light leading-none text-[#0b1012] mb-5"
               style={{ fontFamily: 'Georgia, serif' }}
             >
               Contact
             </h1>
+            <p className="text-base font-light text-[#0b1012]/45 max-w-sm mx-auto leading-relaxed">
+              We'd love to hear about your project. Let's create something extraordinary together.
+            </p>
           </motion.div>
         </div>
       </header>
@@ -626,13 +629,12 @@ export default function Contact() {
 
       {/* ── Bottom CTA ───────────────────────────────────────────────────────── */}
       <section className="bg-[#fafaf8] py-24 border-t border-[#ddd8d0]">
-        <div className="container-custom">
+        <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-xl"
           >
             <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-[#0b1012]/40 mb-5">
               Ready to begin
@@ -643,7 +645,7 @@ export default function Contact() {
             >
               Let's transform<br />your space together.
             </h2>
-            <div className="flex flex-col sm:flex-row gap-8">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center">
               <a
                 href={SITE_CONFIG.mapUrl}
                 target="_blank"

@@ -47,6 +47,9 @@ export default function ServicesHighlight() {
             >
               Services
             </h2>
+            <p className="text-sm font-light text-[#0b1012]/45 mt-3 max-w-xs leading-relaxed">
+              Full-service interior design from residential to commercial.
+            </p>
           </div>
           <Link
             to="/services"

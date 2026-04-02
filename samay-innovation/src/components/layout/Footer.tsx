@@ -73,14 +73,6 @@ export default function Footer() {
                   <div className="w-4 h-px bg-white/15 group-hover:w-8 group-hover:bg-accent-primary transition-all duration-400" />
                 </Link>
               ))}
-              <Link
-                to="/contact"
-                className="group flex items-center gap-3"
-              >
-                <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-accent-primary group-hover:text-white transition-colors duration-300">
-                  Contact ↗
-                </span>
-              </Link>
             </nav>
           </div>
 

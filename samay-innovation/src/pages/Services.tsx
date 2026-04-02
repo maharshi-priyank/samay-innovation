@@ -49,21 +49,24 @@ export default function Services() {
       />
 
       {/* ── Header ── */}
-      <section className="pt-32 pb-12 px-6 md:px-16 border-b border-[#ddd8d0]">
+      <section className="pt-32 pb-16 px-6 md:px-16 border-b border-[#ddd8d0] text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-3">
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-4">
             What We Offer
           </span>
           <h1
-            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none"
+            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none mb-5"
             style={{ fontFamily: 'Georgia, serif' }}
           >
             Services
           </h1>
+          <p className="text-base font-light text-[#0b1012]/45 max-w-md mx-auto leading-relaxed">
+            From concept to completion — every detail handled with precision and care.
+          </p>
         </motion.div>
       </section>
 
@@ -146,17 +149,20 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-16 border-b border-white/8 pb-8"
+            className="mb-16 border-b border-white/8 pb-8 text-center"
           >
-            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 text-white/30 block mb-3">
+            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-white/30 block mb-4">
               How We Work
             </span>
             <h2
-              className="text-4xl md:text-5xl font-light text-white"
+              className="text-4xl md:text-5xl font-light text-white mb-4"
               style={{ fontFamily: 'Georgia, serif' }}
             >
               Our Process
             </h2>
+            <p className="text-sm font-light text-white/35 max-w-sm mx-auto leading-relaxed">
+              A structured approach that keeps your project on time, on budget, and exactly as envisioned.
+            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
@@ -189,13 +195,12 @@ export default function Services() {
 
       {/* ── CTA ── */}
       <section className="py-24 md:py-32 bg-[#fafaf8] border-t border-[#ddd8d0]">
-        <div className="px-6 md:px-16">
+        <div className="px-6 md:px-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="max-w-2xl"
           >
             <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/35 block mb-4">
               Get Started
@@ -207,7 +212,7 @@ export default function Services() {
               Ready to transform your space?
             </h2>
 
-            <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+            <div className="flex flex-col sm:flex-row gap-6 sm:items-center justify-center">
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-3 group"
