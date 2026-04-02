@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Instagram, ExternalLink, ArrowRight } from 'lucide-react';
-import { instagramPosts } from '../../data/instagramPosts';
+import { instagramPosts, type InstagramPost as IPost } from '../../data/instagramPosts';
 
 const INSTAGRAM_URL = 'https://www.instagram.com/samayinnovation/';
 
@@ -77,48 +77,42 @@ export default function InstagramSection() {
         </motion.div>
 
         {/* ── Image grid ── */}
+        {/* Row 1: 2 wide landscape images */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3"
+          className="grid grid-cols-2 gap-2 md:gap-3 mb-2 md:mb-3"
         >
-          {posts.map((post, i) => (
-            <motion.a
-              key={post.id}
-              variants={itemVariants}
-              href={post.postUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group relative overflow-hidden block ${
-                // First post is featured — spans 2 cols on desktop
-                i === 0 ? 'col-span-2 md:col-span-1 row-span-2 md:row-span-2' : ''
-              }`}
-            >
-              <div className={`overflow-hidden ${i === 0 ? 'aspect-square md:aspect-[3/4]' : 'aspect-square'}`}>
-                <img
-                  src={post.image}
-                  alt={post.caption}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-                  loading="lazy"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-[#0b1012]/0 group-hover:bg-[#0b1012]/55 transition-all duration-400 flex flex-col items-center justify-center gap-2 p-4">
-                  <Instagram
-                    size={i === 0 ? 22 : 18}
-                    strokeWidth={1.5}
-                    className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
-                  <p className="text-white/80 text-[11px] text-center leading-relaxed font-light line-clamp-2 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {post.caption}
-                  </p>
-                  <span className="font-mono text-[9px] tracking-widest uppercase text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    View Post
-                  </span>
-                </div>
-              </div>
-            </motion.a>
+          {posts.slice(0, 2).map((post) => (
+            <InstagramPost key={post.id} post={post} aspectClass="aspect-[4/3]" />
+          ))}
+        </motion.div>
+
+        {/* Row 2: 3 square images */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-3 gap-2 md:gap-3 mb-2 md:mb-3"
+        >
+          {posts.slice(2, 5).map((post) => (
+            <InstagramPost key={post.id} post={post} aspectClass="aspect-square" />
+          ))}
+        </motion.div>
+
+        {/* Row 3: 4 square images */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-4 gap-2 md:gap-3"
+        >
+          {posts.slice(5, 9).map((post) => (
+            <InstagramPost key={post.id} post={post} aspectClass="aspect-square" />
           ))}
         </motion.div>
 
@@ -154,5 +148,44 @@ export default function InstagramSection() {
 
       </div>
     </section>
+  );
+}
+
+// ─── Single post cell ─────────────────────────────────────────────────────────
+
+function InstagramPost({ post, aspectClass }: { post: IPost; aspectClass: string }) {
+  return (
+    <motion.a
+      variants={{
+        hidden:  { opacity: 0, y: 16 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+      }}
+      href={post.postUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block overflow-hidden"
+    >
+      <div className={`relative overflow-hidden ${aspectClass}`}>
+        <img
+          src={post.image}
+          alt={post.caption}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-[#0b1012]/0 group-hover:bg-[#0b1012]/55 transition-colors duration-400 flex flex-col items-center justify-center gap-2 p-3">
+          <Instagram
+            size={18}
+            strokeWidth={1.5}
+            className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          />
+          <p className="text-white/80 text-[10px] text-center leading-relaxed font-light line-clamp-2 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            {post.caption}
+          </p>
+          <span className="font-mono text-[9px] tracking-widest uppercase text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            View Post
+          </span>
+        </div>
+      </div>
+    </motion.a>
   );
 }
