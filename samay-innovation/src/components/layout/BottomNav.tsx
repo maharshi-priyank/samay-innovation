@@ -60,12 +60,12 @@ export default function BottomNav() {
             to="/"
             className="flex items-center px-4 py-2 mr-1"
           >
-            <span
-              className="text-[13px] font-light tracking-[0.3em] uppercase text-white/70 hover:text-white transition-colors duration-200"
-              style={{ fontFamily: 'Georgia, serif' }}
-            >
-              SI
-            </span>
+            <img
+              src="/logo/logo.svg"
+              alt="Samay Innovation"
+              className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
           </Link>
 
           {/* Thin divider */}
@@ -155,10 +155,13 @@ export default function BottomNav() {
           <Link
             to="/"
             onClick={() => setMenuOpen(false)}
-            className="text-[12px] font-light tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors"
-            style={{ fontFamily: 'Georgia, serif' }}
           >
-            SI
+            <img
+              src="/logo/logo.svg"
+              alt="Samay Innovation"
+              className="h-5 w-auto opacity-60 hover:opacity-90 transition-opacity duration-200"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
           </Link>
 
           <button
