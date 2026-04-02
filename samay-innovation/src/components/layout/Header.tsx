@@ -4,12 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { NAVIGATION, SITE_CONFIG } from '../../lib/constants';
 
-// Routes whose top section is dark (hero image / dark bg) — nav starts white
 const DARK_HERO_ROUTES = ['/', '/about'];
 
 function hasDarkHero(pathname: string) {
   if (DARK_HERO_ROUTES.includes(pathname)) return true;
-  // Project detail & blog detail both have dark full-bleed heroes
   if (pathname.startsWith('/portfolio/') || pathname.startsWith('/blogs/')) return true;
   return false;
 }
@@ -18,7 +16,6 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
   const darkHero = hasDarkHero(location.pathname);
 
   useEffect(() => {
@@ -27,7 +24,6 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
@@ -54,9 +50,8 @@ export default function Header() {
                 alt={SITE_CONFIG.name}
                 className="h-8 w-auto transition-all duration-500"
                 style={{
-                  // scrolled → natural gold; over dark hero → white; over cream → dark/black
                   filter: isScrolled
-                    ? 'none'
+                    ? 'brightness(0)'
                     : darkHero
                     ? 'brightness(0) invert(1)'
                     : 'brightness(0)',
@@ -65,9 +60,7 @@ export default function Header() {
               />
               <span
                 className={`text-sm font-light tracking-[0.18em] uppercase transition-colors duration-500 ${
-                  isScrolled
-                    ? 'text-[#0b1012]'
-                    : darkHero ? 'text-white' : 'text-[#0b1012]'
+                  isScrolled ? 'text-[#0b1012]' : darkHero ? 'text-white' : 'text-[#0b1012]'
                 }`}
               >
                 Samay Innovation
@@ -105,9 +98,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen((v) => !v)}
               className={`md:hidden flex flex-col gap-[5px] p-2 transition-colors duration-300 ${
-                isScrolled
-                  ? 'text-[#0b1012]'
-                  : darkHero ? 'text-white' : 'text-[#0b1012]'
+                isScrolled ? 'text-[#0b1012]' : darkHero ? 'text-white' : 'text-[#0b1012]'
               }`}
               aria-label="Toggle menu"
             >
