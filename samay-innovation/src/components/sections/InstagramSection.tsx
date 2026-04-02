@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ArrowRight, Play, X } from 'lucide-react';
+import { Play, X, Grid3X3, ExternalLink } from 'lucide-react';
+import { instagramPosts, type InstagramPost as IPost } from '../../data/instagramPosts';
 
-// Custom Instagram SVG (lucide deprecated theirs)
 function IgIcon({ size = 16, className = '' }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -12,21 +12,13 @@ function IgIcon({ size = 16, className = '' }: { size?: number; className?: stri
     </svg>
   );
 }
-import { instagramPosts, type InstagramPost as IPost } from '../../data/instagramPosts';
 
 const INSTAGRAM_URL = 'https://www.instagram.com/samayinnovation/';
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
-};
-
 
 export default function InstagramSection() {
   const posts = instagramPosts.slice(0, 9);
   const [activeReel, setActiveReel] = useState<string | null>(null);
 
-  // Lock body scroll when reel is open
   useEffect(() => {
     document.body.style.overflow = activeReel ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -36,52 +28,31 @@ export default function InstagramSection() {
     <section className="py-24 md:py-32 bg-[#f3f0ec]">
       <div className="px-6 md:px-16">
 
-        {/* ── Header ── */}
+        {/* ── Section label ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-4 pb-8 border-b border-[#ddd8d0]"
+          className="mb-12"
         >
-          <div>
-            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/35 block mb-3">
-              Follow Our Journey
-            </span>
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/35 block mb-3">
+            Follow Our Journey
+          </span>
+          <div className="flex items-end justify-between pb-8 border-b border-[#ddd8d0]">
             <h2
               className="text-4xl md:text-5xl font-light text-[#0b1012]"
               style={{ fontFamily: 'Georgia, serif' }}
             >
-              Instagram Gallery
+              Instagram
             </h2>
-          </div>
-
-          {/* Profile strip */}
-          <div className="flex flex-wrap items-center gap-6 md:gap-10">
-            {[
-              { value: '749',   label: 'Posts'     },
-              { value: '31.4K', label: 'Followers' },
-            ].map((s, i) => (
-              <div key={s.label} className={`text-center ${i > 0 ? 'pl-6 md:pl-10 border-l border-[#ddd8d0]' : ''}`}>
-                <p
-                  className="text-2xl font-light text-[#0b1012] leading-none"
-                  style={{ fontFamily: 'Georgia, serif' }}
-                >
-                  {s.value}
-                </p>
-                <p className="font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/35 mt-1">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-3 pl-6 md:pl-10 border-l border-[#ddd8d0]"
+              className="hidden md:flex items-center gap-2 group"
             >
-              <IgIcon size={14} className="text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300" />
+              <IgIcon size={13} className="text-[#0b1012]/35 group-hover:text-accent-primary transition-colors duration-300" />
               <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300">
                 @samayinnovation
               </span>
@@ -90,73 +61,131 @@ export default function InstagramSection() {
           </div>
         </motion.div>
 
-        {/* ── Image grid ── */}
-        {/* Row 1: 2 wide landscape images */}
+        {/* ── Profile card ── */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 gap-2 md:gap-3 mb-2 md:mb-3"
-        >
-          {posts.slice(0, 2).map((post) => (
-            <InstagramPost key={post.id} post={post} aspectClass="aspect-[4/3]" onPlayReel={setActiveReel} />
-          ))}
-        </motion.div>
-
-        {/* Row 2: 3 square images */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-3 gap-2 md:gap-3 mb-2 md:mb-3"
-        >
-          {posts.slice(2, 5).map((post) => (
-            <InstagramPost key={post.id} post={post} aspectClass="aspect-square" onPlayReel={setActiveReel} />
-          ))}
-        </motion.div>
-
-        {/* Row 3: 4 square images */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-4 gap-2 md:gap-3"
-        >
-          {posts.slice(5, 9).map((post) => (
-            <InstagramPost key={post.id} post={post} aspectClass="aspect-square" onPlayReel={setActiveReel} />
-          ))}
-        </motion.div>
-
-        {/* ── CTA strip ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-10 pt-8 border-t border-[#ddd8d0] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+          className="mb-10"
         >
-          <p
-            className="text-xl md:text-2xl font-light text-[#0b1012]"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
-            Stay inspired — follow our daily work.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-12 pb-10 border-b border-[#ddd8d0]">
 
+            {/* Avatar — logo in circle */}
+            <div className="shrink-0">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden bg-[#0b1012] border border-[#ddd8d0] flex items-center justify-center">
+                <img
+                  src="/logo/logo.png"
+                  alt="Samay Innovation"
+                  className="w-14 h-14 md:w-16 md:h-16 object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Profile info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-4 mb-3">
+                <h3 className="text-lg font-light text-[#0b1012] tracking-wide">samayinnovation</h3>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-[10px] tracking-[0.25em] uppercase px-4 py-1.5 border border-[#0b1012]/20 text-[#0b1012]/60 hover:border-accent-primary hover:text-accent-primary transition-colors duration-300"
+                >
+                  Follow
+                </a>
+              </div>
+
+              {/* Stats row */}
+              <div className="flex items-center gap-8 mb-4">
+                {[
+                  { value: posts.length.toString(), label: 'posts' },
+                  { value: '31.4K', label: 'followers' },
+                  { value: '412', label: 'following' },
+                ].map((s, i) => (
+                  <div key={s.label} className={`${i > 0 ? '' : ''}`}>
+                    <span
+                      className="text-sm font-light text-[#0b1012] mr-1"
+                      style={{ fontFamily: 'Georgia, serif' }}
+                    >
+                      {s.value}
+                    </span>
+                    <span className="font-mono text-[10px] tracking-widest uppercase text-[#0b1012]/40">
+                      {s.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bio */}
+              <p className="text-sm text-[#0b1012]/70 leading-relaxed max-w-sm">
+                Interior Design Studio · Ahmedabad
+                <br />
+                <span className="text-[#0b1012]/45 text-[12px]">Residential · Commercial · Hospitality</span>
+                <br />
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-primary hover:underline font-mono text-[11px] tracking-wide"
+                >
+                  samayinnovation.com
+                </a>
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Grid tab header (like IG's Posts / Reels tabs) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-8 mb-4"
+        >
+          <div className="flex items-center gap-2 pb-3 border-b-2 border-[#0b1012]">
+            <Grid3X3 size={13} className="text-[#0b1012]" />
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#0b1012]">
+              Reels
+            </span>
+          </div>
+        </motion.div>
+
+        {/* ── Posts grid ── */}
+        <div className="grid grid-cols-3 gap-1 md:gap-1.5">
+          {posts.map((post, i) => (
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <PostCell post={post} onPlayReel={setActiveReel} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── Load more / view on IG ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-8 flex justify-center"
+        >
           <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 flex-shrink-0"
+            className="group inline-flex items-center gap-3 px-8 py-3 border border-[#0b1012]/15 hover:border-accent-primary transition-colors duration-300"
           >
-            <IgIcon size={13} className="text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300" />
-            <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#0b1012] group-hover:text-accent-primary transition-colors duration-300">
-              Follow on Instagram
+            <IgIcon size={12} className="text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300" />
+            <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-[#0b1012]/50 group-hover:text-accent-primary transition-colors duration-300">
+              View More on Instagram
             </span>
-            <div className="w-8 h-px bg-[#0b1012]/30 group-hover:w-14 group-hover:bg-accent-primary transition-all duration-500" />
-            <ArrowRight size={12} className="text-[#0b1012]/30 group-hover:text-accent-primary transition-colors duration-300" />
+            <ExternalLink size={10} className="text-[#0b1012]/25 group-hover:text-accent-primary transition-colors duration-300" />
           </a>
         </motion.div>
 
@@ -192,7 +221,6 @@ export default function InstagramSection() {
                 src={`https://www.instagram.com/${activeReel}/embed/`}
                 className="w-full h-full border-0"
                 allowFullScreen
-                scrolling="no"
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               />
             </motion.div>
@@ -205,14 +233,14 @@ export default function InstagramSection() {
 
 // ─── Single post cell ─────────────────────────────────────────────────────────
 
-function InstagramPost({ post, aspectClass, onPlayReel }: { post: IPost; aspectClass: string; onPlayReel: (id: string) => void }) {
+function PostCell({ post, onPlayReel }: { post: IPost; onPlayReel: (id: string) => void }) {
   return (
     <motion.div
       variants={{
-        hidden:  { opacity: 0, y: 16 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+        hidden: { opacity: 0, scale: 0.97 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
       }}
-      className="group relative block overflow-hidden cursor-pointer"
+      className="group relative aspect-square overflow-hidden cursor-pointer bg-[#ddd8d0]"
       onClick={() => {
         if (post.type === 'reel' && post.embedPath) {
           onPlayReel(post.embedPath);
@@ -221,37 +249,29 @@ function InstagramPost({ post, aspectClass, onPlayReel }: { post: IPost; aspectC
         }
       }}
     >
-      <div className={`relative overflow-hidden ${aspectClass}`}>
-        <img
-          src={post.image}
-          alt={post.caption}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
-          loading="lazy"
-        />
+      <img
+        src={post.image}
+        alt={post.caption}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
+        loading="lazy"
+      />
 
-        {/* Reel play badge — always visible on reel posts */}
-        {post.type === 'reel' && (
-          <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-2 py-1">
-            <Play size={8} className="text-white fill-white" />
-            <span className="font-mono text-[8px] tracking-widest uppercase text-white/80">Reel</span>
-          </div>
-        )}
-
-        <div className="absolute inset-0 bg-[#0b1012]/0 group-hover:bg-[#0b1012]/55 transition-colors duration-400 flex flex-col items-center justify-center gap-2 p-3">
-          {post.type === 'reel' ? (
-            <div className="w-10 h-10 border border-white/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:border-accent-primary">
-              <Play size={14} className="text-white fill-white ml-0.5" />
-            </div>
-          ) : (
-            <IgIcon size={18} className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          )}
-          <p className="text-white/80 text-[10px] text-center leading-relaxed font-light line-clamp-2 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {post.caption}
-          </p>
-          <span className="font-mono text-[9px] tracking-widest uppercase text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {post.type === 'reel' ? 'Play Reel' : 'View Post'}
-          </span>
+      {/* Reel badge */}
+      {post.type === 'reel' && (
+        <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/50 backdrop-blur-sm px-1.5 py-0.5">
+          <Play size={8} className="text-white fill-white" />
+          <span className="font-mono text-[8px] tracking-widest uppercase text-white/80">Reel</span>
         </div>
+      )}
+
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-[#0b1012]/0 group-hover:bg-[#0b1012]/60 transition-colors duration-300 flex flex-col items-center justify-center gap-2">
+        <div className="w-10 h-10 rounded-full border border-white/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Play size={14} className="text-white fill-white ml-0.5" />
+        </div>
+        <p className="text-white/80 text-[10px] text-center leading-relaxed font-light line-clamp-2 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {post.caption}
+        </p>
       </div>
     </motion.div>
   );
