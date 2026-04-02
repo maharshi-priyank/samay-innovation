@@ -54,8 +54,12 @@ export default function Header() {
                 alt={SITE_CONFIG.name}
                 className="h-8 w-auto transition-all duration-500"
                 style={{
-                  // scrolled → natural gold; transparent over dark → white; transparent over cream → natural gold
-                  filter: isScrolled ? 'none' : darkHero ? 'brightness(0) invert(1)' : 'none',
+                  // scrolled → natural gold; over dark hero → white; over cream → dark/black
+                  filter: isScrolled
+                    ? 'none'
+                    : darkHero
+                    ? 'brightness(0) invert(1)'
+                    : 'brightness(0)',
                 }}
                 onError={(e) => { e.currentTarget.src = '/logo/logo.png'; }}
               />
