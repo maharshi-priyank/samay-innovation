@@ -216,77 +216,90 @@ function ProjectRow({ project, index, isHovered, onHover, onLeave }: RowProps) {
 /* ── International Section ── */
 function InternationalSection() {
   return (
-    <section className="py-24 bg-[#0b1012] relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      <div className="px-6 md:px-16 relative z-10">
+    <section className="py-24 md:py-32 bg-[#0b1012]">
+      <div className="px-6 md:px-16">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-16 border-b border-white/8 pb-8"
+          className="mb-16 border-b border-white/8 pb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <Globe size={10} className="text-accent-primary" />
-            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-accent-primary">Global Reach</span>
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <Globe size={10} className="text-accent-primary" />
+              <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-accent-primary">Global Reach</span>
+            </div>
+            <h2
+              className="text-4xl md:text-5xl font-light text-white"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              International Projects
+            </h2>
           </div>
-          <h2
-            className="text-4xl md:text-5xl font-light text-white"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
-            International Projects
-          </h2>
+          <p className="text-sm font-light text-white/30 max-w-xs leading-relaxed">
+            Extending our design philosophy beyond borders — crafting spaces across India and the United States.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {internationalProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+              transition={{ duration: 0.7, delay: index * 0.12 }}
             >
               <Link
                 to={`/portfolio/${project.slug}`}
-                className="group block relative overflow-hidden border border-white/8 hover:border-accent-primary/30 transition-colors duration-500"
+                className="group block relative overflow-hidden"
               >
-                <div className="relative h-64 md:h-80 overflow-hidden">
+                {/* Full-bleed image */}
+                <div className="relative h-[420px] md:h-[520px] overflow-hidden">
                   <img
                     src={project.images[0]}
                     alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012] via-black/20 to-transparent" />
-                  <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/15 px-3 py-1.5">
-                    <span className="text-base leading-none">{project.flag}</span>
-                    <span className="text-white/70 text-[10px] font-mono tracking-widest uppercase">{project.country}</span>
+                  {/* Gradient overlay — strong at bottom for text */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+                  {/* Animated gold line on hover */}
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-[2px] bg-accent-primary"
+                    initial={{ width: '0%' }}
+                    whileHover={{ width: '100%' }}
+                    transition={{ duration: 0.5 }}
+                  />
+
+                  {/* Country badge — top left, clean and minimal */}
+                  <div className="absolute top-6 left-6 flex items-center gap-2">
+                    <span className="text-xl leading-none">{project.flag}</span>
+                    <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-white/60">{project.country}</span>
                   </div>
-                </div>
-                <div className="p-6 bg-[#111315]">
-                  <p className="text-[10px] font-mono tracking-[0.35em] uppercase text-accent-primary mb-2">
-                    International · {project.category}
-                  </p>
-                  <h3
-                    className="text-2xl font-light text-white mb-3 group-hover:text-accent-primary/90 transition-colors duration-300"
-                    style={{ fontFamily: 'Georgia, serif' }}
-                  >
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-[10px] font-mono text-white/30 tracking-widest uppercase">
-                      <span>{project.location}</span>
-                      <span>·</span>
-                      <span>{project.year}</span>
+
+                  {/* Text — overlaid at bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 p-7 md:p-9">
+                    <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-accent-primary mb-2">
+                      {project.category}
+                    </p>
+                    <h3
+                      className="text-2xl md:text-3xl font-light text-white leading-tight mb-4 group-hover:text-accent-primary/90 transition-colors duration-500"
+                      style={{ fontFamily: 'Georgia, serif' }}
+                    >
+                      {project.title}
+                    </h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 font-mono text-[10px] text-white/40 tracking-widest uppercase">
+                        <span className="flex items-center gap-1"><MapPin size={9} />{project.location}</span>
+                        <span>·</span>
+                        <span>{project.year}</span>
+                      </div>
+                      <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30 group-hover:text-accent-primary flex items-center gap-2 transition-colors duration-300">
+                        View <ArrowRight size={11} className="group-hover:translate-x-1 transition-transform duration-300" />
+                      </span>
                     </div>
-                    <ArrowRight size={14} className="text-white/20 group-hover:text-accent-primary group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </div>
               </Link>
