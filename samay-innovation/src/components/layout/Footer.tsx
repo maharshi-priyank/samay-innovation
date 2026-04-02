@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Facebook, ChevronUp, MapPin, Phone, Mail } from 'lucide-react';
+import { Instagram, Linkedin, Facebook, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import { SITE_CONFIG, NAVIGATION } from '../../lib/constants';
 
 export default function Footer() {
@@ -7,141 +7,142 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: Instagram, href: SITE_CONFIG.social.instagram, label: 'Instagram' },
-    { icon: Linkedin, href: SITE_CONFIG.social.linkedin, label: 'LinkedIn' },
-    { icon: Facebook, href: SITE_CONFIG.social.facebook, label: 'Facebook' },
+    { icon: Linkedin,  href: SITE_CONFIG.social.linkedin,  label: 'LinkedIn'  },
+    { icon: Facebook,  href: SITE_CONFIG.social.facebook,  label: 'Facebook'  },
   ];
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="relative bg-bg-dark-section dark:bg-dark-bg-tertiary text-white overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=600&fit=crop"
-          alt="Footer background"
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/80" />
-      </div>
+    <footer className="bg-[#0b1012] text-white">
+      {/* ── Main content ── */}
+      <div className="px-6 md:px-16 pt-20 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24 pb-16 border-b border-white/8">
 
-      <div className="relative z-10">
-        {/* Main Footer Content */}
-        <div className="container-custom py-20">
-          {/* Two Column Layout: Logo/Brand on Left, Contact on Right */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            {/* Left Side - Logo, Brand & Social */}
-            <div>
-              <div className="mb-6">
-                <img 
-                  src="/logo/logo.svg" 
-                  alt={SITE_CONFIG.name}
-                  className="h-16 w-auto brightness-0 invert opacity-90"
-                  onError={(e) => {
-                    e.currentTarget.src = '/logo/logo.png';
-                  }}
-                />
-              </div>
-              <h2 className="text-xl md:text-2xl font-light tracking-[0.2em] uppercase text-white mb-4">
-                SAMAY INNOVATION
-              </h2>
-              <p className="text-sm text-white/60 max-w-md leading-relaxed mb-8">
-                {SITE_CONFIG.description}
-              </p>
-              
-              {/* Social Links */}
-              <div className="flex gap-3">
-                {socialLinks.map((social) => (
+          {/* Brand column */}
+          <div className="lg:col-span-1">
+            <img
+              src="/logo/logo.svg"
+              alt={SITE_CONFIG.name}
+              className="h-10 w-auto mb-8"
+              onError={(e) => { e.currentTarget.src = '/logo/logo.png'; }}
+            />
+            <p
+              className="text-sm font-light text-white/45 leading-relaxed mb-10 max-w-xs"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              {SITE_CONFIG.description}
+            </p>
+            <div className="flex items-center gap-6">
+              {socialLinks.map((s) => {
+                const SIcon = s.icon;
+                return (
                   <a
-                    key={social.label}
-                    href={social.href}
+                    key={s.label}
+                    href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-bg-dark-section transition-all duration-300"
-                    aria-label={social.label}
+                    aria-label={s.label}
+                    className="group flex items-center gap-1.5"
                   >
-                    <social.icon size={16} />
+                    <SIcon
+                      size={14}
+                      strokeWidth={1.5}
+                      className="text-white/30 group-hover:text-accent-primary transition-colors duration-300"
+                    />
+                    <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30 group-hover:text-accent-primary transition-colors duration-300">
+                      {s.label}
+                    </span>
                   </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Side - Contact Information */}
-            <div className="md:text-right">
-              <h3 className="text-xs font-light tracking-[0.3em] uppercase text-white/50 mb-6">
-                GET IN TOUCH
-              </h3>
-              <div className="space-y-4">
-                {/* Address */}
-                <div className="flex items-start gap-3 md:justify-end">
-                  <MapPin size={18} className="text-white/60 mt-0.5 flex-shrink-0" />
-                  <div className="text-sm text-white/80 md:text-right">
-                    <p>403 Before, Lane of ICICI Bank</p>
-                    <p>PV Enclave, Sindhu Bhavan Marg</p>
-                    <p>Bodakdev, Ahmedabad 380059</p>
-                  </div>
-                </div>
-                
-                {/* Phone */}
-                <div className="flex items-center gap-3 md:justify-end">
-                  <Phone size={18} className="text-white/60 flex-shrink-0" />
-                  <a
-                    href={`tel:${SITE_CONFIG.phone}`}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {SITE_CONFIG.phone}
-                  </a>
-                </div>
-                
-                {/* Email */}
-                <div className="flex items-center gap-3 md:justify-end">
-                  <Mail size={18} className="text-white/60 flex-shrink-0" />
-                  <a
-                    href={`mailto:${SITE_CONFIG.email}`}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {SITE_CONFIG.email}
-                  </a>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="h-px bg-white/10 mb-8" />
-
-          {/* Bottom Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            {/* Navigation Links */}
-            <nav className="flex flex-wrap justify-center md:justify-start gap-8">
+          {/* Navigation column */}
+          <div className="lg:col-span-1">
+            <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/25 mb-8">Navigation</p>
+            <nav className="space-y-4">
               {NAVIGATION.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-xs font-light tracking-wider uppercase text-white/70 hover:text-white transition-colors"
+                  className="group flex items-center gap-3"
                 >
-                  {item.name}
+                  <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-white/45 group-hover:text-white transition-colors duration-300">
+                    {item.name}
+                  </span>
+                  <div className="w-4 h-px bg-white/15 group-hover:w-8 group-hover:bg-accent-primary transition-all duration-400" />
                 </Link>
               ))}
+              <Link
+                to="/contact"
+                className="group flex items-center gap-3"
+              >
+                <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-accent-primary group-hover:text-white transition-colors duration-300">
+                  Contact ↗
+                </span>
+              </Link>
             </nav>
+          </div>
 
-            {/* Copyright */}
-            <p className="text-xs text-white/50">
-              Copyright {currentYear} by Samay Innovation
-            </p>
+          {/* Contact column */}
+          <div className="lg:col-span-1">
+            <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/25 mb-8">Get in Touch</p>
+            <div className="space-y-6">
+              <a
+                href={SITE_CONFIG.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3"
+              >
+                <MapPin size={13} strokeWidth={1.5} className="text-accent-primary flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-light text-white/45 leading-relaxed group-hover:text-white/70 transition-colors duration-300">
+                    403 Before, Lane of ICICI Bank<br />
+                    PV Enclave, Sindhu Bhavan Marg<br />
+                    Bodakdev, Ahmedabad 380059
+                  </p>
+                </div>
+              </a>
+
+              <a
+                href={`tel:${SITE_CONFIG.phone}`}
+                className="group flex items-center gap-3"
+              >
+                <Phone size={13} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
+                <span className="text-sm font-light text-white/45 group-hover:text-white/70 transition-colors duration-300">
+                  {SITE_CONFIG.phone}
+                </span>
+              </a>
+
+              <a
+                href={`mailto:${SITE_CONFIG.email}`}
+                className="group flex items-center gap-3"
+              >
+                <Mail size={13} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
+                <span className="text-sm font-light text-white/45 group-hover:text-white/70 transition-colors duration-300">
+                  {SITE_CONFIG.email}
+                </span>
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Scroll to Top Button */}
-        <button
-          onClick={scrollToTop}
-          className="absolute bottom-8 right-8 w-12 h-12 border border-white/30 rounded-full flex items-center justify-center hover:bg-white hover:text-bg-dark-section transition-all duration-300"
-          aria-label="Scroll to top"
-        >
-          <ChevronUp size={20} />
-        </button>
+        {/* ── Bottom bar ── */}
+        <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/20">
+            © {currentYear} Samay Innovation. All rights reserved.
+          </p>
+          <a
+            href="#top"
+            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="group flex items-center gap-2"
+          >
+            <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-white/20 group-hover:text-white/50 transition-colors duration-300">
+              Back to Top
+            </span>
+            <ArrowRight size={10} className="text-white/20 group-hover:text-white/50 -rotate-90 transition-colors duration-300" />
+          </a>
+        </div>
       </div>
     </footer>
   );

@@ -522,8 +522,8 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ── Map section (preserved from original) ───────────────────────────── */}
-      <section className="bg-[#0e0e0e] py-20 overflow-hidden">
+      {/* ── Map section ─────────────────────────────────────────────────────── */}
+      <section className="bg-[#0b1012] py-20 overflow-hidden">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -531,13 +531,13 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 border-b border-white/8 pb-8">
               <div>
-                <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-accent-primary">
+                <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/30 block mb-3">
                   Find Us
                 </span>
                 <h2
-                  className="text-3xl md:text-4xl font-light text-white mt-2"
+                  className="text-3xl md:text-4xl font-light text-white"
                   style={{ fontFamily: 'Georgia, serif' }}
                 >
                   Visit Our Studio
@@ -547,58 +547,59 @@ export default function Contact() {
                 href={SITE_CONFIG.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] uppercase text-accent-primary hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-3 group"
               >
-                <MapPin size={13} strokeWidth={1.5} />
-                Get Directions
+                <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-accent-primary group-hover:text-white transition-colors duration-300">
+                  Get Directions
+                </span>
+                <div className="w-8 h-px bg-accent-primary/50 group-hover:w-14 group-hover:bg-white transition-all duration-500" />
+                <ArrowRight size={12} className="text-accent-primary/50 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
               </a>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 rounded-2xl overflow-hidden border border-white/10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-white/8 overflow-hidden">
               {/* Map iframe */}
-              <div className="lg:col-span-2 h-[320px] md:h-[420px] relative">
+              <div className="lg:col-span-2 h-[320px] md:h-[400px] relative">
                 <iframe
                   title="Samay Innovation Location"
                   src="https://maps.google.com/maps?q=PV+Enclave+Sindhu+Bhavan+Marg+Bodakdev+Ahmedabad+Gujarat+380059&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, filter: 'grayscale(20%) contrast(1.05)' }}
+                  style={{ border: 0, filter: 'grayscale(40%) contrast(1.1) brightness(0.75)' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-accent-primary" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-accent-primary/60" />
               </div>
 
               {/* Address sidebar */}
-              <div className="bg-[#1a1a1a] p-8 md:p-10 flex flex-col justify-between">
+              <div className="bg-[#0f1618] p-8 md:p-10 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-white/8">
                 <div>
-                  <div className="w-10 h-10 rounded-full border border-accent-primary/40 flex items-center justify-center mb-6">
-                    <MapPin size={16} strokeWidth={1.5} className="text-accent-primary" />
-                  </div>
-                  <h3 className="text-lg font-light text-white mb-4 tracking-wide">
+                  <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/30 mb-6">Studio Address</p>
+                  <h3 className="text-lg font-light text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>
                     Samay Innovation
                   </h3>
                   <div className="space-y-1 mb-8">
                     {ADDRESS_LINES.map((line, i) => (
-                      <p key={i} className="text-white/60 text-sm font-light">
+                      <p key={i} className="text-white/45 text-sm font-light">
                         {line}
                       </p>
                     ))}
                   </div>
-                  <div className="w-8 h-px bg-accent-primary/40 mb-8" />
-                  <div className="space-y-3">
+                  <div className="w-8 h-px bg-accent-primary/30 mb-8" />
+                  <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <Clock size={13} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
-                      <span className="text-white/50 text-xs font-light tracking-wide">
+                      <Clock size={12} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
+                      <span className="text-white/45 text-xs font-light">
                         Mon – Sat, 10:00 AM – 7:00 PM
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone size={13} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
+                      <Phone size={12} strokeWidth={1.5} className="text-accent-primary flex-shrink-0" />
                       <a
                         href={`tel:${SITE_CONFIG.phone}`}
-                        className="text-white/50 text-xs font-light tracking-wide hover:text-accent-primary transition-colors duration-200"
+                        className="text-white/45 text-xs font-light hover:text-accent-primary transition-colors duration-200"
                       >
                         {SITE_CONFIG.phone}
                       </a>
@@ -610,10 +611,12 @@ export default function Contact() {
                   href={SITE_CONFIG.mapUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-10 inline-flex items-center justify-center gap-2 border border-accent-primary text-accent-primary px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-light hover:bg-accent-primary hover:text-white transition-all duration-300"
+                  className="mt-10 inline-flex items-center gap-3 group"
                 >
-                  <MapPin size={12} strokeWidth={1.5} />
-                  Open in Maps
+                  <MapPin size={12} strokeWidth={1.5} className="text-accent-primary group-hover:text-white transition-colors duration-300" />
+                  <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-accent-primary group-hover:text-white transition-colors duration-300">
+                    Open in Maps
+                  </span>
                 </a>
               </div>
             </div>

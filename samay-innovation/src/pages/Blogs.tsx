@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { blogs } from '../data/blogs';
-import PageHeader from '../components/ui/PageHeader';
 import SEO from '../components/seo/SEO';
 
 const categories = ['all', 'Trends', 'Lifestyle', 'Sustainability', 'Design Tips', 'Space Planning', 'Budget Design'];
@@ -11,12 +10,12 @@ const categories = ['all', 'Trends', 'Lifestyle', 'Sustainability', 'Design Tips
 export default function Blogs() {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  const filteredBlogs = activeCategory === 'all' 
-    ? blogs 
+  const filteredBlogs = activeCategory === 'all'
+    ? blogs
     : blogs.filter(blog => blog.category === activeCategory);
 
   return (
-    <div>
+    <div className="bg-[#f3f0ec]">
       <SEO
         title="Interior Design Blog — Trends, Tips & Inspiration | Samay Innovation"
         description="Explore interior design insights, trends, and inspiration from Samay Innovation's expert team. Articles on luxury residential design, space planning, sustainable interiors, and design tips for homes in Ahmedabad and beyond."
@@ -24,104 +23,126 @@ export default function Blogs() {
         path="/blogs"
       />
 
-      {/* Page Header */}
-      <PageHeader
-        title="Blogs"
-        subtitle="INSIGHTS & INSPIRATION"
-      />
+      {/* ── Header ── */}
+      <section className="pt-32 pb-12 px-6 md:px-16 border-b border-[#ddd8d0]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/40 block mb-3">
+            Insights & Inspiration
+          </span>
+          <h1
+            className="text-5xl md:text-7xl font-light text-[#0b1012] leading-none"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            Journal
+          </h1>
+        </motion.div>
+      </section>
 
-      {/* Filter Section */}
-      <section className="py-12 bg-white dark:bg-dark-bg-primary border-b border-border-light dark:border-border-dark sticky top-20 z-40 backdrop-blur-md bg-white/95 dark:bg-dark-bg-primary/95">
-        <div className="container-custom">
-          <div className="flex items-center justify-center gap-2 overflow-x-auto scrollbar-hide">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-6 py-2 text-xs font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap ${
-                  activeCategory === category
-                    ? 'bg-text-primary dark:bg-dark-text-primary text-white dark:text-dark-bg-primary'
-                    : 'border border-text-primary dark:border-dark-text-primary text-text-primary dark:text-dark-text-primary hover:bg-text-primary hover:text-white dark:hover:bg-dark-text-primary dark:hover:text-dark-bg-primary'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+      {/* ── Filter bar ── */}
+      <section className="sticky top-0 z-40 bg-[#f3f0ec]/95 backdrop-blur-md border-b border-[#ddd8d0]">
+        <div className="px-6 md:px-16 py-4 flex items-center gap-8 overflow-x-auto scrollbar-hide">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`relative flex-shrink-0 text-[10px] font-mono tracking-[0.35em] uppercase pb-1 transition-colors duration-300 ${
+                activeCategory === cat
+                  ? 'text-[#0b1012]'
+                  : 'text-[#0b1012]/35 hover:text-[#0b1012]/70'
+              }`}
+            >
+              {cat === 'all' ? 'All' : cat}
+              {activeCategory === cat && (
+                <motion.span
+                  layoutId="blog-filter-line"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-accent-primary"
+                  transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                />
+              )}
+            </button>
+          ))}
         </div>
       </section>
 
-      {/* Blogs Grid */}
-      <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* ── Blog grid ── */}
+      <section className="py-16 px-6 md:px-16">
+        {filteredBlogs.length === 0 ? (
+          <div className="py-32 text-center">
+            <p className="text-sm font-light text-[#0b1012]/40">No articles in this category.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
             {filteredBlogs.map((blog, index) => (
               <motion.article
                 key={blog.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-white dark:bg-dark-bg-primary overflow-hidden"
+                transition={{ duration: 0.5, delay: Math.min(index * 0.07, 0.35) }}
+                className={`group border-b border-[#ddd8d0] ${
+                  index % 3 !== 2 ? 'md:border-r md:border-r-[#ddd8d0]' : ''
+                }`}
               >
-                <Link to={`/blogs/${blog.slug}`}>
+                <Link to={`/blogs/${blog.slug}`} className="block">
                   {/* Image */}
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative overflow-hidden aspect-[16/10]">
                     <img
                       src={blog.image}
                       alt={blog.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-500" />
                     <div className="absolute top-4 left-4">
-                      <span className="px-4 py-1 bg-white/90 backdrop-blur-sm text-xs font-light tracking-wider uppercase text-text-primary">
+                      <span className="px-3 py-1 bg-[#f3f0ec]/90 backdrop-blur-sm font-mono text-[9px] tracking-[0.35em] uppercase text-[#0b1012]/70">
                         {blog.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-6 md:p-8">
                     {/* Meta */}
-                    <div className="flex items-center gap-4 text-xs text-text-tertiary dark:text-dark-text-tertiary mb-4">
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        <span>{new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock size={14} />
-                        <span>{blog.readTime}</span>
-                      </div>
+                    <div className="flex items-center gap-5 mb-4">
+                      <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/35">
+                        <Calendar size={9} strokeWidth={1.5} />
+                        {new Date(blog.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                      <span className="flex items-center gap-1.5 font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/35">
+                        <Clock size={9} strokeWidth={1.5} />
+                        {blog.readTime}
+                      </span>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-light text-text-primary dark:text-dark-text-primary mb-3 group-hover:text-accent-primary transition-colors">
+                    <h3
+                      className={`text-xl font-light leading-snug mb-3 transition-colors duration-300 ${
+                        'text-[#0b1012] group-hover:text-accent-primary'
+                      }`}
+                      style={{ fontFamily: 'Georgia, serif' }}
+                    >
                       {blog.title}
                     </h3>
 
-                    {/* Excerpt */}
-                    <p className="text-sm text-text-secondary dark:text-dark-text-secondary mb-4 line-clamp-2">
+                    <p className="text-sm font-light text-[#0b1012]/50 leading-relaxed line-clamp-2 mb-6">
                       {blog.excerpt}
                     </p>
 
-                    {/* Read More */}
-                    <div className="flex items-center gap-2 text-xs font-light tracking-wider uppercase text-text-primary dark:text-dark-text-primary group-hover:text-accent-primary transition-colors">
-                      Read More
-                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    <div className="flex items-center gap-3">
+                      <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300">
+                        Read Article
+                      </span>
+                      <div className="w-4 h-px bg-[#0b1012]/20 group-hover:w-8 group-hover:bg-accent-primary transition-all duration-400" />
+                      <ArrowRight size={11} className="text-[#0b1012]/30 group-hover:text-accent-primary transition-colors duration-300" />
                     </div>
                   </div>
                 </Link>
               </motion.article>
             ))}
           </div>
-
-          {filteredBlogs.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-lg text-text-secondary dark:text-dark-text-secondary">
-                No blogs found in this category.
-              </p>
-            </div>
-          )}
-        </div>
+        )}
       </section>
     </div>
   );

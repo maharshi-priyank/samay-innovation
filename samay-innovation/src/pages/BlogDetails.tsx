@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Tag, ArrowRight } from 'lucide-react';
 import { getBlogBySlug, blogs } from '../data/blogs';
 
 export default function BlogDetails() {
@@ -14,11 +14,11 @@ export default function BlogDetails() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-[#f3f0ec] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-light mb-4">Blog Not Found</h1>
-          <Link to="/blogs" className="text-accent-primary hover:underline">
-            Back to Blogs
+          <h1 className="text-4xl font-light text-[#0b1012] mb-4">Article Not Found</h1>
+          <Link to="/blogs" className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#0b1012]/50 hover:text-accent-primary transition-colors">
+            ← Back to Journal
           </Link>
         </div>
       </div>
@@ -29,66 +29,72 @@ export default function BlogDetails() {
   const relatedBlogs = blogs.filter((_, index) => index !== currentIndex).slice(0, 3);
 
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative h-[60vh] overflow-hidden bg-black">
-        <div className="absolute inset-0">
-          <img
-            src={blog.image}
-            alt={blog.title}
-            className="w-full h-full object-cover opacity-40"
-          />
-        </div>
+    <div className="bg-[#f3f0ec]">
 
-        {/* Back Button */}
+      {/* ── Hero ── */}
+      <section className="relative h-[65vh] md:h-[75vh] overflow-hidden bg-[#0b1012]">
+        <motion.img
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.6, ease: 'easeOut' }}
+          src={blog.image}
+          alt={blog.title}
+          className="w-full h-full object-cover opacity-50"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/95 via-black/30 to-black/10" />
+
+        {/* Back */}
         <Link
           to="/blogs"
-          className="absolute top-24 left-8 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 z-10"
+          className="absolute top-6 left-6 md:top-8 md:left-10 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors duration-300 z-10"
         >
-          <ArrowLeft size={20} className="text-white" />
+          <ArrowLeft size={12} />
+          Journal
         </Link>
 
         {/* Content */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="container-custom pb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+        <div className="absolute bottom-10 left-6 right-6 md:bottom-14 md:left-14 md:right-14 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          >
+            <p className="text-[10px] font-mono tracking-[0.4em] uppercase text-accent-primary mb-4">
+              {blog.category}
+            </p>
+            <h1
+              className="text-3xl sm:text-4xl md:text-6xl font-light text-white leading-tight mb-6"
+              style={{ fontFamily: 'Georgia, serif' }}
             >
-              <span className="inline-block px-4 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-light tracking-wider uppercase mb-6">
-                {blog.category}
+              {blog.title}
+            </h1>
+            <div className="flex flex-wrap gap-5 text-white/40 text-[10px] font-mono tracking-widest uppercase">
+              <span className="flex items-center gap-1.5">
+                <Calendar size={9} strokeWidth={1.5} />
+                {new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
-              <h1 className="text-4xl md:text-6xl font-light text-white mb-6">
-                {blog.title}
-              </h1>
-              <div className="flex flex-wrap gap-6 text-white/90 text-sm">
-                <div className="flex items-center gap-2">
-                  <Calendar size={18} />
-                  <span>{new Date(blog.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock size={18} />
-                  <span>{blog.readTime}</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+              <span>·</span>
+              <span className="flex items-center gap-1.5">
+                <Clock size={9} strokeWidth={1.5} />
+                {blog.readTime}
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Blog Content */}
-      <section className="py-24 bg-white dark:bg-dark-bg-primary">
-        <div className="container-custom max-w-4xl">
+      {/* ── Article content ── */}
+      <section className="py-20 md:py-28 px-6 md:px-16 bg-[#f3f0ec]">
+        <div className="max-w-3xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="prose prose-lg max-w-none"
+            transition={{ duration: 0.7 }}
+            className="prose-custom"
           >
-            <div 
-              className="text-text-primary dark:text-dark-text-primary leading-relaxed"
+            <div
+              className="text-[#0b1012]/75 font-light leading-relaxed text-base [&_h2]:text-2xl [&_h2]:font-light [&_h2]:text-[#0b1012] [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:font-serif [&_h3]:text-xl [&_h3]:font-light [&_h3]:text-[#0b1012] [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-6 [&_p]:leading-relaxed [&_ul]:mb-6 [&_ul]:space-y-2 [&_li]:text-[#0b1012]/70 [&_strong]:text-[#0b1012] [&_strong]:font-normal [&_blockquote]:border-l-2 [&_blockquote]:border-accent-primary [&_blockquote]:pl-6 [&_blockquote]:my-8 [&_blockquote]:text-[#0b1012]/60 [&_blockquote]:italic"
               dangerouslySetInnerHTML={{ __html: blog.content }}
             />
           </motion.div>
@@ -100,14 +106,14 @@ export default function BlogDetails() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="mt-12 pt-8 border-t border-border-light dark:border-border-dark"
+              className="mt-16 pt-10 border-t border-[#ddd8d0]"
             >
               <div className="flex items-center gap-3 flex-wrap">
-                <Tag size={20} className="text-text-tertiary dark:text-dark-text-tertiary" />
+                <Tag size={12} strokeWidth={1.5} className="text-[#0b1012]/30" />
                 {blog.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-4 py-2 border border-border-light dark:border-border-dark text-xs font-light tracking-wider uppercase text-text-secondary dark:text-dark-text-secondary"
+                    className="px-3 py-1 border border-[#ddd8d0] font-mono text-[9px] tracking-widest uppercase text-[#0b1012]/40"
                   >
                     {tag}
                   </span>
@@ -118,38 +124,64 @@ export default function BlogDetails() {
         </div>
       </section>
 
-      {/* Related Blogs */}
+      {/* ── Related articles ── */}
       {relatedBlogs.length > 0 && (
-        <section className="py-24 bg-bg-secondary dark:bg-dark-bg-secondary">
-          <div className="container-custom">
-            <h2 className="text-3xl font-light text-text-primary dark:text-dark-text-primary mb-12">
-              Related Articles
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedBlogs.map((relatedBlog, index) => (
+        <section className="py-20 md:py-28 bg-[#0b1012]">
+          <div className="px-6 md:px-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-12 border-b border-white/8 pb-8"
+            >
+              <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-white/30 block mb-3">
+                Continue Reading
+              </span>
+              <h2
+                className="text-3xl md:text-4xl font-light text-white"
+                style={{ fontFamily: 'Georgia, serif' }}
+              >
+                Related Articles
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+              {relatedBlogs.map((rb, index) => (
                 <motion.article
-                  key={relatedBlog.id}
-                  initial={{ opacity: 0, y: 40 }}
+                  key={rb.id}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group bg-white dark:bg-dark-bg-primary overflow-hidden"
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className={`group ${index < relatedBlogs.length - 1 ? 'md:border-r border-white/8 md:pr-8' : ''} ${index > 0 ? 'md:pl-8' : ''} border-b md:border-b-0 border-white/8 pb-8 md:pb-0`}
                 >
-                  <Link to={`/blogs/${relatedBlog.slug}`}>
-                    <div className="relative h-48 overflow-hidden">
+                  <Link to={`/blogs/${rb.slug}`} className="block">
+                    <div className="relative overflow-hidden aspect-[16/10] mb-6">
                       <img
-                        src={relatedBlog.image}
-                        alt={relatedBlog.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        src={rb.image}
+                        alt={rb.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       />
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-400" />
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-lg font-light text-text-primary dark:text-dark-text-primary mb-2 group-hover:text-accent-primary transition-colors">
-                        {relatedBlog.title}
-                      </h3>
-                      <p className="text-sm text-text-secondary dark:text-dark-text-secondary line-clamp-2">
-                        {relatedBlog.excerpt}
-                      </p>
+                    <p className="font-mono text-[9px] tracking-[0.35em] uppercase text-accent-primary mb-3">
+                      {rb.category}
+                    </p>
+                    <h3
+                      className="text-lg font-light text-white leading-snug mb-3 group-hover:text-accent-primary transition-colors duration-300"
+                      style={{ fontFamily: 'Georgia, serif' }}
+                    >
+                      {rb.title}
+                    </h3>
+                    <p className="text-sm font-light text-white/40 line-clamp-2 mb-5">
+                      {rb.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-[10px] tracking-[0.35em] uppercase text-white/30 group-hover:text-accent-primary transition-colors duration-300">
+                        Read
+                      </span>
+                      <ArrowRight size={11} className="text-white/25 group-hover:text-accent-primary transition-colors duration-300" />
                     </div>
                   </Link>
                 </motion.article>
