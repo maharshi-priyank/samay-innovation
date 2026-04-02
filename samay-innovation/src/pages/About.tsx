@@ -239,7 +239,7 @@ export default function About() {
           >
             <div className="aspect-[3/4] overflow-hidden">
               <img
-                src="/assets/images/founder/seme-nadvi.jpg"
+                src="/assets/images/founder/founder-photo.png"
                 alt="Seme Nadvi — Founder, Samay Innovation"
                 className="w-full h-full object-cover object-center"
                 onError={(e) => { e.currentTarget.src = '/assets/images/founder/founder-photo.png'; }}
