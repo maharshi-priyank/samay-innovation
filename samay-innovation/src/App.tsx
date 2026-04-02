@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import BottomNav from './components/layout/BottomNav';
+import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Preloader from './components/ui/Preloader';
 // import WhatsAppButton from './components/ui/WhatsAppButton';
@@ -53,12 +53,12 @@ function Layout() {
       <ScrollToTop />
       <ScrollProgress />
       <Preloader />
+      <Header />
       <div className="min-h-screen flex flex-col">
         <main className="flex-1">
           <AnimatedRoutes />
         </main>
         <Footer />
-        <BottomNav />
         <BackToTop />
       </div>
     </>

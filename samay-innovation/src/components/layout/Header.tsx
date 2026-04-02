@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { NAVIGATION, SITE_CONFIG } from '../../lib/constants';
 
 export default function Header() {
@@ -10,137 +10,173 @@ export default function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (href: string) =>
+    href === '/' ? location.pathname === '/' : location.pathname.startsWith(href);
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-white/95 dark:bg-dark-bg-primary/95 backdrop-blur-md border-b border-border-light/20 shadow-sm'
+            ? 'bg-[#f3f0ec]/95 backdrop-blur-md border-b border-[#ddd8d0]'
             : 'bg-transparent'
         }`}
       >
-        <nav className="container-custom">
+        <div className="px-6 md:px-16">
           <div className="flex items-center justify-between h-20">
+
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
-              <img 
-                src="/logo/logo.svg" 
+            <Link to="/" className="flex items-center gap-3 flex-shrink-0">
+              <img
+                src="/logo/logo.svg"
                 alt={SITE_CONFIG.name}
-                className={`h-10 w-auto transition-all duration-500`}
+                className="h-8 w-auto transition-all duration-500"
                 style={{
-                  filter: isScrolled 
-                    ? 'brightness(0) saturate(100%)' // Dark color when scrolled (matches text-primary)
-                    : 'brightness(0) invert(1)' // White when transparent
+                  filter: isScrolled ? 'none' : 'brightness(0) invert(1)',
                 }}
-                onError={(e) => {
-                  e.currentTarget.src = '/logo/logo.png';
-                }}
+                onError={(e) => { e.currentTarget.src = '/logo/logo.png'; }}
               />
-              <span className={`text-base font-light tracking-[0.15em] uppercase transition-colors duration-500 ${
-                isScrolled 
-                  ? 'text-text-primary dark:text-dark-text-primary' 
-                  : 'text-white'
-              }`}>
-                SAMAY INNOVATION
+              <span
+                className={`text-sm font-light tracking-[0.18em] uppercase transition-colors duration-500 ${
+                  isScrolled ? 'text-[#0b1012]' : 'text-white'
+                }`}
+              >
+                Samay Innovation
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-10">
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-10">
               {NAVIGATION.map((item) => {
-                const isActive = location.pathname === item.href;
+                const active = isActive(item.href);
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`relative text-xs font-light tracking-widest uppercase transition-colors duration-500 group ${
+                    className={`relative text-[11px] font-mono tracking-[0.25em] uppercase transition-colors duration-300 group ${
                       isScrolled
-                        ? isActive
-                          ? 'text-text-primary dark:text-dark-text-primary'
-                          : 'text-text-tertiary dark:text-dark-text-tertiary hover:text-text-primary dark:hover:text-dark-text-primary'
-                        : isActive
-                          ? 'text-white'
-                          : 'text-white/80 hover:text-white'
+                        ? active ? 'text-[#0b1012]' : 'text-[#0b1012]/45 hover:text-[#0b1012]'
+                        : active ? 'text-white' : 'text-white/60 hover:text-white'
                     }`}
                   >
                     {item.name}
-                    {/* Animated underline — grows from center */}
                     <span
-                      className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-px bg-current transition-all duration-300 ease-out ${
-                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      className={`absolute -bottom-0.5 left-0 h-px bg-accent-primary transition-all duration-300 ${
+                        active ? 'w-full' : 'w-0 group-hover:w-full'
                       }`}
                     />
                   </Link>
                 );
               })}
-            </div>
 
-            {/* Mobile Menu Button */}
+              {/* Contact CTA */}
+              <Link
+                to="/contact"
+                className={`text-[11px] font-mono tracking-[0.25em] uppercase transition-colors duration-300 ${
+                  isScrolled
+                    ? 'text-accent-primary hover:text-[#0b1012]'
+                    : 'text-accent-primary hover:text-white'
+                }`}
+              >
+                Contact ↗
+              </Link>
+            </nav>
+
+            {/* Mobile burger */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 transition-colors duration-500 ${
-                isScrolled 
-                  ? 'text-text-primary dark:text-dark-text-primary' 
-                  : 'text-white'
+              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              className={`md:hidden flex flex-col gap-[5px] p-2 transition-colors duration-300 ${
+                isScrolled ? 'text-[#0b1012]' : 'text-white'
               }`}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                  >
+                    <X size={20} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="burger"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className="flex flex-col gap-[5px]"
+                  >
+                    <span className="w-5 h-px bg-current block" />
+                    <span className="w-3 h-px bg-current block opacity-60" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </button>
           </div>
-        </nav>
+        </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
-            />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white dark:bg-dark-bg-primary md:hidden"
-            >
-              <div className="flex flex-col h-full p-8">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="self-end p-2 mb-8"
-                  aria-label="Close menu"
-                >
-                  <X size={24} />
-                </button>
-
-                <nav className="space-y-6">
-                  {NAVIGATION.map((item) => (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="md:hidden fixed inset-0 z-40"
+            style={{
+              backdropFilter: 'blur(32px)',
+              WebkitBackdropFilter: 'blur(32px)',
+              backgroundColor: 'rgba(243,240,236,0.97)',
+            }}
+          >
+            <div className="flex flex-col justify-center h-full px-8 pb-12 pt-24">
+              {[...NAVIGATION, { name: 'Contact', href: '/contact' }].map(({ name, href }, i) => {
+                const active = isActive(href);
+                return (
+                  <motion.div
+                    key={href}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ delay: i * 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                  >
                     <Link
-                      key={item.name}
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="block text-sm font-light tracking-widest uppercase text-text-primary dark:text-dark-text-primary"
+                      to={href}
+                      className={`group flex items-center justify-between py-5 border-b transition-colors duration-200 ${
+                        active ? 'border-accent-primary/30' : 'border-[#ddd8d0]'
+                      }`}
                     >
-                      {item.name}
+                      <span
+                        className={`text-4xl font-light transition-colors duration-200 ${
+                          active ? 'text-accent-primary' : 'text-[#0b1012]/50 group-hover:text-[#0b1012]'
+                        }`}
+                        style={{ fontFamily: 'Georgia, serif' }}
+                      >
+                        {name}
+                      </span>
+                      {active && <span className="text-accent-primary text-sm">↗</span>}
                     </Link>
-                  ))}
-                </nav>
-              </div>
-            </motion.div>
-          </>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
