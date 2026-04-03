@@ -36,24 +36,34 @@ export const STATS = {
 export const AWARDS = [
   {
     id: '1',
-    title: 'Most Promising Interior Designer In Asia and UK',
-    year: '2022',
-    location: 'House Of Commons, London UK',
-    description: 'I am extremely honored to get an award by Navendu Mishra, who is one of the members of Parliament of the United Kingdom for the \'Most Promising Interior Designer In Asia And UK\' at the House Of Commons, London UK May 2022.',
-    image: '/assets/images/awards/award-uk-2022.jpg',
+    title: 'Elite Luxury Interior Designer',
+    year: '2025',
+    location: 'Capitol Hill, Washington DC, USA',
+    description: 'Recognised as the Elite Luxury Interior Designer at Capitol Hill, Washington DC, USA in October 2025 — a testament to the firm\'s growing international presence and commitment to design excellence on a global stage.',
+    image: '',
   },
   {
     id: '2',
+    title: 'Most Promising Interior Designer In Asia and UK',
+    year: '2022',
+    location: 'House Of Commons, London UK',
+    description: 'Honoured by Navendu Mishra, Member of Parliament of the United Kingdom, for the \'Most Promising Interior Designer In Asia And UK\' at the House Of Commons, London UK, May 2022.',
+    image: '/assets/images/awards/award-uk-2022.jpg',
+  },
+  {
+    id: '3',
     title: 'Best Green Compliant Interior Designer In India',
     year: '2019',
     location: 'India Excellence Awards, Taj Bangalore',
-    description: 'When a person really desires something, all the universe conspires to help that person to realize his dream along with a lot of Hardwork. So Thankful to Almighty for my Interior Design Project works to be Recognised and being awarded as the Best Green Compliant Interior Designer in the INDIA EXCELLENCE AWARDS held in Taj Bangalore in December 2019.',
+    description: 'Awarded the Best Green Compliant Interior Designer at the India Excellence Awards, held at Taj Bangalore in December 2019 — recognition for sustainable design practices and project excellence across India.',
     image: '/assets/images/awards/award-india-2019.jpg',
   },
 ];
 
 export const FEATURED_IN = [
   'Forbes',
-  'Vogue',
+  'Vogue India',
   'De-Mode',
+  'Outlook Business',
+  'Zee UK',
 ];

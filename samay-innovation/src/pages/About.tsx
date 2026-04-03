@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Award, MapPin } from 'lucide-react';
+import { ArrowRight, Award } from 'lucide-react';
 import { AWARDS, FEATURED_IN } from '../lib/constants';
 import { projects } from '../data/projects';
 import SEO from '../components/seo/SEO';
@@ -42,7 +42,7 @@ export default function About() {
     <div style={{ backgroundColor: '#fafaf8' }}>
       <SEO
         title="About Us — Seme Nadvi | Award-Winning Interior Designer Ahmedabad"
-        description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat. Recognised at the House of Commons London (2022) and India Excellence Awards (2019). Featured in Forbes, Vogue & De-Mode."
+        description="Meet Seme Nadvi, founder of Samay Innovation — award-winning interior designer based in Ahmedabad, Gujarat since 2015. Recognised at Capitol Hill DC (2025), House of Commons London (2022) & India Excellence Awards (2019). Featured in Forbes, Vogue India, De-Mode & more."
         keywords="best interior designer India, best Indian interior designer, award winning interior designer India, Seme Nadvi interior designer, top interior designer India, most promising interior designer Asia, luxury interior design firm India, Forbes interior designer India, Vogue interior designer India, interior design firm Ahmedabad, award winning interior designer Gujarat, international interior designer India"
         path="/about"
         structuredData={localBusinessSchema}
@@ -91,7 +91,7 @@ export default function About() {
           {[
             { value: '200+', label: 'Projects' },
             { value: '10+',  label: 'Years'    },
-            { value: '2',    label: 'Awards'   },
+            { value: '3',    label: 'Awards'   },
           ].map((s, i) => (
             <div key={s.label} className={`text-right ${i > 0 ? 'pl-8 border-l border-white/15' : ''}`}>
               <p className="text-2xl md:text-3xl font-light text-white leading-none" style={{ fontFamily: 'Georgia, serif' }}>
@@ -120,119 +120,56 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 3. SELECTED WORK ── */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#fafaf8' }}>
-        <div className="container-custom">
-        <motion.div
-          {...fadeUp}
-          className="flex items-end justify-between mb-10 pb-8 border-b border-[#ddd8d0]"
-        >
-          <div>
-            <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#0b1012]/35 block mb-3">
-              Selected Work
-            </span>
-            <h2
-              className="text-4xl md:text-5xl font-light text-[#0b1012]"
-              style={{ fontFamily: 'Georgia, serif' }}
-            >
-              Work That Defines Us
-            </h2>
-          </div>
-          <Link to="/portfolio" className="hidden md:flex items-center gap-3 group">
-            <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#0b1012]/40 group-hover:text-accent-primary transition-colors duration-300">
-              Full Portfolio
-            </span>
-            <div className="w-6 h-px bg-[#0b1012]/20 group-hover:w-10 group-hover:bg-accent-primary transition-all duration-400" />
-            <ArrowRight size={11} className="text-[#0b1012]/25 group-hover:text-accent-primary transition-colors duration-300" />
-          </Link>
-        </motion.div>
-
-        {/* Bento grid: large left + 2 right stacked */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-          {/* Large card — 2 cols */}
-          {showcaseProjects[0] && (
-            <motion.div
-              className="md:col-span-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <WorkCard project={showcaseProjects[0]} aspectClass="aspect-[4/3] md:aspect-[3/2]" />
-            </motion.div>
-          )}
-          {/* Right stacked */}
-          <div className="flex flex-col gap-3">
-            {showcaseProjects.slice(1, 3).map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: (i + 1) * 0.1 }}
-                className="flex-1"
-              >
-                <WorkCard project={p} aspectClass="aspect-[4/3]" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom full-width card */}
-        {showcaseProjects[3] && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-          >
-            <WorkCard project={showcaseProjects[3]} aspectClass="aspect-[16/6]" />
-          </motion.div>
-        )}
-
-        <div className="mt-8 md:hidden">
-          <Link to="/portfolio" className="group flex items-center gap-3">
-            <span className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#0b1012]/50 group-hover:text-accent-primary transition-colors duration-300">
-              View All Projects
-            </span>
-            <div className="w-6 h-px bg-[#0b1012]/20 group-hover:w-10 group-hover:bg-accent-primary transition-all duration-400" />
-            <ArrowRight size={11} className="text-[#0b1012]/25 group-hover:text-accent-primary transition-colors duration-300" />
-          </Link>
-        </div>
-        </div>
-      </section>
-
       {/* ── 4. FOUNDER ── */}
       <section className="py-20 md:py-28 border-t border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
         <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left */}
           <motion.div {...fadeUp}>
-            <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">The Studio</p>
+            <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">Meet the Founder</p>
             <h2
               className="text-4xl md:text-5xl font-light text-[#0b1012] leading-tight mb-10"
               style={{ fontFamily: 'Georgia, serif' }}
             >
-              Simple, Minimalistic
-              <br />& Elegant Design
+              Seme Nadvi —<br />A Decade of Design.
             </h2>
             <p className="text-base text-[#0b1012]/70 leading-relaxed mb-5">
-              Samay Innovation is an Ahmedabad-based interior firm whose work has been featured in
-              Forbes, Vogue, and De-Mode. We offer residential, office, and commercial design
-              solutions rooted in a minimalistic aesthetic — spaces that endure because they are
-              grounded in proportion, material, and light.
+              I am Seme Nadvi, founder and principal designer at Samay Innovation — an award-winning
+              interior design studio and experience centre based in Ahmedabad, Gujarat, established in
+              2015. Over the past decade, I have built the studio on a single belief: that truly
+              exceptional interiors are born from listening, not just drawing.
+            </p>
+            <p className="text-base text-[#0b1012]/70 leading-relaxed mb-5">
+              Our work spans continents — with completed projects in Alicante (Spain), Adelaide
+              (Australia), Amman (Jordan), Cologne (Germany), and Mexico City, alongside turnkey
+              residential and commercial projects across the United States and India. Every space,
+              regardless of geography, carries the same intention: refined, purposeful, and
+              unmistakably personal.
+            </p>
+            <p className="text-base text-[#0b1012]/70 leading-relaxed mb-5">
+              The studio's work has been featured in Forbes, Vogue India, De-Mode (an Indo-Italian
+              design magazine), Outlook Business, and Zee UK, among others. I have also had the
+              privilege of serving on a panel for Women's Day on Zee News Channel, speaking on
+              design, entrepreneurship, and creative leadership.
             </p>
             <p className="text-base text-[#0b1012]/70 leading-relaxed mb-12">
-              Our team is energetic, cooperative, and diverse — united by a commitment to sustainable
-              design. We treat every project as a long-term relationship, remaining responsive to the
-              client's vision from first sketch to final installation.
+              You can explore more of my work on Instagram — and as I always say, a warm referral
+              goes a long way.
             </p>
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 text-sm text-[#0b1012] hover:gap-3 transition-all duration-200"
-            >
-              Explore our services <ArrowRight size={14} />
-            </Link>
+            <div className="flex flex-wrap gap-6">
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center gap-2 text-sm text-[#0b1012] hover:gap-3 transition-all duration-200"
+              >
+                View Portfolio <ArrowRight size={14} />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 text-sm text-[#0b1012]/50 hover:text-[#0b1012] hover:gap-3 transition-all duration-200"
+              >
+                Get in touch <ArrowRight size={14} />
+              </Link>
+            </div>
           </motion.div>
 
           {/* Right — founder photo */}
@@ -350,46 +287,3 @@ export default function About() {
   );
 }
 
-// ─── Work Card ────────────────────────────────────────────────────────────────
-
-function WorkCard({ project, aspectClass }: { project: (typeof projects)[0]; aspectClass: string }) {
-  return (
-    <Link to={`/portfolio/${project.slug}`} className="group block relative overflow-hidden">
-      <div className={`relative overflow-hidden ${aspectClass}`}>
-        <img
-          src={project.images[0]}
-          alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.05]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/75 via-black/10 to-transparent" />
-
-        {/* Gold line on hover */}
-        <div className="absolute bottom-0 left-0 h-[2px] bg-accent-primary w-0 group-hover:w-full transition-all duration-500 ease-out" />
-
-        {/* Category badge */}
-        <div className="absolute top-5 left-5">
-          <span className="font-mono text-[9px] tracking-[0.35em] uppercase text-white/60 bg-black/30 backdrop-blur-sm px-2 py-1">
-            {project.category}
-          </span>
-        </div>
-
-        {/* Text */}
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
-          <h3
-            className="font-light text-white leading-tight text-lg md:text-xl mb-1.5 group-hover:text-accent-primary/90 transition-colors duration-300"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
-            {project.title}
-          </h3>
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 font-mono text-[9px] tracking-widest uppercase text-white/40">
-              <MapPin size={8} />{project.location}
-            </span>
-            <span className="text-white/20 text-[9px]">·</span>
-            <span className="font-mono text-[9px] tracking-widest uppercase text-white/40">{project.year}</span>
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-}
