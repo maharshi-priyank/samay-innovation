@@ -61,7 +61,7 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1012]/85 via-black/30 to-black/20" />
 
         {/* Bottom-left text */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-20 pb-14 z-10">
+        <div className="absolute bottom-0 left-0 right-0 px-6 sm:px-8 md:px-10 lg:px-16 xl:px-20 pb-14 z-10">
           <motion.p
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -86,7 +86,7 @@ export default function About() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="absolute top-24 md:top-28 right-6 md:right-16 flex items-center gap-8 md:gap-12 z-10"
+          className="absolute top-24 md:top-28 right-6 sm:right-8 md:right-10 lg:right-16 xl:right-20 flex items-center gap-8 md:gap-12 z-10"
         >
           {[
             { value: '200+', label: 'Projects' },
@@ -106,10 +106,10 @@ export default function About() {
       {/* ── 2. FEATURED IN ── */}
       <section className="py-8 border-b border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
         <div className="container-custom">
-        <motion.div {...fadeUp} className="flex flex-wrap items-center gap-6 md:gap-14">
+        <motion.div {...fadeUp} className="flex flex-wrap items-center gap-x-8 md:gap-x-14 gap-y-3">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 shrink-0">Featured In</p>
           {FEATURED_IN.map((pub, i) => (
-            <span key={pub} className="flex items-center gap-6 md:gap-14">
+            <span key={pub} className="flex items-center gap-8 md:gap-14">
               <span className="text-2xl md:text-3xl font-light text-[#0b1012]/70" style={{ fontFamily: 'Georgia, serif' }}>
                 {pub}
               </span>
@@ -121,7 +121,7 @@ export default function About() {
       </section>
 
       {/* ── 3. SELECTED WORK ── */}
-      <section className="py-20" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#fafaf8' }}>
         <div className="container-custom">
         <motion.div
           {...fadeUp}
@@ -203,7 +203,7 @@ export default function About() {
       </section>
 
       {/* ── 4. FOUNDER ── */}
-      <section className="py-24 border-t border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-20 md:py-28 border-t border-[#ddd8d0]" style={{ backgroundColor: '#fafaf8' }}>
         <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left */}
@@ -256,7 +256,7 @@ export default function About() {
       </section>
 
       {/* ── 5. PHILOSOPHY ── */}
-      <section className="py-24" style={{ backgroundColor: '#0b1012' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#0b1012' }}>
         <div className="container-custom">
         <motion.div {...fadeUp} className="text-center mb-20">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-white/30 mb-10">Our Philosophy</p>
@@ -289,7 +289,7 @@ export default function About() {
       </section>
 
       {/* ── 6. AWARDS ── */}
-      <section className="py-24" style={{ backgroundColor: '#fafaf8' }}>
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#fafaf8' }}>
         <div className="container-custom">
         <motion.div {...fadeUp} className="mb-16">
           <p className="font-mono tracking-[0.4em] uppercase text-[10px] text-[#0b1012]/40 mb-6">Recognition</p>
