@@ -33,7 +33,7 @@ export default function Portfolio() {
     <div className="bg-[#fafaf8]">
       <SEO
         title="Interior Design Portfolio — Luxury Projects in Ahmedabad, Gujarat & USA"
-        description="Browse Samay Innovation's portfolio of luxury interior design projects."
+        description="Explore Samay Innovation's award-winning interior design portfolio — luxury villas, 4BHK apartments, commercial offices & international projects across Ahmedabad, Gujarat and the USA."
         keywords="best interior design portfolio India, luxury interior design projects India, top interior design firm India, best residential interior designer India, best commercial interior designer India, luxury home design India, villa interior design India, hotel interior design India, restaurant interior design India, apartment interior design India, interior design projects Ahmedabad, luxury interior design Gujarat, international interior design projects India"
         path="/portfolio"
         structuredData={breadcrumbSchema([

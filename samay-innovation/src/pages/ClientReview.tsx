@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import SEO from '../components/seo/SEO';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -33,6 +34,7 @@ export default function ClientReview() {
 
   return (
     <div className="min-h-screen bg-[#f7f5f2] flex flex-col">
+      <SEO title="Share Your Experience" description="" noIndex={true} />
       {/* Top accent bar */}
       <div className="h-1 bg-gradient-to-r from-[#C9A97A] via-[#e8d5c4] to-[#C9A97A]" />
 

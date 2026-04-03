@@ -6,6 +6,16 @@ import { getProjectBySlug, projects } from '../data/projects';
 import SEO from '../components/seo/SEO';
 import { breadcrumbSchema, projectSchema } from '../components/seo/schemas';
 
+/** Returns lg: col-span so the last row always fills the 6-column grid. */
+function getColSpan(index: number, total: number): string {
+  const remainder = total % 3;
+  if (remainder === 0) return 'lg:col-span-2';
+  const lastRowStart = total - remainder;
+  if (index < lastRowStart) return 'lg:col-span-2';
+  if (remainder === 1) return 'lg:col-span-6'; // single leftover → full width
+  return 'lg:col-span-3';                      // two leftovers → half each
+}
+
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
   const project = getProjectBySlug(slug || '');
@@ -19,7 +29,7 @@ export default function ProjectDetails() {
     return (
       <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-light text-[#0b1012] mb-4">Project Not Found</h1>
+          <p className="text-4xl font-light text-[#0b1012] mb-4">Project Not Found</p>
           <Link to="/portfolio" className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#0b1012]/50 hover:text-accent-primary transition-colors">
             ← Back to Portfolio
           </Link>
@@ -64,7 +74,7 @@ export default function ProjectDetails() {
         {/* Back */}
         <Link
           to="/portfolio"
-          className="absolute top-6 left-6 md:top-8 md:left-10 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors duration-300 z-10"
+          className="absolute top-24 left-6 md:top-28 md:left-10 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors duration-300 z-10"
         >
           <ArrowLeft size={12} />
           Portfolio
@@ -178,8 +188,8 @@ export default function ProjectDetails() {
             </p>
           </div>
 
-          {/* Masonry grid */}
-          <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 md:gap-4 space-y-3 md:space-y-4">
+          {/* Image grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 md:gap-4">
             {project.images.map((image, index) => (
               <motion.div
                 key={index}
@@ -187,13 +197,13 @@ export default function ProjectDetails() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.4) }}
-                className="break-inside-avoid group relative overflow-hidden cursor-pointer"
+                className={`${getColSpan(index, project.images.length)} aspect-[4/3] group relative overflow-hidden cursor-pointer`}
                 onClick={() => setSelectedImage(index)}
               >
                 <img
                   src={image}
                   alt={`${project.title} — ${index + 1}`}
-                  className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.04]"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-400 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-9 h-9 border border-white/50 flex items-center justify-center">

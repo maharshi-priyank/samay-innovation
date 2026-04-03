@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, Star, Lock, LogOut, RefreshCw, Clock, Eye } from 'lucide-react';
 import { supabase, type Review } from '../lib/supabase';
+import SEO from '../components/seo/SEO';
 
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD as string;
 
@@ -126,6 +127,7 @@ export default function AdminReviews() {
   /* ── Dashboard ── */
   return (
     <div className="min-h-screen bg-[#f7f5f2]">
+      <SEO title="Admin" description="" noIndex={true} />
       {/* Top accent */}
       <div className="h-1 bg-gradient-to-r from-[#C9A97A] via-[#e8d5c4] to-[#C9A97A]" />
 
@@ -133,7 +135,7 @@ export default function AdminReviews() {
       <div className="bg-white border-b border-[#ede8e0] px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/logo/logo.png" alt="" className="w-8 h-8 object-contain" />
+            <img src="/logo/logo.png" alt="Samay Innovation" className="w-8 h-8 object-contain" />
             <div>
               <p className="text-sm font-light text-[#1a1a1a] tracking-wide">SAMAY INNOVATION</p>
               <p className="text-[10px] text-[#aaa] tracking-widest uppercase">Review Dashboard</p>

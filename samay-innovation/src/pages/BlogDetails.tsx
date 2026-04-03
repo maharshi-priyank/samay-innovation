@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Clock, Tag, ArrowRight } from 'lucide-react';
 import { getBlogBySlug, blogs } from '../data/blogs';
+import SEO from '../components/seo/SEO';
 
 export default function BlogDetails() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,7 +17,7 @@ export default function BlogDetails() {
     return (
       <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-light text-[#0b1012] mb-4">Article Not Found</h1>
+          <p className="text-4xl font-light text-[#0b1012] mb-4">Article Not Found</p>
           <Link to="/blogs" className="text-[11px] font-mono tracking-[0.3em] uppercase text-[#0b1012]/50 hover:text-accent-primary transition-colors">
             ← Back to Journal
           </Link>
@@ -30,6 +31,25 @@ export default function BlogDetails() {
 
   return (
     <div className="bg-[#fafaf8]">
+      <SEO
+        title={blog.title}
+        description={blog.excerpt.slice(0, 155)}
+        path={`/blogs/${blog.slug}`}
+        image={blog.image}
+        type="article"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: blog.title,
+          description: blog.excerpt.slice(0, 155),
+          image: blog.image,
+          datePublished: blog.date,
+          author: { '@type': 'Person', name: blog.author },
+          publisher: { '@type': 'Organization', name: 'Samay Innovation', url: 'https://samayinnovation.in' },
+          url: `https://samayinnovation.in/blogs/${blog.slug}`,
+          keywords: blog.tags.join(', '),
+        }}
+      />
 
       {/* ── Hero ── */}
       <section className="relative h-[65vh] md:h-[75vh] overflow-hidden bg-[#0b1012]">
@@ -46,7 +66,7 @@ export default function BlogDetails() {
         {/* Back */}
         <Link
           to="/blogs"
-          className="absolute top-6 left-6 md:top-8 md:left-10 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors duration-300 z-10"
+          className="absolute top-24 left-6 md:top-28 md:left-10 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 hover:text-white transition-colors duration-300 z-10"
         >
           <ArrowLeft size={12} />
           Journal

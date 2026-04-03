@@ -21,6 +21,22 @@ export default function Blogs() {
         description="Explore interior design insights, trends, and inspiration from Samay Innovation's expert team. Articles on luxury residential design, space planning, sustainable interiors, and design tips for homes in Ahmedabad and beyond."
         keywords="interior design blog India, best interior design ideas India, luxury home decor India, interior design trends India, modern interior design India, sustainable interior design India, space planning tips India, home renovation ideas India, residential interior design tips India, commercial interior design India, interior design inspiration India, luxury living ideas India, interior design tips Ahmedabad"
         path="/blogs"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: 'Samay Innovation Journal',
+          url: 'https://samayinnovation.in/blogs',
+          description: 'Interior design insights, trends, and inspiration from Samay Innovation.',
+          publisher: { '@type': 'Organization', name: 'Samay Innovation', url: 'https://samayinnovation.in' },
+          blogPost: blogs.slice(0, 10).map((b) => ({
+            '@type': 'BlogPosting',
+            headline: b.title,
+            url: `https://samayinnovation.in/blogs/${b.slug}`,
+            image: b.image,
+            datePublished: b.date,
+            author: { '@type': 'Person', name: b.author },
+          })),
+        }}
       />
 
       {/* ── Header ── */}
